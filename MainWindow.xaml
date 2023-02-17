@@ -1,0 +1,185 @@
+﻿<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:local="clr-namespace:FYPManagementSystem" xmlns:StudentsUserControlls="clr-namespace:FYPManagementSystem.UserControlls.StudentsUserControlls" x:Class="FYPManagementSystem.MainWindow"
+    Height="700" Width="1050" ResizeMode="NoResize"
+    AllowsTransparency="True" WindowStartupLocation="CenterScreen" WindowStyle="None" Background="Transparent">
+    <Window.Resources>
+
+        <Style x:Key="menuTitle" TargetType="{x:Type TextBlock}">
+            <Setter Property="Foreground" Value="#67c7f0"/>
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="63 30 0 15"/>
+
+        </Style>
+
+        <Style x:Key="menuButton" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#cfcfcf"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Margin" Value="30 3 0 3"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Tag" Value="Collapsed"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="25">
+                            <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="35 0 0 0"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True" >
+                    <Setter Property="Background" Value="#67c7f0"/>
+                    <Setter Property="Foreground" Value="#ffffff"/>
+                    <Setter Property="Tag" Value="Visible"/>
+
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+
+        <Style x:Key="menuButtonIcon" TargetType="{x:Type Icon:PackIconMaterial}">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0 0 23 0"/>
+            <Setter Property="Kind" Value="ChevronRight"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="Visibility" Value="{Binding Tag, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}"/>
+        </Style>
+
+
+
+
+    </Window.Resources>
+    <Border Background="White" CornerRadius="40" MouseDown="Border_MouseDown">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="270"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Menu -->
+            <Border Background="White" CornerRadius="40 0 0 40" Grid.Column="0">
+                <StackPanel Margin="0 30 0 0">
+                    <ContentControl x:Name="CC" Grid.Column="1"/>
+
+                    <!-- Ellips -->
+
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Left" Margin="63 10 0 10">
+                        <Ellipse Fill="#FF6258" Width="10" Height="10"/>
+                        <Ellipse Fill="#FFBF2F" Width="10" Height="10" Margin="7 0"/>
+                        <Ellipse Fill="#2acb42" Width="10" Height="10"/>
+                    </StackPanel>
+
+                    <TextBlock Text="Library" Style="{StaticResource menuTitle}"/>
+                    <!-- Button 1-->
+                    <Button x:Name="StudentButton" Style="{StaticResource menuButton}" Click="StudentButton_Click">
+                        <Grid>
+                            <TextBlock Text="Students" Margin="0 0 0 2"/>
+                            <Icon:PackIconMaterial Style="{StaticResource menuButtonIcon}"/>
+                        </Grid>
+                    </Button>
+
+                    <!-- Button 2-->
+                    <Button x:Name="GStudentButton" Style="{StaticResource menuButton}" Click="GStudentButton_Click">
+                        <Grid>
+                            <TextBlock Text="Group Students" Margin="0 0 0 2"/>
+                            <Icon:PackIconMaterial Style="{StaticResource menuButtonIcon}"/>
+                        </Grid>
+                    </Button>
+
+                    <!-- Button 3-->
+                    <Button x:Name="ProjectButton" Style="{StaticResource menuButton}" Click="ProjectButton_Click" >
+                        <Grid>
+                            <TextBlock Text="Projects" Margin="0 0 0 2"/>
+                            <Icon:PackIconMaterial Style="{StaticResource menuButtonIcon}"/>
+                        </Grid>
+                    </Button>
+
+                    <!-- Button 4-->
+                    <Button  x:Name="GProjectsButton"  Style="{StaticResource menuButton}" Click="GProjectsButton_Click">
+                        <Grid>
+                            <TextBlock Text="Assign Projects" Margin="0 0 0 2"/>
+                            <Icon:PackIconMaterial Style="{StaticResource menuButtonIcon}"/>
+                        </Grid>
+                    </Button>
+
+                    <!-- Button 5-->
+                    <Button x:Name="EvaluationButton" Style="{StaticResource menuButton}" Click="EvaluationButton_Click">
+                        <Grid>
+                            <TextBlock Text="Evaluations" Margin="0 0 0 2"/>
+                            <Icon:PackIconMaterial Style="{StaticResource menuButtonIcon}"/>
+                        </Grid>
+                    </Button>
+
+                    <!-- Button 6-->
+                    <Button x:Name="GEvaluaionButton" Style="{StaticResource menuButton}" Click="GEvaluaionButton_Click" >
+                        <Grid>
+                            <TextBlock Text="Mark Evaluations" Margin="0 0 0 2"/>
+                            <Icon:PackIconMaterial Style="{StaticResource menuButtonIcon}"/>
+                        </Grid>
+                    </Button>
+
+                    <!-- Button 7-->
+                    <Button x:Name="AdvisorButton" Style="{StaticResource menuButton}" Click="AdvisorButton_Click">
+                        <Grid>
+                            <TextBlock Text="Advisors" Margin="0 0 0 2"/>
+                            <Icon:PackIconMaterial Style="{StaticResource menuButtonIcon}"/>
+                        </Grid>
+                    </Button>
+
+                    <!-- Button 8-->
+                    <Button x:Name="GAdvisorButton" Style="{StaticResource menuButton}" Click="GAdvisorButton_Click">
+                        <Grid>
+                            <TextBlock Text="Assign Advisors" Margin="0 0 0 2"/>
+                            <Icon:PackIconMaterial Style="{StaticResource menuButtonIcon}"/>
+                        </Grid>
+                    </Button>
+                    <!-- Button 9-->
+                    <Button x:Name="PdfRepButton" Style="{StaticResource menuButton}" Click="PdfRepButton_Click">
+                        <Grid>
+                            <TextBlock Text="Generate PDF" Margin="0 0 0 2"/>
+                            <Icon:PackIconMaterial Style="{StaticResource menuButtonIcon}"/>
+                        </Grid>
+                    </Button>
+
+
+                </StackPanel>
+            </Border>
+
+            <Grid Grid.Column="1" x:Name="StudentGrid">
+                <Grid x:Name="stUC">
+
+                    <local:StudentUC/>
+
+                </Grid>
+                <Grid Visibility="Collapsed" x:Name="AddStuUC">
+
+                    <StudentsUserControlls:AddStudentUC/>
+
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Column="1" x:Name="AdvisorGrid">
+                <Grid x:Name="advUC">
+
+                    <local:StudentUC/>
+
+                </Grid>
+                <Grid Visibility="Collapsed" x:Name="AddAdvUC">
+
+                    <StudentsUserControlls:AddStudentUC/>
+
+                </Grid>
+            </Grid>
+        </Grid>
+
+    </Border>
+</Window>

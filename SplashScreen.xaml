@@ -1,0 +1,57 @@
+﻿<Window x:Class="FYPManagementSystem.SplashScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FYPManagementSystem"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="SplashScreen" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        Background="{x:Null}" ContentRendered="Window_ContentRendered">
+    <materialDesign:Card UniformCornerRadius="15" Background="{DynamicResource MaterialDesignPaper}" materialDesign:ShadowAssist.ShadowDepth="Depth4" Margin="25">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="350"/>
+                <ColumnDefinition Width="450"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="50 0 0 0 ">
+                <WrapPanel>
+                    <Image Source="Assets\Images\splashImage.png" HorizontalAlignment="Center" Height="150" Width="150" >
+                    </Image>
+                    <TextBlock Name="fyp" Text="Final Year Project Management System" FontSize="28" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"    Margin="15 0 0 0" Width="400" TextWrapping="Wrap">
+
+                    </TextBlock>
+                </WrapPanel>
+                <TextBlock Name ="loadinNumber" Text="Loading ... " FontSize="17" FontWeight="SemiBold" HorizontalAlignment="Left" Margin="0 30 0 15" Foreground="Black">
+                    <TextBlock.Effect>
+                        <DropShadowEffect
+                            ShadowDepth="4"
+                            Direction="330"
+                            Color="Black"
+                            Opacity="0.5"
+                            BlurRadius="4"/>
+                    </TextBlock.Effect></TextBlock>
+                <ProgressBar Name="progressBar" Height="5" Width="280" HorizontalAlignment="Left"></ProgressBar>
+
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"
+                        Height="320" Width="320">
+                <Ellipse Height="320" Width="320">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="Assets\Images\illustration.jpg"/>
+
+                    </Ellipse.Fill>
+                </Ellipse>
+
+            </StackPanel>
+        </Grid>
+
+
+
+    </materialDesign:Card>
+
+</Window>
