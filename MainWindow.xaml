@@ -2,7 +2,9 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
-    xmlns:local="clr-namespace:FYPManagementSystem" xmlns:StudentsUserControlls="clr-namespace:FYPManagementSystem.UserControlls.StudentsUserControlls" x:Class="FYPManagementSystem.MainWindow"
+    xmlns:local="clr-namespace:FYPManagementSystem" xmlns:StudentsUserControlls="clr-namespace:FYPManagementSystem.UserControlls.StudentsUserControlls"
+    xmlns:AdvisorUserControlls="clr-namespace:FYPManagementSystem.UserControlls.AdvisorsUsercontrolls"
+    x:Class="FYPManagementSystem.MainWindow"
     Height="700" Width="1050" ResizeMode="NoResize"
     AllowsTransparency="True" WindowStartupLocation="CenterScreen" WindowStyle="None" Background="Transparent">
     <Window.Resources>
@@ -160,22 +162,22 @@
                     <local:StudentUC/>
 
                 </Grid>
-                <Grid Visibility="Collapsed" x:Name="AddStuUC">
+                <!--<Grid Visibility="Collapsed" x:Name="AddStuUC">
 
-                    <StudentsUserControlls:AddStudentUC/>
+                <StudentsUserControlls:AddStudentUC/>
 
-                </Grid>
+                </Grid>-->
             </Grid>
 
             <Grid Grid.Column="1" x:Name="AdvisorGrid">
                 <Grid x:Name="advUC">
 
-                    <local:StudentUC/>
+                    <AdvisorUserControlls:AddAdvUC/>
 
                 </Grid>
                 <Grid Visibility="Collapsed" x:Name="AddAdvUC">
 
-                    <StudentsUserControlls:AddStudentUC/>
+                    <AdvisorUserControlls:AddAdvUC/>
 
                 </Grid>
             </Grid>

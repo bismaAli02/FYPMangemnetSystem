@@ -5,8 +5,144 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:FYPManagementSystem.UserControlls.StudentsUserControlls"
              mc:Ignorable="d"
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="Aqua">
+             xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal"
+             TextOptions.TextRenderingMode="Auto"
+             Background="Transparent"
+             FontFamily="{DynamicResource MaterialDesignFont}">
+    <materialDesign:Card Padding="32" Margin="16">
+        <Grid Margin="0,2,0,-2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-    </Grid>
+
+            <Button x:Name="BackButton" Click="BackButton_Click_1" Grid.Column="0" Grid.Row="0" Width="120" Margin="28,-4,204,4">
+                <StackPanel Orientation="Horizontal">
+                    <Icon:PackIconMaterial Kind="ArrowLeftBold" Margin="0 2 10 2" />
+                    <TextBlock Text="Back" HorizontalAlignment="Center">
+
+                    </TextBlock>
+                </StackPanel>
+            </Button>
+            <Image Source="C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\Assets\Images\AddUser.png" Grid.Column="1" Grid.Row="0" Height="70"/>
+
+            <Grid Grid.Row="1" Grid.Column="0" Margin="0 20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock HorizontalAlignment="Left" Grid.Column="0" Text="First Name" VerticalAlignment="Center" Width="100"  FontSize="16" FontWeight="SemiBold">
+
+                </TextBlock>
+                <TextBox Grid.Column="1" Name="FNTextBox" HorizontalAlignment="Left" Margin="10 0" VerticalAlignment="Center" Width="200"/>
+            </Grid>
+
+            <Grid Grid.Row="1" Grid.Column="1" Margin="0 20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock HorizontalAlignment="Left" Grid.Column="0" Text="Last Name" VerticalAlignment="Center" Width="100"  FontSize="16" FontWeight="SemiBold">
+
+                </TextBlock>
+                <TextBox Grid.Column="1" Name="LNTextBox" HorizontalAlignment="Left" Margin="10 0" VerticalAlignment="Center" Width="200"/>
+            </Grid>
+
+
+            <Grid Grid.Row="2" Grid.Column="0" Margin="0 20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock HorizontalAlignment="Left" Grid.Column="0"  Text="Gender" VerticalAlignment="Center" Width="100"  FontSize="16" FontWeight="SemiBold">
+
+                </TextBlock>
+                <ComboBox Grid.Column="1" Name="genderComboBox" Width="200">
+                    <ComboBoxItem Content="MALE"/>
+                    <ComboBoxItem Content="FEMALE"/>
+                </ComboBox>
+            </Grid>
+
+
+
+            <Grid Grid.Row="2" Grid.Column="1" Margin="0 40">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock HorizontalAlignment="Left" Grid.Column="0" Text="Date Of Birth" VerticalAlignment="Center" Width="100"  FontSize="16" FontWeight="SemiBold">
+
+                </TextBlock>
+                <DatePicker Name="Date" Grid.Column="1" Width="200"></DatePicker>
+            </Grid>
+
+            <Grid Grid.Row="3" Grid.Column="0" Margin="0 40">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock HorizontalAlignment="Left" Grid.Column="0"  Text="Contact" VerticalAlignment="Center" Width="100"  FontSize="16" FontWeight="SemiBold">
+
+                </TextBlock>
+                <TextBox  Name="ContactTextBox" Grid.Column="1" HorizontalAlignment="Left" Margin="10 0" VerticalAlignment="Center" Width="200"/>
+            </Grid>
+
+
+
+            <Grid Grid.Row="3" Grid.Column="1" Margin="0 40">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock HorizontalAlignment="Center" Text="Email" Width="100"  FontSize="16" FontWeight="SemiBold" Margin="0,2,0,3"/>
+                <TextBox Grid.Column="1" Name="EmailTextBox" HorizontalAlignment="Left" Margin="10 0" VerticalAlignment="Center" Width="200"/>
+            </Grid>
+
+            <Grid Grid.Row="4" Grid.Column="0" Margin="0 40" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="175"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock HorizontalAlignment="Left" Grid.Column="0" Text="Registration Number" VerticalAlignment="Center" Width="400"  FontSize="16" FontWeight="SemiBold">
+
+                </TextBlock>
+                <TextBox Name="RNTextBox" Grid.Column="1" HorizontalAlignment="Left" Margin="10 0" VerticalAlignment="Center" Width="200" />
+            </Grid>
+
+            <Button x:Name="CancleButton" Click="CancleButton_Click" Grid.Column="0" Grid.Row="5" Width="120" VerticalAlignment="Center" Margin="56,0,176,0">
+                <StackPanel Orientation="Horizontal">
+                    <Icon:PackIconMaterial Kind="Cancel" Margin="0 2 10 2" />
+                    <TextBlock Text="Cancle" HorizontalAlignment="Center">
+
+                    </TextBlock>
+                </StackPanel>
+            </Button>
+
+            <Button x:Name="SaveButton" Click="SaveButton_Click" Grid.Column="1" Grid.Row="5" Margin="125,52,75,52"  Width="120">
+                <StackPanel Orientation="Horizontal">
+                    <Icon:PackIconMaterial Kind="ContentSave" Margin="0 2 10 2" />
+                    <TextBlock Text="Save" HorizontalAlignment="Center">
+
+                    </TextBlock>
+                </StackPanel>
+            </Button>
+
+
+
+        </Grid>
+    </materialDesign:Card>
 </UserControl>

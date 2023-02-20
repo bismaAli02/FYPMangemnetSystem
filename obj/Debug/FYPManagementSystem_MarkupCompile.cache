@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Dell\Desktop\FYPManagementSystem\obj\Debug\
+C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\obj\Debug\
 FYPManagementSystem
 none
 false
 DEBUG;TRACE
-C:\Users\Dell\Desktop\FYPManagementSystem\App.xaml
-4-1480443821
+C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\App.xaml
+151803173446
 
-8-1584255881
-212144184509
-MainWindow.xaml;SplashScreen.xaml;UserControlls\StudentsUserControlls\AddStudentUC.xaml;UserControlls\StudentsUserControlls\StudentUC.xaml;
+20-1266407624
+21194903065
+MainWindow.xaml;SplashScreen.xaml;UserControlls\AdvisorsUsercontrolls\AddAdvUC.xaml;UserControlls\AdvisorsUsercontrolls\AdvUC.xaml;UserControlls\AdvisorsUsercontrolls\AssignAdvUC.xaml;UserControlls\EvaluationsUserControlls\AddEvaUC.xaml;UserControlls\EvaluationsUserControlls\EvaUC.xaml;UserControlls\EvaluationsUserControlls\MarkEvaUC.xaml;UserControlls\PdfUserControlls\PdfUC.xaml;UserControlls\ProjectsUserControlls\AddProjUC.xaml;UserControlls\ProjectsUserControlls\AssignProjUC.xaml;UserControlls\ProjectsUserControlls\ProjUC.xaml;UserControlls\StudentsUserControlls\AddStudentUC.xaml;UserControlls\StudentsUserControlls\GroupStuUC.xaml;UserControlls\StudentsUserControlls\StudentUC.xaml;
 
 False
 

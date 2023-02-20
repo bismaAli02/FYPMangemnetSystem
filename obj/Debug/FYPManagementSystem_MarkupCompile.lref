@@ -1,7 +1,18 @@
 ﻿
-FC:\Users\Dell\Desktop\FYPManagementSystem\App.xaml;;
-FC:\Users\Dell\Desktop\FYPManagementSystem\MainWindow.xaml;;
-FC:\Users\Dell\Desktop\FYPManagementSystem\SplashScreen.xaml;;
-FC:\Users\Dell\Desktop\FYPManagementSystem\UserControlls\StudentsUserControlls\AddStudentUC.xaml;;
-FC:\Users\Dell\Desktop\FYPManagementSystem\UserControlls\StudentsUserControlls\StudentUC.xaml;;
+FC:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\App.xaml;;
+FC:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\MainWindow.xaml;;
+FC:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\SplashScreen.xaml;;
+FC:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\UserControlls\AdvisorsUsercontrolls\AddAdvUC.xaml;;
+FC:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\UserControlls\AdvisorsUsercontrolls\AdvUC.xaml;;
+FC:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\UserControlls\AdvisorsUsercontrolls\AssignAdvUC.xaml;;
+FC:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\UserControlls\EvaluationsUserControlls\AddEvaUC.xaml;;
+FC:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\UserControlls\EvaluationsUserControlls\EvaUC.xaml;;
+FC:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\UserControlls\EvaluationsUserControlls\MarkEvaUC.xaml;;
+FC:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\UserControlls\PdfUserControlls\PdfUC.xaml;;
+FC:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\UserControlls\ProjectsUserControlls\AddProjUC.xaml;;
+FC:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\UserControlls\ProjectsUserControlls\AssignProjUC.xaml;;
+FC:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\UserControlls\ProjectsUserControlls\ProjUC.xaml;;
+FC:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\UserControlls\StudentsUserControlls\AddStudentUC.xaml;;
+FC:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\UserControlls\StudentsUserControlls\GroupStuUC.xaml;;
+FC:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\UserControlls\StudentsUserControlls\StudentUC.xaml;;
 

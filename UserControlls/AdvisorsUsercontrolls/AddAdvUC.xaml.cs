@@ -24,5 +24,21 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
         {
             InitializeComponent();
         }
+
+        private void BackButton_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CancleButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
     }
 }

@@ -6,9 +6,19 @@ namespace FYPManagementSystem
 {
     public partial class MainWindow : Window
     {
+        private void CollapseAllGrids()
+        {
+            StudentGrid.Visibility = Visibility.Collapsed;
+            AdvisorGrid.Visibility = Visibility.Collapsed;
+            stUC.Visibility = Visibility.Collapsed;
+            //  AddStuUC.Visibility = Visibility.Collapsed;
+            AddAdvUC.Visibility = Visibility.Collapsed;
+            advUC.Visibility = Visibility.Collapsed;
+        }
         public MainWindow()
         {
             InitializeComponent();
+            CollapseAllGrids();
         }
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
@@ -21,15 +31,13 @@ namespace FYPManagementSystem
 
         private void StudentButton_Click(object sender, RoutedEventArgs e)
         {
-            //stUC.Visibility = Visibility.Collapsed;
-            //AddStuUC.Visibility = Visibility.Visible;
+            CollapseAllGrids();
             StudentGrid.Visibility = Visibility.Visible;
+            stUC.Visibility = Visibility.Visible;
         }
 
         private void GStudentButton_Click(object sender, RoutedEventArgs e)
         {
-            //stUC.Visibility = Visibility.Visible;
-            //AddStuUC.Visibility = Visibility.Collapsed;
         }
 
         private void ProjectButton_Click(object sender, RoutedEventArgs e)
@@ -54,7 +62,9 @@ namespace FYPManagementSystem
 
         private void AdvisorButton_Click(object sender, RoutedEventArgs e)
         {
-
+            CollapseAllGrids();
+            AdvisorGrid.Visibility = Visibility.Visible;
+            AddAdvUC.Visibility = Visibility.Visible;
         }
 
         private void GAdvisorButton_Click(object sender, RoutedEventArgs e)
@@ -68,5 +78,4 @@ namespace FYPManagementSystem
         }
     }
 }
-
 
