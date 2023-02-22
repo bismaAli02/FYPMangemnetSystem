@@ -9,11 +9,11 @@ namespace FYPManagementSystem
         private void CollapseAllGrids()
         {
             StudentGrid.Visibility = Visibility.Collapsed;
-            AdvisorGrid.Visibility = Visibility.Collapsed;
+            //AdvisorGrid.Visibility = Visibility.Collapsed;
             stUC.Visibility = Visibility.Collapsed;
-            //  AddStuUC.Visibility = Visibility.Collapsed;
-            AddAdvUC.Visibility = Visibility.Collapsed;
-            advUC.Visibility = Visibility.Collapsed;
+            AddStuUC.Visibility = Visibility.Collapsed;
+            //AddAdvUC.Visibility = Visibility.Collapsed;
+            //advUC.Visibility = Visibility.Collapsed;
         }
         public MainWindow()
         {
@@ -63,8 +63,8 @@ namespace FYPManagementSystem
         private void AdvisorButton_Click(object sender, RoutedEventArgs e)
         {
             CollapseAllGrids();
-            AdvisorGrid.Visibility = Visibility.Visible;
-            AddAdvUC.Visibility = Visibility.Visible;
+            //AdvisorGrid.Visibility = Visibility.Visible;
+            //AddAdvUC.Visibility = Visibility.Visible;
         }
 
         private void GAdvisorButton_Click(object sender, RoutedEventArgs e)

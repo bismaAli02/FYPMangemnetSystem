@@ -29,6 +29,18 @@ namespace FYPManagementSystem
             InitializeComponent();
             DisplayStudent();
             AddStuUC.Content = new AddStudentUC();
+            System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+            dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
+            dispatcherTimer.Interval = new TimeSpan(0, 1, 0);
+            dispatcherTimer.Start();
+        }
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            MessageBox.Show((AddStuUC.Visibility == Visibility.Collapsed).ToString());
+            if (AddStuUC.Visibility == Visibility.Collapsed)
+            {
+                addStScroll.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void DisplayStudent()
@@ -53,6 +65,7 @@ namespace FYPManagementSystem
 
         private void AddStuButton_Click(object sender, RoutedEventArgs e)
         {
+            addStScroll.Visibility = Visibility.Visible;
             AddStuUC.Visibility = Visibility.Visible;
         }
     }

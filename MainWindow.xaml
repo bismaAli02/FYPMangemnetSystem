@@ -5,8 +5,8 @@
     xmlns:local="clr-namespace:FYPManagementSystem" xmlns:StudentsUserControlls="clr-namespace:FYPManagementSystem.UserControlls.StudentsUserControlls"
     xmlns:AdvisorUserControlls="clr-namespace:FYPManagementSystem.UserControlls.AdvisorsUsercontrolls"
     x:Class="FYPManagementSystem.MainWindow"
-    Height="700" Width="1050" ResizeMode="NoResize"
-    AllowsTransparency="True" WindowStartupLocation="CenterScreen" WindowStyle="None" Background="Transparent">
+    Height="700" Width="1050"
+    WindowStartupLocation="CenterScreen" Background="Transparent">
     <Window.Resources>
 
         <Style x:Key="menuTitle" TargetType="{x:Type TextBlock}">
@@ -162,25 +162,25 @@
                     <local:StudentUC/>
 
                 </Grid>
-                <!--<Grid Visibility="Collapsed" x:Name="AddStuUC">
+                <Grid Visibility="Collapsed" x:Name="AddStuUC">
 
-                <StudentsUserControlls:AddStudentUC/>
-
-                </Grid>-->
-            </Grid>
-
-            <Grid Grid.Column="1" x:Name="AdvisorGrid">
-                <Grid x:Name="advUC">
-
-                    <AdvisorUserControlls:AddAdvUC/>
-
-                </Grid>
-                <Grid Visibility="Collapsed" x:Name="AddAdvUC">
-
-                    <AdvisorUserControlls:AddAdvUC/>
+                    <StudentsUserControlls:AddStudentUC/>
 
                 </Grid>
             </Grid>
+
+            <!--<Grid Grid.Column="1" x:Name="AdvisorGrid">
+            <Grid x:Name="advUC">
+
+            <AdvisorUserControlls:AddAdvUC/>
+
+            </Grid>
+            <Grid Visibility="Collapsed" x:Name="AddAdvUC">
+
+            <AdvisorUserControlls:AddAdvUC/>
+
+            </Grid>
+            </Grid>-->
         </Grid>
 
     </Border>

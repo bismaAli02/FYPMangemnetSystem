@@ -29,7 +29,8 @@ namespace FYPManagementSystem.UserControlls.StudentsUserControlls
 
         private void BackButton_Click_1(object sender, RoutedEventArgs e)
         {
-
+            EmptyForm();
+            this.Visibility = Visibility.Collapsed;
         }
 
         private void EmptyForm()
@@ -74,7 +75,9 @@ namespace FYPManagementSystem.UserControlls.StudentsUserControlls
                 cmd.Parameters.AddWithValue("@RegNo", RNTextBox.Text);
                 EmptyForm();
                 cmd.ExecuteNonQuery();
+
                 MessageBox.Show("Successfully saved");
+                this.Visibility = Visibility.Collapsed;
             }
             catch (Exception ex)
             {

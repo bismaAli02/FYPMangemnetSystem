@@ -51,7 +51,7 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
-            <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
+            <ScrollViewer x:Name="addStScroll" Visibility="Collapsed" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
                 <UserControl Grid.Row="0" x:Name="AddStuUC" Visibility="Collapsed"/>
             </ScrollViewer>
         </Grid>
