@@ -25,9 +25,9 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <Button Grid.Row="0" Content="Add Student" HorizontalAlignment="Left" Width="130" Name="AddStuButton" Click="AddStuButton_Click" Margin="472,0,0,0"/>
+                <Button Grid.Row="0" Content="Add Student" HorizontalAlignment="Right" Width="130" Name="AddStuButton" Click="AddStuButton_Click" Margin="472,0,0,0"/>
 
-                <DataGrid Grid.Row="1" Name="stuDataGrid" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserSortColumns="False" IsReadOnly="True">
+                <DataGrid Grid.Row="1" Name="stuDataGrid" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserSortColumns="False" CanUserResizeColumns="False" IsReadOnly="True">
                     <DataGrid.Columns>
                         <DataGridTemplateColumn Header="Edit" IsReadOnly="True" Width="auto">
                             <DataGridTemplateColumn.CellTemplate>
@@ -50,10 +50,10 @@
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
+                <UserControl Grid.Row="1" x:Name="AddStuUC" Visibility="Collapsed"/>
             </Grid>
-            <ScrollViewer x:Name="addStScroll" Visibility="Collapsed" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
-                <UserControl Grid.Row="0" x:Name="AddStuUC" Visibility="Collapsed"/>
-            </ScrollViewer>
+
+
         </Grid>
 
 

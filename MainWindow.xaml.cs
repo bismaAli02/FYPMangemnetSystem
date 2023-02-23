@@ -34,6 +34,8 @@ namespace FYPManagementSystem
             CollapseAllGrids();
             StudentGrid.Visibility = Visibility.Visible;
             stUC.Visibility = Visibility.Visible;
+            stUC.Children.Clear();
+            stUC.Children.Add(new StudentUC());
         }
 
         private void GStudentButton_Click(object sender, RoutedEventArgs e)
