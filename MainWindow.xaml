@@ -158,29 +158,20 @@
 
             <Grid Grid.Column="1" x:Name="StudentGrid">
                 <Grid x:Name="stUC">
-
                     <local:StudentUC/>
 
-                </Grid>
-                <Grid Visibility="Collapsed" x:Name="AddStuUC">
-
-                    <StudentsUserControlls:AddStudentUC/>
 
                 </Grid>
-            </Grid>
-
-            <!--<Grid Grid.Column="1" x:Name="AdvisorGrid">
-            <Grid x:Name="advUC">
-
-            <AdvisorUserControlls:AddAdvUC/>
 
             </Grid>
-            <Grid Visibility="Collapsed" x:Name="AddAdvUC">
 
-            <AdvisorUserControlls:AddAdvUC/>
+            <Grid Grid.Column="1" x:Name="AdvisorGrid">
+                <Grid x:Name="advUC">
 
+                    <AdvisorUserControlls:AdvUC/>
+
+                </Grid>
             </Grid>
-            </Grid>-->
         </Grid>
 
     </Border>

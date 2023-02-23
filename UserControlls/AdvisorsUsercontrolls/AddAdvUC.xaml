@@ -14,146 +14,139 @@
              TextOptions.TextRenderingMode="Auto"
              Background="Transparent"
              FontFamily="{DynamicResource MaterialDesignFont}">
-    <materialDesign:Card Padding="32" Margin="16">
-        <Grid Margin="0,2,0,-2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
+    <materialDesign:Card Padding="32" Margin="-16 0">
+        <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
+            <Grid Margin="0,2,0,-2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
+                <Image Source="C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\Assets\Images\AddUser.png" Grid.Column="1" Grid.Row="0" Height="70"/>
 
-            <Button x:Name="BackButton" Click="BackButton_Click_1" Grid.Column="0" Grid.Row="0" Width="120" Margin="28,-4,204,4">
-                <StackPanel Orientation="Horizontal">
-                    <Icon:PackIconMaterial Kind="ArrowLeftBold" Margin="0 2 10 2" />
-                    <TextBlock Text="Back" HorizontalAlignment="Center">
+                <Grid Grid.Row="1" Grid.Column="0" Margin="0 20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Left" Grid.Column="0" Text="First Name" VerticalAlignment="Center" Width="100"  FontSize="16" FontWeight="SemiBold">
 
                     </TextBlock>
-                </StackPanel>
-            </Button>
-            <Image Source="C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\Assets\Images\AddUser.png" Grid.Column="1" Grid.Row="0" Height="70"/>
+                    <TextBox Grid.Column="1" x:Name="FNTextBox" HorizontalAlignment="Left" Margin="10 0" VerticalAlignment="Center" Width="200"/>
+                </Grid>
 
-            <Grid Grid.Row="1" Grid.Column="0" Margin="0 20">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock HorizontalAlignment="Left" Grid.Column="0" Text="First Name" VerticalAlignment="Center" Width="100"  FontSize="16" FontWeight="SemiBold">
-
-                </TextBlock>
-                <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="10 0" VerticalAlignment="Center" Width="200"/>
-            </Grid>
-
-            <Grid Grid.Row="1" Grid.Column="1" Margin="0 20">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock HorizontalAlignment="Left" Grid.Column="0" Text="Last Name" VerticalAlignment="Center" Width="100"  FontSize="16" FontWeight="SemiBold">
-
-                </TextBlock>
-                <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="10 0" VerticalAlignment="Center" Width="200"/>
-            </Grid>
-
-
-            <Grid Grid.Row="2" Grid.Column="0" Margin="0 20">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock HorizontalAlignment="Left" Grid.Column="0"  Text="Gender" VerticalAlignment="Center" Width="100"  FontSize="16" FontWeight="SemiBold">
-
-                </TextBlock>
-                <ComboBox Grid.Column="1" Name="GenderComboBox" Width="200">
-                    <ComboBoxItem Content="MALE"/>
-                    <ComboBoxItem Content="FEMALE"/>
-                </ComboBox>
-            </Grid>
-
-
-
-            <Grid Grid.Row="2" Grid.Column="1" Margin="0 40">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock HorizontalAlignment="Left" Grid.Column="0" Text="Date Of Birth" VerticalAlignment="Center" Width="100"  FontSize="16" FontWeight="SemiBold">
-
-                </TextBlock>
-                <DatePicker Grid.Column="1" Width="200"></DatePicker>
-            </Grid>
-
-            <Grid Grid.Row="3" Grid.Column="0" Margin="0 40">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock HorizontalAlignment="Left" Grid.Column="0"  Text="Contact" VerticalAlignment="Center" Width="100"  FontSize="16" FontWeight="SemiBold">
-
-                </TextBlock>
-                <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="10 0" VerticalAlignment="Center" Width="200"/>
-            </Grid>
-
-
-
-            <Grid Grid.Row="3" Grid.Column="1" Margin="0 40">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock HorizontalAlignment="Center" Text="Email" Width="100"  FontSize="16" FontWeight="SemiBold" Margin="0,2,0,3"/>
-                <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="10 0" VerticalAlignment="Center" Width="200"/>
-            </Grid>
-
-            <Grid Grid.Row="4" Grid.Column="0" Margin="0 40">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock HorizontalAlignment="Center" Text="Designation" Width="100"  FontSize="16" FontWeight="SemiBold" Margin="0,2,0,3"/>
-                <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="10 0" VerticalAlignment="Center" Width="200"/>
-            </Grid>
-
-            <Grid Grid.Row="4" Grid.Column="1" Margin="0 40">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock HorizontalAlignment="Center" Text="Salary" Width="100"  FontSize="16" FontWeight="SemiBold" Margin="0,2,0,3"/>
-                <ComboBox Grid.Column="1" Name="DesComboBox" Width="200">
-                    <ComboBoxItem Content="Professor"/>
-                    <ComboBoxItem Content="Associate Professor"/>
-                    <ComboBoxItem Content="Assistant Professor"/>
-                    <ComboBoxItem Content="Lecturer"/>
-                    <ComboBoxItem Content="Industry Professional"/>
-                </ComboBox>
-            </Grid>
-
-            <Button x:Name="CancleButton" Click="CancleButton_Click" Grid.Column="0" Grid.Row="5" Width="120" VerticalAlignment="Center" Margin="56,0,176,0">
-                <StackPanel Orientation="Horizontal">
-                    <Icon:PackIconMaterial Kind="Cancel" Margin="0 2 10 2" />
-                    <TextBlock Text="Cancle" HorizontalAlignment="Center">
+                <Grid Grid.Row="1" Grid.Column="1" Margin="0 20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Left" Grid.Column="0" Text="Last Name" VerticalAlignment="Center" Width="100"  FontSize="16" FontWeight="SemiBold">
 
                     </TextBlock>
-                </StackPanel>
-            </Button>
+                    <TextBox Grid.Column="1" x:Name="LNTextBox" HorizontalAlignment="Left" Margin="10 0" VerticalAlignment="Center" Width="200"/>
+                </Grid>
 
-            <Button x:Name="SaveButton" Click="SaveButton_Click" Grid.Column="1" Grid.Row="5" Margin="125,52,75,52"  Width="120">
-                <StackPanel Orientation="Horizontal">
-                    <Icon:PackIconMaterial Kind="ContentSave" Margin="0 2 10 2" />
-                    <TextBlock Text="Save" HorizontalAlignment="Center">
+
+                <Grid Grid.Row="2" Grid.Column="0" Margin="0 20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Left" Grid.Column="0"  Text="Gender" VerticalAlignment="Center" Width="100"  FontSize="16" FontWeight="SemiBold">
 
                     </TextBlock>
-                </StackPanel>
-            </Button>
+                    <ComboBox Grid.Column="1" Name="genderComboBox" Width="200">
+                        <ComboBoxItem Content="MALE"/>
+                        <ComboBoxItem Content="FEMALE"/>
+                    </ComboBox>
+                </Grid>
 
-        </Grid>
+
+
+                <Grid Grid.Row="2" Grid.Column="1" Margin="0 40">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Left" Grid.Column="0" Text="Date Of Birth" VerticalAlignment="Center" Width="100"  FontSize="16" FontWeight="SemiBold">
+
+                    </TextBlock>
+                    <DatePicker Grid.Column="1" x:Name="Date" Width="200"></DatePicker>
+                </Grid>
+
+                <Grid Grid.Row="3" Grid.Column="0" Margin="0 40">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Left" Grid.Column="0"  Text="Contact" VerticalAlignment="Center" Width="100"  FontSize="16" FontWeight="SemiBold">
+
+                    </TextBlock>
+                    <TextBox Grid.Column="1" x:Name="ContactTextBox" Margin="10 0" VerticalAlignment="Center" Width="200"/>
+                </Grid>
+
+
+
+                <Grid Grid.Row="3" Grid.Column="1" Margin="0 40">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Text="Email" Width="100"  FontSize="16" FontWeight="SemiBold" Margin="0,2,0,3"/>
+                    <TextBox Grid.Column="1" x:Name="EmailTextBox" Margin="10 0" VerticalAlignment="Center" Width="200"/>
+                </Grid>
+
+                <Grid Grid.Row="4" Grid.Column="0" Margin="0 40">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Text="Designation" Width="100"  FontSize="16" FontWeight="SemiBold" Margin="0,2,0,3"/>
+                    <ComboBox Grid.Column="1" Name="DesComboBox" Width="200">
+                        <ComboBoxItem Content="Professor"/>
+                        <ComboBoxItem Content="Associate Professor"/>
+                        <ComboBoxItem Content="Assistant Professor"/>
+                        <ComboBoxItem Content="Lecturer"/>
+                        <ComboBoxItem Content="Industry Professional"/>
+                    </ComboBox>
+                </Grid>
+
+                <Grid Grid.Row="4" Grid.Column="1" Margin="0 40">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Text="Salary" Width="100"  FontSize="16" FontWeight="SemiBold" Margin="0,2,0,3"/>
+                    <TextBox Grid.Column="1" x:Name="SalaryTextBox" HorizontalAlignment="Left" Margin="10 0" VerticalAlignment="Center" Width="200"/>
+                </Grid>
+
+                <Button x:Name="CancleButton" Click="CancleButton_Click" Grid.Column="0" Grid.Row="5" Width="120" VerticalAlignment="Center" Margin="56,0,176,0">
+                    <StackPanel Orientation="Horizontal">
+                        <Icon:PackIconMaterial Kind="Cancel" Margin="0 2 10 2" />
+                        <TextBlock Text="Cancle" HorizontalAlignment="Center">
+
+                        </TextBlock>
+                    </StackPanel>
+                </Button>
+
+                <Button x:Name="SaveButton" Click="SaveButton_Click" Grid.Column="1" Grid.Row="5" Margin="125,52,75,52"  Width="120">
+                    <StackPanel Orientation="Horizontal">
+                        <Icon:PackIconMaterial Kind="ContentSave" Margin="0 2 10 2" />
+                        <TextBlock Text="Save" x:Name="SaveButtonTxt" HorizontalAlignment="Center">
+
+                        </TextBlock>
+                    </StackPanel>
+                </Button>
+
+            </Grid>
+        </ScrollViewer>
     </materialDesign:Card>
 </UserControl>
