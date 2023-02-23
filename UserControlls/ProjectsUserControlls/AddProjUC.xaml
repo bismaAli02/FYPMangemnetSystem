@@ -3,10 +3,81 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:FYPManagementSystem.UserControlls.ProjectsUserControlls"
+             xmlns:local="clr-namespace:FYPManagementSystem.UserControlls.StudentsUserControlls"
              mc:Ignorable="d"
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="BlueViolet">
+             xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal"
+             TextOptions.TextRenderingMode="Auto"
+             Background="Transparent"
+             FontFamily="{DynamicResource MaterialDesignFont}">
+    <materialDesign:Card Padding="32" Margin="-16 0">
+        <Grid Margin="0,2,0,-2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-    </Grid>
+
+
+            <Image Source="C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\Assets\Images\Projects.jpg" Grid.Column="1" Grid.Row="0" Height="100"/>
+
+
+            <Grid Grid.Row="1" Grid.Column="0" Margin="0 40" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="175"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock HorizontalAlignment="Left" Grid.Column="0" Text="Description" VerticalAlignment="Center" Width="400"  FontSize="16" FontWeight="SemiBold">
+
+                </TextBlock>
+                <TextBox Name="DescriptionTextBox" Grid.Column="1" HorizontalAlignment="Left" Margin="10 0" VerticalAlignment="Center" Width="200" />
+            </Grid>
+
+            <Grid Grid.Row="2" Grid.Column="0" Margin="0 40" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="175"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock HorizontalAlignment="Left" Grid.Column="0" Text="Title" VerticalAlignment="Center" Width="400"  FontSize="16" FontWeight="SemiBold">
+
+                </TextBlock>
+                <TextBox Name="TitleTextBox" Grid.Column="1" HorizontalAlignment="Left" Margin="10 0" VerticalAlignment="Center" Width="200" />
+            </Grid>
+
+
+
+
+
+            <Button x:Name="CancleButton" Click="CancleButton_Click" Grid.Column="0" Grid.Row="3" Width="120" VerticalAlignment="Center" Margin="56,0,176,0">
+                <StackPanel Orientation="Horizontal">
+                    <Icon:PackIconMaterial Kind="Cancel" Margin="0 2 10 2" />
+                    <TextBlock Text="Cancle" HorizontalAlignment="Center">
+
+                    </TextBlock>
+                </StackPanel>
+            </Button>
+
+            <Button x:Name="SaveButton" Click="SaveButton_Click" Grid.Column="1" Grid.Row="3" Margin="125,52,75,52"  Width="120">
+                <StackPanel Orientation="Horizontal">
+                    <Icon:PackIconMaterial Kind="ContentSave" Margin="0 2 10 2" />
+                    <TextBlock x:Name="SaveButtonTxt" Text="Save" HorizontalAlignment="Center">
+
+                    </TextBlock>
+                </StackPanel>
+            </Button>
+
+
+
+        </Grid>
+    </materialDesign:Card>
 </UserControl>

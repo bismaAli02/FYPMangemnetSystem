@@ -146,7 +146,6 @@ namespace FYPManagementSystem.UserControlls.StudentsUserControlls
                 {
                     MessageBox.Show("Please Select any record to Update");
                 }
-                //savebuttontxt.Text = "Save";
             }
 
         }

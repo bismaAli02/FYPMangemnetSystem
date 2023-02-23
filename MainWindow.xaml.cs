@@ -10,8 +10,12 @@ namespace FYPManagementSystem
         {
             StudentGrid.Visibility = Visibility.Collapsed;
             AdvisorGrid.Visibility = Visibility.Collapsed;
+            ProjectGrid.Visibility = Visibility.Collapsed;
+            EvaluationGrid.Visibility = Visibility.Collapsed;
             stUC.Visibility = Visibility.Collapsed;
             advUC.Visibility = Visibility.Collapsed;
+            ProjUC.Visibility = Visibility.Collapsed;
+            EvaUC.Visibility = Visibility.Collapsed;
         }
         public MainWindow()
         {
@@ -42,7 +46,9 @@ namespace FYPManagementSystem
 
         private void ProjectButton_Click(object sender, RoutedEventArgs e)
         {
-
+            CollapseAllGrids();
+            ProjectGrid.Visibility = Visibility.Visible;
+            ProjUC.Visibility = Visibility.Visible;
         }
 
         private void GProjectsButton_Click(object sender, RoutedEventArgs e)
@@ -52,7 +58,9 @@ namespace FYPManagementSystem
 
         private void EvaluationButton_Click(object sender, RoutedEventArgs e)
         {
-
+            CollapseAllGrids();
+            EvaluationGrid.Visibility = Visibility.Visible;
+            EvaUC.Visibility = Visibility.Visible;
         }
 
         private void GEvaluaionButton_Click(object sender, RoutedEventArgs e)

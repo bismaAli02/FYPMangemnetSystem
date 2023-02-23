@@ -4,6 +4,8 @@
     xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
     xmlns:local="clr-namespace:FYPManagementSystem" xmlns:StudentsUserControlls="clr-namespace:FYPManagementSystem.UserControlls.StudentsUserControlls"
     xmlns:AdvisorUserControlls="clr-namespace:FYPManagementSystem.UserControlls.AdvisorsUsercontrolls"
+    xmlns:ProjectsUserControlls="clr-namespace:FYPManagementSystem.UserControlls.ProjectsUserControlls"
+    xmlns:EvaluationsUserControlls="clr-namespace:FYPManagementSystem.UserControlls.EvaluationsUserControlls"
     x:Class="FYPManagementSystem.MainWindow"
     Height="700" Width="1050"
     WindowStartupLocation="CenterScreen" Background="Transparent">
@@ -169,6 +171,22 @@
                 <Grid x:Name="advUC">
 
                     <AdvisorUserControlls:AdvUC/>
+
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Column="1" x:Name="ProjectGrid">
+                <Grid x:Name="ProjUC">
+
+                    <ProjectsUserControlls:ProjUC/>
+
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Column="1" x:Name="EvaluationGrid">
+                <Grid x:Name="EvaUC">
+
+                    <EvaluationsUserControlls:EvaUC/>
 
                 </Grid>
             </Grid>
