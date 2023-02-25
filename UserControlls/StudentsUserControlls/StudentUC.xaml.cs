@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FYPManagementSystem.UserControlls.StudentsUserControlls;
+using FYPManagementSystem.UserControlls.ProjectsUserControlls;
 
 namespace FYPManagementSystem
 {
@@ -28,17 +29,26 @@ namespace FYPManagementSystem
         {
             InitializeComponent();
             DisplayStudent();
+            AddStuScroll.Visibility = Visibility.Collapsed;
         }
 
 
-        private void DisplayStudent()
+        public void DisplayStudent()
         {
             var con = Configuration.getInstance().getConnection();
-            SqlCommand cmd = new SqlCommand("SELECT P.Id,P.FirstName,P.LastName,P.Contact,P.Gender,P.Email,P.DateOfBirth,S.RegistrationNo FROM Person AS P, Student AS S WHERE S.Id = P.Id", con);
+            SqlCommand cmd = new SqlCommand("SELECT P.Id, S.RegistrationNo , (FirstName +' '+ LastName) AS Name,LU.Value AS Gender,(SELECT FORMAT(DateOfBirth, 'dd/MM/yyyy')) AS DateOfBirth,Contact,Email FROM Person AS P JOIN Student AS S ON S.Id=P.Id JOIN Lookup LU ON LU.Id=P.Gender", con);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             da.Fill(dt);
             stuDataGrid.ItemsSource = dt.DefaultView;
+            if (AddStuUC.Visibility == Visibility.Collapsed)
+            {
+                AddStuButton.Content = "Add Student";
+            }
+            else
+            {
+                AddStuButton.Content = "Go Back";
+            }
         }
         private void deleteTuple(int id)
         {
@@ -63,7 +73,9 @@ namespace FYPManagementSystem
             {
                 int id = int.Parse(selectedRow["Id"].ToString());
                 deleteTuple(id);
+                AddStuScroll.Visibility = Visibility.Collapsed;
                 DisplayStudent();
+                AddStuButton.Content = "Add Student";
 
             }
             else
@@ -74,21 +86,24 @@ namespace FYPManagementSystem
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
-            string firstName, lastName, contact, email, regNo, dob;
-            int gender;
+            string fullName, firstName, lastName, contact, email, regNo, dob, gender;
             DataRowView selectedRow = stuDataGrid.SelectedItem as DataRowView;
+            string[] name;
             if (selectedRow != null)
             {
                 int id = Int32.Parse(selectedRow["Id"].ToString());
-                firstName = selectedRow["FirstName"].ToString();
-                lastName = selectedRow["LastName"].ToString();
+                fullName = selectedRow["Name"].ToString();
+                name = fullName.Split(' ');
+                firstName = name[0];
+                lastName = name[1];
                 contact = selectedRow["Contact"].ToString();
                 email = selectedRow["Email"].ToString();
                 regNo = selectedRow["RegistrationNo"].ToString();
                 dob = selectedRow["DateOfBirth"].ToString();
-                gender = int.Parse(selectedRow["Gender"].ToString());
+                gender = selectedRow["Gender"].ToString();
                 AddStuUC.Content = new AddStudentUC(firstName, lastName, contact, email, gender, regNo, dob, id);
                 AddStuUC.Visibility = Visibility.Visible;
+                AddStuScroll.Visibility = Visibility.Visible;
                 AddStuButton.Content = "Go Back";
             }
         }
@@ -100,11 +115,13 @@ namespace FYPManagementSystem
             {
                 AddStuUC.Content = new AddStudentUC();
                 AddStuUC.Visibility = Visibility.Visible;
+                AddStuScroll.Visibility = Visibility.Visible;
                 AddStuButton.Content = "Go Back";
             }
             else
             {
                 AddStuUC.Visibility = Visibility.Collapsed;
+                AddStuScroll.Visibility = Visibility.Collapsed;
                 AddStuButton.Content = "Add Student";
 
             }

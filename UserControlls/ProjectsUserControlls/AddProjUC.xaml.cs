@@ -49,9 +49,25 @@ namespace FYPManagementSystem.UserControlls.ProjectsUserControlls
             TitleTextBox.IsReadOnly = true;
         }
 
-        private void CancleButton_Click(object sender, RoutedEventArgs e)
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             EmptyForm();
+        }
+        private void findParentUserControl()
+        {
+            var parent = VisualTreeHelper.GetParent(this);
+            while (parent != null && !(parent is ProjUC))
+            {
+                parent = VisualTreeHelper.GetParent(parent);
+            }
+            if (parent is ProjUC)
+            {
+                ProjUC par = parent as ProjUC;
+                par.DisplayProjects();
+                Button btn = (Button)par.FindName("AddProjButton");
+                btn.Content = "Add Project";
+
+            }
         }
 
         private void SaveRecord()
@@ -102,14 +118,29 @@ namespace FYPManagementSystem.UserControlls.ProjectsUserControlls
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            if (SaveButtonTxt.Text == "Save")
+            if (TitleTextBox.Text == string.Empty)
             {
-                SaveRecord();
+                MessageBox.Show("Please Select Title of the Project", " Error ", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else if (DescriptionTextBox.Text == string.Empty)
+            {
+                MessageBox.Show("Please Select Description for the Project", " Error ", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else
             {
-                UpdateRecord();
+                if (SaveButtonTxt.Text == "Save")
+                {
+                    SaveRecord();
+                }
+                else
+                {
+                    UpdateRecord();
+                }
+                this.Visibility = Visibility.Collapsed;
+                findParentUserControl();
             }
+
+
         }
     }
 }

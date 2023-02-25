@@ -70,10 +70,10 @@
 
 
 
-            <Button x:Name="CancleButton" Click="CancleButton_Click" Grid.Column="0" Grid.Row="4" Width="120" VerticalAlignment="Center" Margin="56,0,176,0">
+            <Button x:Name="CancelButton" Click="CancelButton_Click" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="4" Width="120" VerticalAlignment="Center" Margin="35,0,176,0">
                 <StackPanel Orientation="Horizontal">
                     <Icon:PackIconMaterial Kind="Cancel" Margin="0 2 10 2" />
-                    <TextBlock Text="Cancle" HorizontalAlignment="Center">
+                    <TextBlock Text="Cancel" HorizontalAlignment="Center">
 
                     </TextBlock>
                 </StackPanel>

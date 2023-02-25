@@ -30,7 +30,7 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
             DisplayEvaluation();
         }
 
-        private void DisplayEvaluation()
+        public void DisplayEvaluation()
         {
             var con = Configuration.getInstance().getConnection();
             SqlCommand cmd = new SqlCommand("SELECT Id, Name, TotalMarks, TotalWeightage FROM Evaluation", con);
@@ -38,6 +38,14 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
             DataTable dt = new DataTable();
             da.Fill(dt);
             EvaDataGrid.ItemsSource = dt.DefaultView;
+            if (AddEvaUC.Visibility == Visibility.Collapsed)
+            {
+                AddEvaButton.Content = "Add Evaluation";
+            }
+            else
+            {
+                AddEvaButton.Content = "Go Back";
+            }
         }
 
         private void deleteTuple(int id)
@@ -100,6 +108,7 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
             {
                 int id = int.Parse(selectedRow["Id"].ToString());
                 deleteTuple(id);
+                AddEvaUC.Visibility = Visibility.Collapsed;
                 DisplayEvaluation();
 
             }

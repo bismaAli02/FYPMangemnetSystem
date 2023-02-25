@@ -27,13 +27,31 @@
 
                 <Button Grid.Row="0" Content="Add Project" HorizontalAlignment="Right" Width="130" Name="AddProjButton" Click="AddProjButton_Click" Margin="472,0,0,0"/>
 
-                <DataGrid Grid.Row="1" Name="ProjDataGrid" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserSortColumns="False" CanUserResizeColumns="False" IsReadOnly="True">
+                <DataGrid Grid.Row="1" Name="ProjDataGrid" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserSortColumns="False" CanUserResizeColumns="False" IsReadOnly="True" AutoGenerateColumns="False">
                     <DataGrid.Columns>
+
+                        <DataGridTemplateColumn Header="Title" Width="auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Title}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Description" Width="auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Description}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+
                         <DataGridTemplateColumn Header="Edit" IsReadOnly="True" Width="auto">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button x:Name="EditButton" Click="EditButton_Click">
-                                        <Icon:PackIconMaterial Kind="AccountEdit" />
+                                    <Button x:Name="EditButton" Background="Transparent" BorderBrush="Transparent" Click="EditButton_Click">
+                                        <Icon:PackIconMaterial Kind="AccountEdit" Foreground="BlueViolet"/>
                                     </Button>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -42,8 +60,8 @@
                         <DataGridTemplateColumn Header="Delete" IsReadOnly="True" Width="auto">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button x:Name="DeleteButton" Click="DeleteButton_Click">
-                                        <Icon:PackIconMaterial Kind="Delete" />
+                                    <Button x:Name="DeleteButton" Click="DeleteButton_Click" Background="Transparent" BorderBrush="Transparent">
+                                        <Icon:PackIconMaterial Kind="Delete" Foreground="Red"/>
                                     </Button>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>

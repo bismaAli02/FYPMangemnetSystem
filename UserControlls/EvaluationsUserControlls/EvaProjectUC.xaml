@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="FYPManagementSystem.UserControlls.AdvisorsUsercontrolls.AdvUC"
+﻿<UserControl x:Class="FYPManagementSystem.UserControlls.EvaluationsUserControlls.EvaProjectUC"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -25,11 +25,19 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <Button Grid.Row="0" Content="Add Advisor" HorizontalAlignment="Right" Width="130" Name="AddAdvButton" Click="AddAdvButton_Click" Margin="472,0,0,0"/>
+                <Button Grid.Row="0" Content=" Evaluate Group" HorizontalAlignment="Right" Width="130" Name="MarkEvaButton" Click="MarkEvaButton_Click" Margin="472,0,0,0"/>
 
-                <DataGrid Grid.Row="1" Name="advDataGrid" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserSortColumns="False" CanUserResizeColumns="False" IsReadOnly="True" AutoGenerateColumns="False">
+                <DataGrid Grid.Row="1" Name="EvaDataGrid" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserSortColumns="False" CanUserResizeColumns="False" IsReadOnly="True" AutoGenerateColumns="False">
                     <DataGrid.Columns>
-                        <DataGridTemplateColumn Header="Name" Width="auto">
+                        <DataGridTemplateColumn Header="Group ID" Width="auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding GroupId}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Evaluation Name" Width="auto">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Name}"/>
@@ -37,59 +45,28 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="Designation" Width="auto">
+                        <DataGridTemplateColumn Header="Obtained Marks" Width="auto">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Designation}"/>
+                                    <TextBlock Text="{Binding ObtainedMarks}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="Salary" Width="auto">
+                        <DataGridTemplateColumn Header="Total Marks" Width="auto">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Salary}"/>
+                                    <TextBlock Text="{Binding TotalMarks}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="Gender" Width="auto">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Gender}"/>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-
-                        <DataGridTemplateColumn Header="Contact" Width="auto">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Contact}"/>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-
-                        <DataGridTemplateColumn Header="Email" Width="auto">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Email}"/>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-
-                        <DataGridTemplateColumn Header="Date Of Birth" Width="auto">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding DateOfBirth}"/>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
 
                         <DataGridTemplateColumn Header="Edit" IsReadOnly="True" Width="auto">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button x:Name="EditButton" Click="EditButton_Click" Background="Transparent" BorderBrush="Transparent">
-                                        <Icon:PackIconMaterial Kind="AccountEdit" Foreground="Blue" />
+                                    <Button x:Name="EditButton" Background="Transparent" BorderBrush="Transparent" Click="EditButton_Click">
+                                        <Icon:PackIconMaterial Kind="AccountEdit" Foreground="BlueViolet"/>
                                     </Button>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -99,17 +76,14 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button x:Name="DeleteButton" Click="DeleteButton_Click" Background="Transparent" BorderBrush="Transparent">
-                                        <Icon:PackIconMaterial Kind="Delete" Foreground="Red" />
+                                        <Icon:PackIconMaterial Kind="Delete" Foreground="Red"/>
                                     </Button>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
-                <ScrollViewer Grid.Row="1" x:Name="AddAdvScroll" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
-
-                    <UserControl  x:Name="AddAdvUC" Visibility="Collapsed"/>
-                </ScrollViewer>
+                <UserControl Grid.Row="1" x:Name="MarkEvaUC" Visibility="Collapsed"/>
             </Grid>
 
 
@@ -118,3 +92,4 @@
 
     </materialDesign:Card>
 </UserControl>
+

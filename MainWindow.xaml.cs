@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 using System.Threading;
+using FYPManagementSystem.UserControlls.EvaluationsUserControlls;
 
 namespace FYPManagementSystem
 {
@@ -12,10 +13,13 @@ namespace FYPManagementSystem
             AdvisorGrid.Visibility = Visibility.Collapsed;
             ProjectGrid.Visibility = Visibility.Collapsed;
             EvaluationGrid.Visibility = Visibility.Collapsed;
+            MarkEvaluationGrid.Visibility = Visibility.Collapsed;
             stUC.Visibility = Visibility.Collapsed;
             advUC.Visibility = Visibility.Collapsed;
             ProjUC.Visibility = Visibility.Collapsed;
             EvaUC.Visibility = Visibility.Collapsed;
+            MarkEvaUC.Visibility = Visibility.Collapsed;
+
         }
         public MainWindow()
         {
@@ -65,7 +69,9 @@ namespace FYPManagementSystem
 
         private void GEvaluaionButton_Click(object sender, RoutedEventArgs e)
         {
-
+            CollapseAllGrids();
+            MarkEvaluationGrid.Visibility = Visibility.Visible;
+            MarkEvaUC.Visibility = Visibility.Visible;
         }
 
         private void AdvisorButton_Click(object sender, RoutedEventArgs e)

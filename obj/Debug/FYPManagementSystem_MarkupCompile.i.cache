@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\App.xaml
-151803173446
+16-1644100442
 
-21946471054
+221263914214
 21194903065
-MainWindow.xaml;SplashScreen.xaml;UserControlls\AdvisorsUsercontrolls\AddAdvUC.xaml;UserControlls\AdvisorsUsercontrolls\AdvUC.xaml;UserControlls\AdvisorsUsercontrolls\AssignAdvUC.xaml;UserControlls\EvaluationsUserControlls\AddEvaUC.xaml;UserControlls\EvaluationsUserControlls\EvaUC.xaml;UserControlls\EvaluationsUserControlls\MarkEvaUC.xaml;UserControlls\PdfUserControlls\PdfUC.xaml;UserControlls\ProjectsUserControlls\AddProjUC.xaml;UserControlls\ProjectsUserControlls\AssignProjUC.xaml;UserControlls\ProjectsUserControlls\ProjUC.xaml;UserControlls\StudentsUserControlls\AddStudentUC.xaml;UserControlls\StudentsUserControlls\GroupStuUC.xaml;UserControlls\StudentsUserControlls\StudentUC.xaml;
+MainWindow.xaml;SplashScreen.xaml;UserControlls\AdvisorsUsercontrolls\AddAdvUC.xaml;UserControlls\AdvisorsUsercontrolls\AdvUC.xaml;UserControlls\AdvisorsUsercontrolls\AssignAdvUC.xaml;UserControlls\EvaluationsUserControlls\AddEvaUC.xaml;UserControlls\EvaluationsUserControlls\EvaProjectUC.xaml;UserControlls\EvaluationsUserControlls\EvaUC.xaml;UserControlls\EvaluationsUserControlls\MarkEvaUC.xaml;UserControlls\PdfUserControlls\PdfUC.xaml;UserControlls\ProjectsUserControlls\AddProjUC.xaml;UserControlls\ProjectsUserControlls\AssignProjUC.xaml;UserControlls\ProjectsUserControlls\ProjUC.xaml;UserControlls\StudentsUserControlls\AddStudentUC.xaml;UserControlls\StudentsUserControlls\GroupStuUC.xaml;UserControlls\StudentsUserControlls\StudentUC.xaml;
 
 False
 

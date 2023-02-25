@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FYPManagementSystem.UserControlls.EvaluationsUserControlls;
 
 namespace FYPManagementSystem.UserControlls.ProjectsUserControlls
 {
@@ -29,7 +30,7 @@ namespace FYPManagementSystem.UserControlls.ProjectsUserControlls
             InitializeComponent();
             DisplayProjects();
         }
-        private void DisplayProjects()
+        public void DisplayProjects()
         {
             var con = Configuration.getInstance().getConnection();
             SqlCommand cmd = new SqlCommand("SELECT Id, Description, Title FROM Project", con);
@@ -37,6 +38,14 @@ namespace FYPManagementSystem.UserControlls.ProjectsUserControlls
             DataTable dt = new DataTable();
             da.Fill(dt);
             ProjDataGrid.ItemsSource = dt.DefaultView;
+            if (AddProjUC.Visibility == Visibility.Collapsed)
+            {
+                AddProjButton.Content = "Add Project";
+            }
+            else
+            {
+                AddProjButton.Content = "Go Back";
+            }
         }
 
         private void deleteTuple(int id)
@@ -94,8 +103,8 @@ namespace FYPManagementSystem.UserControlls.ProjectsUserControlls
             {
                 int id = int.Parse(selectedRow["Id"].ToString());
                 deleteTuple(id);
+                AddProjUC.Visibility = Visibility.Collapsed;
                 DisplayProjects();
-
             }
             else
             {

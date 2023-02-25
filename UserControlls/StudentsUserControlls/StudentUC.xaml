@@ -27,13 +27,64 @@
 
                 <Button Grid.Row="0" Content="Add Student" HorizontalAlignment="Right" Width="130" Name="AddStuButton" Click="AddStuButton_Click" Margin="472,0,0,0"/>
 
-                <DataGrid Grid.Row="1" Name="stuDataGrid" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserSortColumns="False" CanUserResizeColumns="False" IsReadOnly="True">
+                <DataGrid Grid.Row="1" Name="stuDataGrid" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserSortColumns="False" CanUserResizeColumns="False" IsReadOnly="True" AutoGenerateColumns="False">
                     <DataGrid.Columns>
+
+                        <DataGridTemplateColumn Header="Registration No." Width="auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding RegistrationNo}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+
+                        <DataGridTemplateColumn Header="Name" Width="auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Gender" Width="auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Gender}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Contact" Width="auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Contact}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Email" Width="auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Email}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Date Of Birth" Width="auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding DateOfBirth}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+
                         <DataGridTemplateColumn Header="Edit" IsReadOnly="True" Width="auto">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button x:Name="EditButton" Click="EditButton_Click">
-                                        <Icon:PackIconMaterial Kind="AccountEdit" />
+                                    <Button HorizontalAlignment="Right" x:Name="EditButton" Background="Transparent" BorderBrush="Transparent" Click="EditButton_Click">
+                                        <Icon:PackIconMaterial Kind="AccountEdit" Foreground="BlueViolet" />
                                     </Button>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -42,15 +93,18 @@
                         <DataGridTemplateColumn Header="Delete" IsReadOnly="True" Width="auto">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button x:Name="DeleteButton" Click="DeleteButton_Click">
-                                        <Icon:PackIconMaterial Kind="Delete" />
+                                    <Button x:Name="DeleteButton" Click="DeleteButton_Click" Background="Transparent" BorderBrush="Transparent">
+                                        <Icon:PackIconMaterial Kind="Delete" Foreground="Red"/>
                                     </Button>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
-                <UserControl Grid.Row="1" x:Name="AddStuUC" Visibility="Collapsed"/>
+                <ScrollViewer x:Name="AddStuScroll" Grid.Row="1" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
+                    <UserControl  x:Name="AddStuUC" Visibility="Collapsed"/>
+
+                </ScrollViewer>
             </Grid>
 
 

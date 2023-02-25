@@ -190,6 +190,14 @@
 
                 </Grid>
             </Grid>
+
+            <Grid Grid.Column="1" x:Name="MarkEvaluationGrid">
+                <Grid x:Name="MarkEvaUC">
+
+                    <EvaluationsUserControlls:EvaProjectUC/>
+
+                </Grid>
+            </Grid>
         </Grid>
 
     </Border>

@@ -37,10 +37,10 @@
                     <ColumnDefinition Width="175"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock HorizontalAlignment="Left" Grid.Column="0" Text="Description" VerticalAlignment="Center" Width="400"  FontSize="16" FontWeight="SemiBold">
+                <TextBlock  HorizontalAlignment="Left" Grid.Column="0" Text="Title" VerticalAlignment="Center" Width="400"  FontSize="16" FontWeight="SemiBold">
 
                 </TextBlock>
-                <TextBox Name="DescriptionTextBox" Grid.Column="1" HorizontalAlignment="Left" Margin="10 0" VerticalAlignment="Center" Width="200" />
+                <TextBox Name="TitleTextBox"  Grid.Column="1" HorizontalAlignment="Left" Margin="10 0" VerticalAlignment="Center" Width="200" />
             </Grid>
 
             <Grid Grid.Row="2" Grid.Column="0" Margin="0 40" Grid.ColumnSpan="2">
@@ -48,20 +48,20 @@
                     <ColumnDefinition Width="175"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock HorizontalAlignment="Left" Grid.Column="0" Text="Title" VerticalAlignment="Center" Width="400"  FontSize="16" FontWeight="SemiBold">
+                <TextBlock HorizontalAlignment="Left" Grid.Column="0" Text="Description" VerticalAlignment="Center" Width="400"  FontSize="16" FontWeight="SemiBold">
 
                 </TextBlock>
-                <TextBox Name="TitleTextBox" Grid.Column="1" HorizontalAlignment="Left" Margin="10 0" VerticalAlignment="Center" Width="200" />
+                <TextBox Name="DescriptionTextBox" Grid.Column="1" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" TextWrapping="Wrap" Height="70" HorizontalAlignment="Left" Margin="10 0" VerticalAlignment="Center" Width="200" />
             </Grid>
 
 
 
 
 
-            <Button x:Name="CancleButton" Click="CancleButton_Click" Grid.Column="0" Grid.Row="3" Width="120" VerticalAlignment="Center" Margin="56,0,176,0">
+            <Button x:Name="CancelButton" Click="CancelButton_Click" Grid.Column="0" Grid.Row="3" Width="120" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="35,0,176,0">
                 <StackPanel Orientation="Horizontal">
                     <Icon:PackIconMaterial Kind="Cancel" Margin="0 2 10 2" />
-                    <TextBlock Text="Cancle" HorizontalAlignment="Center">
+                    <TextBlock Text="Cancel" HorizontalAlignment="Center">
 
                     </TextBlock>
                 </StackPanel>

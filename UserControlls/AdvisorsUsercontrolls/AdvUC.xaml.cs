@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Security.AccessControl;
 
 namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
 {
@@ -27,26 +28,35 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
         public AdvUC()
         {
             InitializeComponent();
+            AddAdvScroll.Visibility = Visibility.Collapsed;
             DisplayAdvisors();
         }
 
 
-        private void DisplayAdvisors()
+        public void DisplayAdvisors()
         {
             var con = Configuration.getInstance().getConnection();
-            SqlCommand cmd = new SqlCommand("SELECT P.Id,P.FirstName,P.LastName,P.Contact,P.Gender,P.Email,P.DateOfBirth,A.Designation,A.Salary FROM Person AS P, Advisor AS A WHERE A.Id = P.Id", con);
+            SqlCommand cmd = new SqlCommand("Select P.Id, (FirstName + ' ' + LastName) AS Name,LU1.Value AS Designation,A.Salary,LU.Value AS Gender,(SELECT FORMAT(DateOfBirth, 'dd/MM/yyyy')) AS [DateOfBirth],Contact,Email FROM Person P JOIN Advisor A ON A.Id=P.Id JOIN Lookup LU ON LU.Id=P.Gender JOIN Lookup LU1 ON LU1.Id=A.Designation", con);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             da.Fill(dt);
             advDataGrid.ItemsSource = dt.DefaultView;
+            if (AddAdvScroll.Visibility == Visibility.Collapsed)
+            {
+                AddAdvButton.Content = "Add Advisor";
+            }
+            else
+            {
+                AddAdvButton.Content = "Go Back";
+
+            }
         }
         private void deleteTuple(int id)
         {
             try
             {
                 var con = Configuration.getInstance().getConnection();
-                SqlCommand cmd = new SqlCommand("DELETE FROM Advisor" +
-                    " WHERE Id =@Id; DELETE FROM Person WHERE Id =@Id", con);
+                SqlCommand cmd = new SqlCommand("DELETE FROM Advisor WHERE Id =@Id; DELETE FROM Person WHERE Id =@Id", con);
                 cmd.Parameters.AddWithValue("@Id", id);
                 cmd.ExecuteNonQuery();
                 MessageBox.Show("Successfully Deleted!!!");
@@ -64,6 +74,7 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
             {
                 int id = int.Parse(selectedRow["Id"].ToString());
                 deleteTuple(id);
+                AddAdvScroll.Visibility = Visibility.Collapsed;
                 DisplayAdvisors();
 
             }
@@ -75,21 +86,24 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
-            string firstName, lastName, contact, email, salary, dob;
-            int gender, designation;
+            string fullName, firstName, lastName, contact, email, salary, dob, gender, designation;
             DataRowView selectedRow = advDataGrid.SelectedItem as DataRowView;
+            string[] name;
             if (selectedRow != null)
             {
                 int id = Int32.Parse(selectedRow["Id"].ToString());
-                firstName = selectedRow["FirstName"].ToString();
-                lastName = selectedRow["LastName"].ToString();
+                fullName = selectedRow["Name"].ToString();
+                name = fullName.Split(' ');
+                firstName = name[0];
+                lastName = name[1];
                 contact = selectedRow["Contact"].ToString();
                 email = selectedRow["Email"].ToString();
                 salary = selectedRow["Salary"].ToString();
                 dob = selectedRow["DateOfBirth"].ToString();
-                gender = int.Parse(selectedRow["Gender"].ToString());
-                designation = int.Parse(selectedRow["Designation"].ToString());
+                gender = selectedRow["Gender"].ToString();
+                designation = selectedRow["Designation"].ToString();
                 AddAdvUC.Content = new AddAdvUC(firstName, lastName, contact, email, gender, designation, salary, dob, id);
+                AddAdvScroll.Visibility = Visibility.Visible;
                 AddAdvUC.Visibility = Visibility.Visible;
                 AddAdvButton.Content = "Go Back";
             }
@@ -101,12 +115,14 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
             if (AddAdvButton.Content.ToString() == "Add Advisor")
             {
                 AddAdvUC.Content = new AddAdvUC();
+                AddAdvScroll.Visibility = Visibility.Visible;
                 AddAdvUC.Visibility = Visibility.Visible;
                 AddAdvButton.Content = "Go Back";
             }
             else
             {
                 AddAdvUC.Visibility = Visibility.Collapsed;
+                AddAdvScroll.Visibility = Visibility.Collapsed;
                 AddAdvButton.Content = "Add Advisor";
 
             }

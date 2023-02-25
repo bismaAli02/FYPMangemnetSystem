@@ -110,3 +110,5 @@ C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\obj\Debug\UserCont
 C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\obj\Debug\UserControlls\StudentsUserControlls\AddStudentUC.baml
 C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\obj\Debug\UserControlls\StudentsUserControlls\GroupStuUC.baml
 C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\obj\Debug\UserControlls\StudentsUserControlls\StudentUC.baml
+C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\obj\Debug\UserControlls\EvaluationsUserControlls\EvaProjectUC.g.cs
+C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\obj\Debug\UserControlls\EvaluationsUserControlls\EvaProjectUC.baml

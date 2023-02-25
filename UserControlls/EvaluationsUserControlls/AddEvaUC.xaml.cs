@@ -1,4 +1,5 @@
 ﻿using CRUD_Operations;
+using FYPManagementSystem.UserControlls.ProjectsUserControlls;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -104,18 +105,52 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            if (SaveButtonTxt.Text == "Save")
+            if (NameTextBox.Text == string.Empty)
             {
-                SaveRecord();
+                MessageBox.Show("Please Enter Name of the Evaluation", " Error ", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else if (TMTextBox.Text == string.Empty)
+            {
+                MessageBox.Show("Please Enter Total Marks for the Project", " Error ", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else if (TWTextBox.Text == string.Empty)
+            {
+                MessageBox.Show("Please Enter Total Weightage for the Project", " Error ", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else
             {
-                UpdateRecord();
+                if (SaveButtonTxt.Text == "Save")
+                {
+                    SaveRecord();
+                }
+                else
+                {
+                    UpdateRecord();
+                }
+                this.Visibility = Visibility.Collapsed;
+                findParentUserControl();
+
             }
 
+
+        }
+        private void findParentUserControl()
+        {
+            var parent = VisualTreeHelper.GetParent(this);
+            while (parent != null && !(parent is EvaUC))
+            {
+                parent = VisualTreeHelper.GetParent(parent);
+            }
+            if (parent is EvaUC)
+            {
+                EvaUC par = parent as EvaUC;
+                par.DisplayEvaluation();
+                Button btn = (Button)par.FindName("AddEvaButton");
+                btn.Content = "Add Evaluation";
+            }
         }
 
-        private void CancleButton_Click(object sender, RoutedEventArgs e)
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             EmptyForm();
         }

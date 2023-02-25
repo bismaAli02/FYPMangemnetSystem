@@ -1,6 +1,7 @@
 ﻿using CRUD_Operations;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -27,8 +28,10 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
         {
             InitializeComponent();
             SaveButtonTxt.Text = "Save";
+            GenderToComboBox();
+            DesignationToComboBox();
         }
-        public AddAdvUC(string firstName, string lastName, string contact, string email, int gender, int designation, string salary, string dob, int id)
+        public AddAdvUC(string firstName, string lastName, string contact, string email, string gender, string designation, string salary, string dob, int id)
         {
             InitializeComponent();
             SaveButtonTxt.Text = "Update";
@@ -36,37 +39,45 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
             LNTextBox.Text = lastName;
             ContactTextBox.Text = contact;
             EmailTextBox.Text = email;
-            if (gender == 1)
-            {
-                genderComboBox.Text = "MALE";
-            }
-            else
-            {
-                genderComboBox.Text = "FEMALE";
-            }
+            GenderToComboBox();
+            genderComboBox.Text = gender;
             Date.Text = dob;
-            if (designation == 3)
-            {
-                DesComboBox.Text = "Professor";
-            }
-            else if (designation == 4)
-            {
-                DesComboBox.Text = "Associate Professor";
-            }
-            else if (designation == 5)
-            {
-                DesComboBox.Text = "Assistant Professor";
-            }
-            else if (designation == 6)
-            {
-                DesComboBox.Text = "Lecturer";
-            }
-            else if (designation == 7)
-            {
-                DesComboBox.Text = "Industry Professional";
-            }
+            DesignationToComboBox();
+            DesComboBox.Text = designation;
             this.id = id;
             SalaryTextBox.Text = salary;
+        }
+        private void findParent()
+        {
+            var parent = VisualTreeHelper.GetParent(this);
+            while (parent != null && !(parent is ScrollViewer))
+            {
+                parent = VisualTreeHelper.GetParent(parent);
+            }
+            if (parent is ScrollViewer)
+            {
+                ScrollViewer par = parent as ScrollViewer;
+                par.Visibility = Visibility.Collapsed;
+                findParentUserControl();
+
+            }
+        }
+
+        private void findParentUserControl()
+        {
+            var parent = VisualTreeHelper.GetParent(this);
+            while (parent != null && !(parent is AdvisorsUsercontrolls.AdvUC))
+            {
+                parent = VisualTreeHelper.GetParent(parent);
+            }
+            if (parent is AdvisorsUsercontrolls.AdvUC)
+            {
+                AdvisorsUsercontrolls.AdvUC par = parent as AdvisorsUsercontrolls.AdvUC;
+                par.DisplayAdvisors();
+                Button btn = (Button)par.FindName("AddAdvButton");
+                btn.Content = "Add Advisor";
+
+            }
         }
 
         private void BackButton_Click_1(object sender, RoutedEventArgs e)
@@ -97,51 +108,81 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
             DesComboBox.IsReadOnly = true;
         }
 
-        private void CancleButton_Click(object sender, RoutedEventArgs e)
+        private void GenderToComboBox()
+        {
+            try
+            {
+                var con = Configuration.getInstance().getConnection();
+                SqlCommand cmd = new SqlCommand("SELECT Value FROM Lookup WHERE Category=@Category", con);
+                cmd.Parameters.AddWithValue("@Category", "GENDER");
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
+                DataSet dataSet = new DataSet();
+                dataAdapter.Fill(dataSet);
+                genderComboBox.ItemsSource = dataSet.Tables[0].DefaultView;
+                genderComboBox.DisplayMemberPath = "Value";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void DesignationToComboBox()
+        {
+            try
+            {
+                var con = Configuration.getInstance().getConnection();
+                SqlCommand cmd = new SqlCommand("SELECT Value FROM Lookup WHERE Category=@Category", con);
+                cmd.Parameters.AddWithValue("@Category", "DESIGNATION");
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
+                DataSet dataSet = new DataSet();
+                dataAdapter.Fill(dataSet);
+                DesComboBox.ItemsSource = dataSet.Tables[0].DefaultView;
+                DesComboBox.DisplayMemberPath = "Value";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             EmptyForm();
         }
 
-        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        private void SaveRecord(int gender, int designation)
         {
-            int gender = 0;
-            int designation = 0;
-            if (genderComboBox.SelectedIndex == 0)
+            try
             {
-                gender = 1;
+                var con = Configuration.getInstance().getConnection();
+                SqlCommand cmd = new SqlCommand("INSERT INTO Person(FirstName,LastName,Contact,Email,DateOfBirth,Gender) VALUES (@FirstName,@LastName, @Contact,@Email,@DateOfBirth, @Gender); INSERT INTO Advisor(Id,Designation,Salary) VALUES ((SELECT Id FROM Person WHERE FirstName = @FirstName AND LastName=@LastName AND Contact=@Contact AND Email=@Email AND DateOfBirth=@DateOfBirth AND Gender=@Gender) ,@Designation, @Salary);", con);
+                cmd.Parameters.AddWithValue("@FirstName", FNTextBox.Text);
+                cmd.Parameters.AddWithValue("@LastName", LNTextBox.Text);
+                cmd.Parameters.AddWithValue("@Contact", ContactTextBox.Text);
+                cmd.Parameters.AddWithValue("@Email", EmailTextBox.Text);
+                cmd.Parameters.AddWithValue("@DateOfBirth", Date.Text);
+                cmd.Parameters.AddWithValue("@Gender", gender);
+                cmd.Parameters.AddWithValue("@Designation", designation);
+                cmd.Parameters.AddWithValue("@Salary", int.Parse(SalaryTextBox.Text));
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Successfully saved");
+                EmptyForm();
             }
-            else
+            catch (Exception ex)
             {
-                gender = 2;
+                MessageBox.Show(ex.Message);
             }
+        }
 
-            if (DesComboBox.SelectedIndex == 0)
-            {
-                designation = 3;
-            }
-            else if (DesComboBox.SelectedIndex == 1)
-            {
-                designation = 4;
-            }
-            else if (DesComboBox.SelectedIndex == 2)
-            {
-                designation = 5;
-            }
-            else if (DesComboBox.SelectedIndex == 3)
-            {
-                designation = 6;
-            }
-            else if (DesComboBox.SelectedIndex == 4)
-            {
-                designation = 7;
-            }
-
-            if (SaveButtonTxt.Text == "Save")
+        private void UpdateRecord(int gender, int designation)
+        {
+            if (FNTextBox.Text != string.Empty && EmailTextBox.Text != string.Empty)
             {
                 try
                 {
                     var con = Configuration.getInstance().getConnection();
-                    SqlCommand cmd = new SqlCommand("INSERT INTO Person(FirstName,LastName,Contact,Email,DateOfBirth,Gender) VALUES (@FirstName,@LastName, @Contact,@Email,@DateOfBirth, @Gender); INSERT INTO Advisor(Id,Designation,Salary) VALUES ((SELECT Id FROM Person WHERE FirstName = @FirstName AND LastName=@LastName AND Contact=@Contact AND Email=@Email AND DateOfBirth=@DateOfBirth AND Gender=@Gender) ,@Designation, @Salary);", con);
+                    SqlCommand cmd = new SqlCommand("UPDATE Person SET FirstName = @FirstName, LastName=@LastName, Contact=@Contact, Email=@Email, DateOfBirth=@DateOfBirth, Gender=@Gender WHERE Id=@Id; UPDATE Advisor SET Designation=@Designation, Salary=@Salary WHERE Id=@Id;", con);
                     cmd.Parameters.AddWithValue("@FirstName", FNTextBox.Text);
                     cmd.Parameters.AddWithValue("@LastName", LNTextBox.Text);
                     cmd.Parameters.AddWithValue("@Contact", ContactTextBox.Text);
@@ -150,48 +191,89 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
                     cmd.Parameters.AddWithValue("@Gender", gender);
                     cmd.Parameters.AddWithValue("@Designation", designation);
                     cmd.Parameters.AddWithValue("@Salary", SalaryTextBox.Text);
+                    cmd.Parameters.AddWithValue("@Id", id);
                     cmd.ExecuteNonQuery();
-                    MessageBox.Show("Successfully saved");
-                    EmptyForm();
+                    MessageBox.Show("Record Updated");
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
                 }
+                EmptyForm();
+                LockForm();
             }
             else
             {
-                if (FNTextBox.Text != string.Empty && EmailTextBox.Text != string.Empty)
+                MessageBox.Show("Please Select any record to Update");
+            }
+        }
+
+        private int ReturnGender()
+        {
+            int gender = 0;
+            var con = Configuration.getInstance().getConnection();
+            SqlCommand cmd = new SqlCommand("SELECT Id FROM Lookup WHERE Category='GENDER' AND Value=@Gender", con);
+            cmd.Parameters.AddWithValue("@Gender", genderComboBox.Text);
+            SqlDataReader reader = cmd.ExecuteReader();
+            if (reader.Read())
+            {
+                gender = int.Parse(reader["Id"].ToString());
+            }
+            reader.Close();
+            return gender;
+
+        }
+
+        private int ReturnDesignation()
+        {
+            int designation = 0;
+            var con = Configuration.getInstance().getConnection();
+            SqlCommand cmd = new SqlCommand("SELECT Id FROM Lookup WHERE Category='DESIGNATION' AND Value=@designation", con);
+            cmd.Parameters.AddWithValue("@designation", DesComboBox.Text);
+            SqlDataReader reader = cmd.ExecuteReader();
+            if (reader.Read())
+            {
+                designation = int.Parse(reader["Id"].ToString());
+            }
+            reader.Close();
+            return designation;
+
+        }
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            int gender = ReturnGender();
+            int designation = ReturnDesignation();
+
+            if (FNTextBox.Text == string.Empty)
+            {
+                MessageBox.Show("Please Enter  First Name ", " Error ", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else if (DesComboBox.Text == string.Empty)
+            {
+                MessageBox.Show("Please Select Designation", " Error ", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else if (EmailTextBox.Text == string.Empty)
+            {
+                MessageBox.Show("Please Enter Email", " Error ", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else if (SalaryTextBox.Text == string.Empty)
+            {
+                MessageBox.Show("Please Enter Salary", " Error ", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
+            else
+            {
+                if (SaveButtonTxt.Text == "Save")
                 {
-                    try
-                    {
-                        var con = Configuration.getInstance().getConnection();
-                        SqlCommand cmd = new SqlCommand("UPDATE Person SET FirstName = @FirstName, LastName=@LastName, Contact=@Contact, Email=@Email, DateOfBirth=@DateOfBirth, Gender=@Gender WHERE Id=@Id; UPDATE Advisor SET Designation=@Designation, Salary=@Salary WHERE Id=@Id;", con);
-                        cmd.Parameters.AddWithValue("@FirstName", FNTextBox.Text);
-                        cmd.Parameters.AddWithValue("@LastName", LNTextBox.Text);
-                        cmd.Parameters.AddWithValue("@Contact", ContactTextBox.Text);
-                        cmd.Parameters.AddWithValue("@Email", EmailTextBox.Text);
-                        cmd.Parameters.AddWithValue("@DateOfBirth", Date.Text);
-                        cmd.Parameters.AddWithValue("@Gender", gender);
-                        cmd.Parameters.AddWithValue("@Designation", designation);
-                        cmd.Parameters.AddWithValue("@Salary", SalaryTextBox.Text);
-                        cmd.Parameters.AddWithValue("@Id", id);
-                        cmd.ExecuteNonQuery();
-                        MessageBox.Show("Record Updated");
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                    EmptyForm();
-                    LockForm();
+                    SaveRecord(gender, designation);
                 }
                 else
                 {
-                    MessageBox.Show("Please Select any record to Update");
+                    UpdateRecord(gender, designation);
                 }
-            }
+                findParent();
 
+            }
         }
 
 
