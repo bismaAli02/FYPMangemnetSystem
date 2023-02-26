@@ -218,8 +218,7 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
         {
             EmptyForm();
         }
-
-        private void EvaComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void EvaComboBox_DropDownClosed(object sender, EventArgs e)
         {
             GiveEvaluationId();
         }

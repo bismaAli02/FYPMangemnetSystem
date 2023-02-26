@@ -6,13 +6,14 @@
     xmlns:AdvisorUserControlls="clr-namespace:FYPManagementSystem.UserControlls.AdvisorsUsercontrolls"
     xmlns:ProjectsUserControlls="clr-namespace:FYPManagementSystem.UserControlls.ProjectsUserControlls"
     xmlns:EvaluationsUserControlls="clr-namespace:FYPManagementSystem.UserControlls.EvaluationsUserControlls"
+    xmlns:GroupUserControlls="clr-namespace:FYPManagementSystem.UserControlls.GroupUserControlls"
     x:Class="FYPManagementSystem.MainWindow"
     Height="700" Width="1050"
     WindowStartupLocation="CenterScreen" Background="Transparent">
     <Window.Resources>
 
         <Style x:Key="menuTitle" TargetType="{x:Type TextBlock}">
-            <Setter Property="Foreground" Value="#67c7f0"/>
+            <Setter Property="Foreground" Value="BlueViolet"/>
             <Setter Property="FontSize" Value="30"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="Margin" Value="63 30 0 15"/>
@@ -40,7 +41,7 @@
 
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True" >
-                    <Setter Property="Background" Value="#67c7f0"/>
+                    <Setter Property="Background" Value="BlueViolet"/>
                     <Setter Property="Foreground" Value="#ffffff"/>
                     <Setter Property="Tag" Value="Visible"/>
 
@@ -82,8 +83,8 @@
                         <Ellipse Fill="#2acb42" Width="10" Height="10"/>
                     </StackPanel>
 
-                    <TextBlock Text="Library" Style="{StaticResource menuTitle}"/>
-                    <!-- Button 1-->
+                    <TextBlock Text="Main Menu" Style="{StaticResource menuTitle}"/>
+                    <!-- Button 1 student grid-->
                     <Button x:Name="StudentButton" Style="{StaticResource menuButton}" Click="StudentButton_Click">
                         <Grid>
                             <TextBlock Text="Students" Margin="0 0 0 2"/>
@@ -91,7 +92,7 @@
                         </Grid>
                     </Button>
 
-                    <!-- Button 2-->
+                    <!-- Button 2 Make student Groups-->
                     <Button x:Name="GStudentButton" Style="{StaticResource menuButton}" Click="GStudentButton_Click">
                         <Grid>
                             <TextBlock Text="Group Students" Margin="0 0 0 2"/>
@@ -99,7 +100,7 @@
                         </Grid>
                     </Button>
 
-                    <!-- Button 3-->
+                    <!-- Button 3 Project Grid-->
                     <Button x:Name="ProjectButton" Style="{StaticResource menuButton}" Click="ProjectButton_Click" >
                         <Grid>
                             <TextBlock Text="Projects" Margin="0 0 0 2"/>
@@ -107,7 +108,7 @@
                         </Grid>
                     </Button>
 
-                    <!-- Button 4-->
+                    <!-- Button 4 Assign projects To students-->
                     <Button  x:Name="GProjectsButton"  Style="{StaticResource menuButton}" Click="GProjectsButton_Click">
                         <Grid>
                             <TextBlock Text="Assign Projects" Margin="0 0 0 2"/>
@@ -115,7 +116,7 @@
                         </Grid>
                     </Button>
 
-                    <!-- Button 5-->
+                    <!-- Button 5 Evaluation Grid -->
                     <Button x:Name="EvaluationButton" Style="{StaticResource menuButton}" Click="EvaluationButton_Click">
                         <Grid>
                             <TextBlock Text="Evaluations" Margin="0 0 0 2"/>
@@ -123,7 +124,7 @@
                         </Grid>
                     </Button>
 
-                    <!-- Button 6-->
+                    <!-- Button 6 Marks Evaluation Grid-->
                     <Button x:Name="GEvaluaionButton" Style="{StaticResource menuButton}" Click="GEvaluaionButton_Click" >
                         <Grid>
                             <TextBlock Text="Mark Evaluations" Margin="0 0 0 2"/>
@@ -131,7 +132,7 @@
                         </Grid>
                     </Button>
 
-                    <!-- Button 7-->
+                    <!-- Button 7 Advisor Grid-->
                     <Button x:Name="AdvisorButton" Style="{StaticResource menuButton}" Click="AdvisorButton_Click">
                         <Grid>
                             <TextBlock Text="Advisors" Margin="0 0 0 2"/>
@@ -146,56 +147,57 @@
                             <Icon:PackIconMaterial Style="{StaticResource menuButtonIcon}"/>
                         </Grid>
                     </Button>
-                    <!-- Button 9-->
-                    <Button x:Name="PdfRepButton" Style="{StaticResource menuButton}" Click="PdfRepButton_Click">
-                        <Grid>
-                            <TextBlock Text="Generate PDF" Margin="0 0 0 2"/>
-                            <Icon:PackIconMaterial Style="{StaticResource menuButtonIcon}"/>
-                        </Grid>
-                    </Button>
-
 
                 </StackPanel>
             </Border>
 
+
+            <!-- Place Student User Control On MainWindow so that All Students Records Can Display-->
+
             <Grid Grid.Column="1" x:Name="StudentGrid">
                 <Grid x:Name="stUC">
                     <local:StudentUC/>
-
-
                 </Grid>
-
             </Grid>
+
+            <!-- Place Advisor User Control On MainWindow so that All Advisor Records Can Display-->
 
             <Grid Grid.Column="1" x:Name="AdvisorGrid">
                 <Grid x:Name="advUC">
-
                     <AdvisorUserControlls:AdvUC/>
-
                 </Grid>
             </Grid>
+
+            <!-- Place Project User Control On MainWindow so that All Project Records Can Display-->
 
             <Grid Grid.Column="1" x:Name="ProjectGrid">
                 <Grid x:Name="ProjUC">
-
                     <ProjectsUserControlls:ProjUC/>
-
                 </Grid>
             </Grid>
+
+
+            <!-- Place Evaluation User Control On MainWindow so that All Evaluation Records Can Display-->
 
             <Grid Grid.Column="1" x:Name="EvaluationGrid">
                 <Grid x:Name="EvaUC">
-
                     <EvaluationsUserControlls:EvaUC/>
-
                 </Grid>
             </Grid>
 
+            <!-- Place Marks Evaluation User Control On MainWindow so that All Marked Evaluation Record Can Display-->
+
             <Grid Grid.Column="1" x:Name="MarkEvaluationGrid">
                 <Grid x:Name="MarkEvaUC">
-
                     <EvaluationsUserControlls:EvaProjectUC/>
+                </Grid>
+            </Grid>
 
+            <!-- Place Group User Control On MainWindow so that All Group Record Can Display-->
+
+            <Grid Grid.Column="1" x:Name="GroupUCGrid">
+                <Grid x:Name="GroupStuUC">
+                    <GroupUserControlls:GroupStuUC/>
                 </Grid>
             </Grid>
         </Grid>

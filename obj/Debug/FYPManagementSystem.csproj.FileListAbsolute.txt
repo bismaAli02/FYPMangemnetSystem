@@ -94,7 +94,6 @@ C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\obj\Debug\UserCont
 C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\obj\Debug\UserControlls\ProjectsUserControlls\AssignProjUC.g.cs
 C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\obj\Debug\UserControlls\ProjectsUserControlls\ProjUC.g.cs
 C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\obj\Debug\UserControlls\StudentsUserControlls\AddStudentUC.g.cs
-C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\obj\Debug\UserControlls\StudentsUserControlls\GroupStuUC.g.cs
 C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\obj\Debug\UserControlls\StudentsUserControlls\StudentUC.g.cs
 C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\obj\Debug\UserControlls\AdvisorsUsercontrolls\AddAdvUC.baml
@@ -108,7 +107,10 @@ C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\obj\Debug\UserCont
 C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\obj\Debug\UserControlls\ProjectsUserControlls\AssignProjUC.baml
 C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\obj\Debug\UserControlls\ProjectsUserControlls\ProjUC.baml
 C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\obj\Debug\UserControlls\StudentsUserControlls\AddStudentUC.baml
-C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\obj\Debug\UserControlls\StudentsUserControlls\GroupStuUC.baml
 C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\obj\Debug\UserControlls\StudentsUserControlls\StudentUC.baml
 C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\obj\Debug\UserControlls\EvaluationsUserControlls\EvaProjectUC.g.cs
 C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\obj\Debug\UserControlls\EvaluationsUserControlls\EvaProjectUC.baml
+C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\obj\Debug\UserControlls\GroupUserControlls\GroupStuUC.g.cs
+C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\obj\Debug\UserControlls\GroupUserControlls\GroupStuUC.baml
+C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\obj\Debug\UserControlls\GroupUserControlls\EditGroupUC.g.cs
+C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\obj\Debug\UserControlls\GroupUserControlls\EditGroupUC.baml

@@ -104,6 +104,9 @@
     <Compile Include="UserControlls\EvaluationsUserControlls\MarkEvaUC.xaml.cs">
       <DependentUpon>MarkEvaUC.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControlls\GroupUserControlls\EditGroupUC.xaml.cs">
+      <DependentUpon>EditGroupUC.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControlls\PdfUserControlls\PdfUC.xaml.cs">
       <DependentUpon>PdfUC.xaml</DependentUpon>
     </Compile>
@@ -119,7 +122,7 @@
     <Compile Include="UserControlls\StudentsUserControlls\AddStudentUC.xaml.cs">
       <DependentUpon>AddStudentUC.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControlls\StudentsUserControlls\GroupStuUC.xaml.cs">
+    <Compile Include="UserControlls\GroupUserControlls\GroupStuUC.xaml.cs">
       <DependentUpon>GroupStuUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControlls\StudentsUserControlls\StudentUC.xaml.cs">
@@ -169,6 +172,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControlls\GroupUserControlls\EditGroupUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControlls\PdfUserControlls\PdfUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -189,7 +196,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControlls\StudentsUserControlls\GroupStuUC.xaml">
+    <Page Include="UserControlls\GroupUserControlls\GroupStuUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -242,6 +249,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Images\markEvaluation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\group.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\MaterialDesignThemes.4.7.0\build\MaterialDesignThemes.targets" Condition="Exists('packages\MaterialDesignThemes.4.7.0\build\MaterialDesignThemes.targets')" />

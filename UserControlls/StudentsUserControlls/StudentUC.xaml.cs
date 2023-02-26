@@ -28,7 +28,7 @@ namespace FYPManagementSystem
         public StudentUC()
         {
             InitializeComponent();
-            DisplayStudent();
+            DisplayStudent(); // whenever constructor call all students record display
             AddStuScroll.Visibility = Visibility.Collapsed;
         }
 
@@ -36,11 +36,18 @@ namespace FYPManagementSystem
         public void DisplayStudent()
         {
             var con = Configuration.getInstance().getConnection();
+
+            // sql querey that retrieve data for students by joining lookup , student and person tabel
+
+            //SELECT FORMAT(DateOfBirth, 'dd/MM/yyyy') this format is used to only retrieve date no time
+
             SqlCommand cmd = new SqlCommand("SELECT P.Id, S.RegistrationNo , (FirstName +' '+ LastName) AS Name,LU.Value AS Gender,(SELECT FORMAT(DateOfBirth, 'dd/MM/yyyy')) AS DateOfBirth,Contact,Email FROM Person AS P JOIN Student AS S ON S.Id=P.Id JOIN Lookup LU ON LU.Id=P.Gender", con);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             da.Fill(dt);
             stuDataGrid.ItemsSource = dt.DefaultView;
+
+            // use a single button for two purpose if Add studentUC visibility is visible that means we can open add student UserControl or if not it means Usercontrol is already opened now we use this button for go back purpose
             if (AddStuUC.Visibility == Visibility.Collapsed)
             {
                 AddStuButton.Content = "Add Student";
@@ -55,6 +62,7 @@ namespace FYPManagementSystem
             try
             {
                 var con = Configuration.getInstance().getConnection();
+                // delete a record from student tabel also from  person tabel
                 SqlCommand cmd = new SqlCommand("DELETE FROM Student WHERE Id =@Id; DELETE FROM Person WHERE Id =@Id", con);
                 cmd.Parameters.AddWithValue("@Id", id);
                 cmd.ExecuteNonQuery();
@@ -68,7 +76,7 @@ namespace FYPManagementSystem
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            DataRowView selectedRow = stuDataGrid.SelectedItem as DataRowView;
+            DataRowView selectedRow = stuDataGrid.SelectedItem as DataRowView; // as is used for typecasting through as we convert selected item in dataRowView 
             if (selectedRow != null)
             {
                 int id = int.Parse(selectedRow["Id"].ToString());
@@ -88,7 +96,7 @@ namespace FYPManagementSystem
         {
             string fullName, firstName, lastName, contact, email, regNo, dob, gender;
             DataRowView selectedRow = stuDataGrid.SelectedItem as DataRowView;
-            string[] name;
+            string[] name;// array is used because I concatenated first name and last name 
             if (selectedRow != null)
             {
                 int id = Int32.Parse(selectedRow["Id"].ToString());
@@ -101,6 +109,9 @@ namespace FYPManagementSystem
                 regNo = selectedRow["RegistrationNo"].ToString();
                 dob = selectedRow["DateOfBirth"].ToString();
                 gender = selectedRow["Gender"].ToString();
+
+                // this constructer is call because if I clicked edit button of selected row so I can see previous data in Usercontrol
+
                 AddStuUC.Content = new AddStudentUC(firstName, lastName, contact, email, gender, regNo, dob, id);
                 AddStuUC.Visibility = Visibility.Visible;
                 AddStuScroll.Visibility = Visibility.Visible;
@@ -110,6 +121,8 @@ namespace FYPManagementSystem
 
         private void AddStuButton_Click(object sender, RoutedEventArgs e)
         {
+
+            // use a single button for two purpose if Add student bitton content = Add student that means we can open add student UserControl or if not it means Usercontrol is already opened now we use this button for go back purpose
 
             if (AddStuButton.Content.ToString() == "Add Student")
             {

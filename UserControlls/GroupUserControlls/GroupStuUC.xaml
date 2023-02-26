@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="FYPManagementSystem.StudentUC"
+﻿<UserControl x:Class="FYPManagementSystem.UserControlls.GroupUserControlls.GroupStuUC"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -25,57 +25,54 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <Button Grid.Row="0" Content="Add Student" HorizontalAlignment="Right" Width="130" Name="AddStuButton" Click="AddStuButton_Click" Margin="472,0,0,0"/>
+                <Button Grid.Row="0" Content="Export PDF" HorizontalAlignment="Left" Width="130" Name="ExportPdfButton" Click="ExportPdfButton_Click" Margin="10,0,0,0"/>
 
-                <DataGrid Grid.Row="1" Name="stuDataGrid" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserSortColumns="False" CanUserResizeColumns="False" IsReadOnly="True" AutoGenerateColumns="False">
+
+                <Button Grid.Row="0" Content="Create Group" HorizontalAlignment="Right" Width="130" Name="CreateGroupButton" Click="CreateGroupButton_Click" Margin="472,0,0,0"/>
+
+                <DataGrid Grid.Row="1" Name="GroupDataGrid" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserSortColumns="False" CanUserResizeColumns="False" IsReadOnly="True" AutoGenerateColumns="False">
                     <DataGrid.Columns>
 
                         <!-- Make columns and bind them with tabel attributes-->
+                        <DataGridTemplateColumn Header="Group ID" Width="auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding GroupId}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+
+                        <DataGridTemplateColumn Header="Project Title" Width="auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Title }"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
                         <DataGridTemplateColumn Header="Registration No." Width="auto">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding RegistrationNo}"/>
+                                    <TextBlock Text="{Binding RegNo }"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
-
-                        <DataGridTemplateColumn Header="Name" Width="auto">
+                        <DataGridTemplateColumn Header="Created On" Width="auto">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Name}"/>
+                                    <TextBlock Text="{Binding Created_On}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="Gender" Width="auto">
+                        <DataGridTemplateColumn Header="Group Detail" IsReadOnly="True" Width="auto">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Gender}"/>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-
-                        <DataGridTemplateColumn Header="Contact" Width="auto">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Contact}"/>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-
-                        <DataGridTemplateColumn Header="Email" Width="auto">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Email}"/>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-
-                        <DataGridTemplateColumn Header="Date Of Birth" Width="auto">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding DateOfBirth}"/>
+                                    <Button HorizontalAlignment="Right" x:Name="GDButton" Background="Transparent" BorderBrush="Transparent" Click="GDButton_Click">
+                                        <Icon:PackIconMaterial Kind="Record" Foreground="BlueViolet" />
+                                    </Button>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -102,8 +99,8 @@
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
-                <ScrollViewer x:Name="AddStuScroll" Grid.Row="1" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
-                    <UserControl  x:Name="AddStuUC" Visibility="Collapsed"/>
+                <ScrollViewer x:Name="GroupScroll" Grid.Row="1" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" Visibility="Collapsed">
+                    <UserControl  x:Name="GroupUC" Visibility="Collapsed"/>
 
                 </ScrollViewer>
             </Grid>
