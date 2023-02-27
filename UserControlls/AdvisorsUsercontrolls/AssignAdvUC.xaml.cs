@@ -24,5 +24,20 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
         {
             InitializeComponent();
         }
+
+        private void AssignProjectButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

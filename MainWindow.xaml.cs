@@ -24,6 +24,7 @@ namespace FYPManagementSystem
             AdvisorGrid.Visibility = Visibility.Collapsed;
             ProjectGrid.Visibility = Visibility.Collapsed;
             EvaluationGrid.Visibility = Visibility.Collapsed;
+            AssignAdvUCGrid.Visibility = Visibility.Collapsed;
             GroupUCGrid.Visibility = Visibility.Collapsed;
             MarkEvaluationGrid.Visibility = Visibility.Collapsed;
             stUC.Visibility = Visibility.Collapsed;
@@ -32,6 +33,7 @@ namespace FYPManagementSystem
             EvaUC.Visibility = Visibility.Collapsed;
             MarkEvaUC.Visibility = Visibility.Collapsed;
             GroupStuUC.Visibility = Visibility.Collapsed;
+            AssignAdvUC.Visibility = Visibility.Collapsed;
 
         }
 
@@ -72,11 +74,6 @@ namespace FYPManagementSystem
             ProjUC.Children.Add(new ProjUC());
         }
 
-        private void GProjectsButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         // colapsed all other grids and diplay only Evaluation UserControl
         private void EvaluationButton_Click(object sender, RoutedEventArgs e)
         {
@@ -106,10 +103,18 @@ namespace FYPManagementSystem
             advUC.Children.Clear();
             advUC.Children.Add(new AdvUC());
         }
-
-        private void GAdvisorButton_Click(object sender, RoutedEventArgs e)
+        private void AssignAdvButton_Click(object sender, RoutedEventArgs e)
         {
+            CollapseAllGrids();
+            AssignAdvUCGrid.Visibility = Visibility.Visible;
+            AssignAdvUC.Visibility = Visibility.Visible;
+            AssignAdvUC.Children.Clear();
+            AssignAdvUC.Children.Add(new AssignAdvUC());
+        }
 
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }

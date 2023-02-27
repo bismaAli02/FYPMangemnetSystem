@@ -42,7 +42,7 @@
                 <ComboBox Grid.Column="1" Name="ProjectComboBox" HorizontalAlignment="Left" Margin="10 0" VerticalAlignment="Center" Width="140"/>
             </Grid>
 
-            <Button x:Name="AssigProjButton" Click="AssignProjButton_Click" Grid.Column="1" Grid.Row="1" Margin="20,35,70,35"  Width="100" HorizontalAlignment="Left">
+            <Button x:Name="AssigProjButton" Click="AssignProjButton_Click" Grid.Column="1" Grid.Row="1" Margin="20,35,70,35"  Width="130" HorizontalAlignment="Left">
                 <StackPanel Orientation="Horizontal">
                     <Icon:PackIconMaterial Kind="Projector" Margin="0 2 10 2" />
                     <TextBlock x:Name="AssignButtonTxt" Text="Assign" HorizontalAlignment="Center">
@@ -70,7 +70,7 @@
                 <ComboBox Grid.Column="1" Name="AddStuComboBox" HorizontalAlignment="Left" Margin="10 0" VerticalAlignment="Center" Width="140"/>
             </Grid>
 
-            <Button x:Name="AddStuButton" Click="AddStuButton_Click" Grid.Column="1" Grid.Row="3" Margin="20,35,70,35"  Width="100" HorizontalAlignment="Left">
+            <Button x:Name="AddStuButton" Click="AddStuButton_Click" Grid.Column="1" Grid.Row="3" Margin="20,35,70,35"  Width="130" HorizontalAlignment="Left">
                 <StackPanel Orientation="Horizontal">
                     <Icon:PackIconMaterial Kind="Plus" Margin="0 2 10 2" />
                     <TextBlock x:Name="AddStuButtonTxt" Text="Add" HorizontalAlignment="Center">
@@ -78,7 +78,7 @@
                     </TextBlock>
                 </StackPanel>
             </Button>
-            <DataGrid Grid.Row="4" Name="EditGroupDataGrid" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserSortColumns="False" CanUserResizeColumns="False" IsReadOnly="True" AutoGenerateColumns="False" Grid.ColumnSpan="2" Grid.Column="0">
+            <DataGrid Grid.Row="4" x:Name="GroupStudentDataGrid" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserSortColumns="False" CanUserResizeColumns="False" IsReadOnly="True" AutoGenerateColumns="False" Grid.ColumnSpan="2" Grid.Column="0">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn Header="Registration Number" Width="auto">
                         <DataGridTemplateColumn.CellTemplate>
@@ -98,12 +98,7 @@
                     <DataGridTemplateColumn Header="Status" Width="auto">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <ComboBox SelectedValue="{Binding Status}" x:Name="StatusComboBox" DropDownClosed="StatusComboBox_DropDownClosed">
-                                    <ComboBoxItem Content="Active"/>
-                                    <ComboBoxItem Content="In Active"/>
-
-
-                                </ComboBox>
+                                <ToggleButton IsChecked="True" Unchecked="ToggleButton_Unchecked" ToolTip="Make Student In Active"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

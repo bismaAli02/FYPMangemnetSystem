@@ -9,7 +9,7 @@
     xmlns:GroupUserControlls="clr-namespace:FYPManagementSystem.UserControlls.GroupUserControlls"
     x:Class="FYPManagementSystem.MainWindow"
     Height="700" Width="1050"
-    WindowStartupLocation="CenterScreen" Background="Transparent">
+    WindowStartupLocation="CenterScreen" Background="Transparent" AllowsTransparency="True" WindowStyle="None">
     <Window.Resources>
 
         <Style x:Key="menuTitle" TargetType="{x:Type TextBlock}">
@@ -109,9 +109,9 @@
                     </Button>
 
                     <!-- Button 4 Assign projects To students-->
-                    <Button  x:Name="GProjectsButton"  Style="{StaticResource menuButton}" Click="GProjectsButton_Click">
+                    <Button  x:Name="AssignAdvButton"  Style="{StaticResource menuButton}" Click="AssignAdvButton_Click">
                         <Grid>
-                            <TextBlock Text="Assign Projects" Margin="0 0 0 2"/>
+                            <TextBlock Text="Assign Advisors" Margin="0 0 0 2"/>
                             <Icon:PackIconMaterial Style="{StaticResource menuButtonIcon}"/>
                         </Grid>
                     </Button>
@@ -141,9 +141,9 @@
                     </Button>
 
                     <!-- Button 8-->
-                    <Button x:Name="GAdvisorButton" Style="{StaticResource menuButton}" Click="GAdvisorButton_Click">
+                    <Button x:Name="ExitButton" Style="{StaticResource menuButton}" Click="ExitButton_Click">
                         <Grid>
-                            <TextBlock Text="Assign Advisors" Margin="0 0 0 2"/>
+                            <TextBlock Text="Exit" Margin="0 0 0 2"/>
                             <Icon:PackIconMaterial Style="{StaticResource menuButtonIcon}"/>
                         </Grid>
                     </Button>
@@ -198,6 +198,14 @@
             <Grid Grid.Column="1" x:Name="GroupUCGrid">
                 <Grid x:Name="GroupStuUC">
                     <GroupUserControlls:GroupStuUC/>
+                </Grid>
+            </Grid>
+
+            <!-- Place Assign advisor User Control On MainWindow so that All Advisor Projects Record Can Display-->
+
+            <Grid Grid.Column="1" x:Name="AssignAdvUCGrid">
+                <Grid x:Name="AssignAdvUC">
+                    <AdvisorUserControlls:AssignAdvUC/>
                 </Grid>
             </Grid>
         </Grid>
