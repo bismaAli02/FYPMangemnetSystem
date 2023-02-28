@@ -57,12 +57,12 @@ namespace FYPManagementSystem
                 AddStuButton.Content = "Go Back";
             }
         }
+
         private void deleteTuple(int id)
         {
             try
             {
                 var con = Configuration.getInstance().getConnection();
-                // delete a record from student tabel also from  person tabel
                 SqlCommand cmd = new SqlCommand("DELETE FROM Student WHERE Id =@Id; DELETE FROM Person WHERE Id =@Id", con);
                 cmd.Parameters.AddWithValue("@Id", id);
                 cmd.ExecuteNonQuery();
@@ -76,7 +76,7 @@ namespace FYPManagementSystem
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            DataRowView selectedRow = stuDataGrid.SelectedItem as DataRowView; // as is used for typecasting through as we convert selected item in dataRowView 
+            DataRowView selectedRow = stuDataGrid.SelectedItem as DataRowView;
             if (selectedRow != null)
             {
                 int id = int.Parse(selectedRow["Id"].ToString());
@@ -84,14 +84,12 @@ namespace FYPManagementSystem
                 AddStuScroll.Visibility = Visibility.Collapsed;
                 DisplayStudent();
                 AddStuButton.Content = "Add Student";
-
             }
             else
             {
                 MessageBox.Show("Please Select a specific row to Delete!!!");
             }
         }
-
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
             string fullName, firstName, lastName, contact, email, regNo, dob, gender;

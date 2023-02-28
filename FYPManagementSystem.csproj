@@ -86,6 +86,9 @@
     <Compile Include="UserControlls\AdvisorsUsercontrolls\AddAdvUC.xaml.cs">
       <DependentUpon>AddAdvUC.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControlls\AdvisorsUsercontrolls\AddProjectAdvUC.xaml.cs">
+      <DependentUpon>AddProjectAdvUC.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControlls\AdvisorsUsercontrolls\AdvUC.xaml.cs">
       <DependentUpon>AdvUC.xaml</DependentUpon>
     </Compile>
@@ -145,6 +148,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControlls\AdvisorsUsercontrolls\AddAdvUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControlls\AdvisorsUsercontrolls\AddProjectAdvUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

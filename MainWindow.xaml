@@ -205,7 +205,7 @@
 
             <Grid Grid.Column="1" x:Name="AssignAdvUCGrid">
                 <Grid x:Name="AssignAdvUC">
-                    <AdvisorUserControlls:AssignAdvUC/>
+                    <AdvisorUserControlls:AssignAdvUC Margin="-10,-37,10,37"/>
                 </Grid>
             </Grid>
         </Grid>

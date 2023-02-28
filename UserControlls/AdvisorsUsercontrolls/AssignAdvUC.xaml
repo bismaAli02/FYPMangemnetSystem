@@ -27,7 +27,7 @@
 
                 <Button Grid.Row="0" Content="Assign Advisor To Project" HorizontalAlignment="Right" Width="200" Name="AssignProjectButton" Click="AssignProjectButton_Click" Margin="472,0,0,0"/>
 
-                <DataGrid Grid.Row="1" Name="EvaDataGrid" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserSortColumns="False" CanUserResizeColumns="False" IsReadOnly="True" AutoGenerateColumns="False">
+                <DataGrid Grid.Row="1" Name="AssignAdvDataGrid" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserSortColumns="False" CanUserResizeColumns="False" IsReadOnly="True" AutoGenerateColumns="False">
                     <DataGrid.Columns>
                         <DataGridTemplateColumn Header="Project Title" Width="auto">
                             <DataGridTemplateColumn.CellTemplate>
@@ -83,7 +83,11 @@
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
-                <UserControl Grid.Row="1" x:Name="AddEvaUC" Visibility="Collapsed"/>
+                <ScrollViewer x:Name="AddStuScroll" Grid.Row="1" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
+                    <UserControl  x:Name="addProjectUC" Visibility="Collapsed"/>
+
+                </ScrollViewer>
+
             </Grid>
 
 

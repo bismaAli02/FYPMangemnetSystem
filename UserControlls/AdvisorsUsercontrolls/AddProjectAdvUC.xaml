@@ -1,0 +1,105 @@
+﻿<UserControl x:Class="FYPManagementSystem.UserControlls.AdvisorsUsercontrolls.AddProjectAdvUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:FYPManagementSystem.UserControlls.StudentsUserControlls"
+             mc:Ignorable="d"
+             xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal"
+             TextOptions.TextRenderingMode="Auto"
+             Background="Transparent"
+             FontFamily="{DynamicResource MaterialDesignFont}">
+    <materialDesign:Card Padding="32" Margin="-16 0">
+        <Grid Margin="0,2,0,-2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+
+
+            <Image Source="C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\Assets\Images\group.png" Grid.Column="1" Grid.Row="0" Height="50"/>
+
+            <Grid Grid.Row="0" Grid.Column="0" Margin="0 20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock HorizontalAlignment="Left" Grid.Column="0" Text="Project Title" VerticalAlignment="Center" Width="100"  FontSize="16" FontWeight="SemiBold">
+                </TextBlock>
+                <ComboBox Grid.Column="1" Name="ProjTitleComboBox" DropDownClosed="ProjTitleComboBox_DropDownClosed" HorizontalAlignment="Left" Margin="10 0" VerticalAlignment="Center" Width="140"/>
+            </Grid>
+            <Grid Grid.Row="1" Grid.Column="0" Margin="0 20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock HorizontalAlignment="Left" Grid.Column="0" Text="Main Advisor" VerticalAlignment="Center" Width="100"  FontSize="16" FontWeight="SemiBold">
+                </TextBlock>
+                <ComboBox Grid.Column="1" Name="MainAdvComboBox" HorizontalAlignment="Left" Margin="10 0" VerticalAlignment="Center" Width="140"/>
+            </Grid>
+
+            <Button x:Name="MainAdvButton" Click="MainAdvButton_Click" Grid.Column="1" Grid.Row="1" Margin="20,35,70,35"  Width="130" HorizontalAlignment="Left">
+                <StackPanel Orientation="Horizontal">
+                    <Icon:PackIconMaterial Kind="Projector" Margin="0 2 10 2" />
+                    <TextBlock x:Name="MainAdvButtonTxt" Text="Assign" HorizontalAlignment="Center">
+
+                    </TextBlock>
+                </StackPanel>
+            </Button>
+
+            <Grid Grid.Row="2" Grid.Column="0" Margin="0 20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock HorizontalAlignment="Left" Text="Co-Advisor" VerticalAlignment="Center" Width="150"  FontSize="16" FontWeight="SemiBold" Margin="0,0,0,3"/>
+                <ComboBox Grid.Column="1" x:Name="Co_AdvisorComboBox" HorizontalAlignment="Left" Margin="10 0" VerticalAlignment="Center" Width="140"/>
+            </Grid>
+            <Button x:Name="Co_AdvButton" Click="Co_AdvButton_Click" Grid.Column="1" Grid.Row="2" Margin="20,35,70,35"  Width="130" HorizontalAlignment="Left">
+                <StackPanel Orientation="Horizontal">
+                    <Icon:PackIconMaterial Kind="Projector" Margin="0 2 10 2" />
+                    <TextBlock x:Name="Co_AdvButtonTxt" Text="Assign" HorizontalAlignment="Center">
+
+                    </TextBlock>
+                </StackPanel>
+            </Button>
+
+            <Grid Grid.Row="3" Grid.Column="0" Margin="0 20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock HorizontalAlignment="Left" Grid.Column="0" Text="Industry Advisor" VerticalAlignment="Center" Width="150"  FontSize="16" FontWeight="SemiBold">
+                </TextBlock>
+                <ComboBox Grid.Column="1" Name="IAComboBox" HorizontalAlignment="Left" Margin="10 0" VerticalAlignment="Center" Width="140"/>
+            </Grid>
+
+            <Button x:Name="IAButton" Click="IAButton_Click" Grid.Column="1" Grid.Row="3" Margin="20,35,70,35"  Width="130" HorizontalAlignment="Left">
+                <StackPanel Orientation="Horizontal">
+                    <Icon:PackIconMaterial Kind="Projector" Margin="0 2 10 2" />
+                    <TextBlock x:Name="IAButtonTxt" Text="Assign" HorizontalAlignment="Center">
+
+                    </TextBlock>
+                </StackPanel>
+            </Button>
+
+
+
+        </Grid>
+    </materialDesign:Card>
+</UserControl>
+
+

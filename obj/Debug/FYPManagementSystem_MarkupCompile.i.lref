@@ -1,8 +1,9 @@
-﻿
+﻿C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\obj\Debug\GeneratedInternalTypeHelper.g.i.cs
 FC:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\App.xaml;;
 FC:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\MainWindow.xaml;;
 FC:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\SplashScreen.xaml;;
 FC:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\UserControlls\AdvisorsUsercontrolls\AddAdvUC.xaml;;
+FC:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\UserControlls\AdvisorsUsercontrolls\AddProjectAdvUC.xaml;;
 FC:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\UserControlls\AdvisorsUsercontrolls\AdvUC.xaml;;
 FC:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\UserControlls\AdvisorsUsercontrolls\AssignAdvUC.xaml;;
 FC:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\UserControlls\EvaluationsUserControlls\AddEvaUC.xaml;;
@@ -17,5 +18,4 @@ FC:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\UserControlls\Pro
 FC:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\UserControlls\StudentsUserControlls\AddStudentUC.xaml;;
 FC:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\UserControlls\GroupUserControlls\GroupStuUC.xaml;;
 FC:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\UserControlls\StudentsUserControlls\StudentUC.xaml;;
-FC:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\UserControlls\AdvisorsUsercontrolls\AddProjectAdvUC.xaml;;
 
