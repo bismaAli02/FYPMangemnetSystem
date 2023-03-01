@@ -25,7 +25,8 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="50"/>
+
             </Grid.RowDefinitions>
 
 
@@ -48,7 +49,7 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock HorizontalAlignment="Left" Grid.Column="0" Text="Main Advisor" VerticalAlignment="Center" Width="100"  FontSize="16" FontWeight="SemiBold">
                 </TextBlock>
-                <ComboBox Grid.Column="1" Name="MainAdvComboBox" HorizontalAlignment="Left" Margin="10 0" VerticalAlignment="Center" Width="140"/>
+                <ComboBox Grid.Column="1" Name="MainAdvComboBox" DropDownClosed="MainAdvComboBox_DropDownClosed" HorizontalAlignment="Left" Margin="10 0" VerticalAlignment="Center" Width="140"/>
             </Grid>
 
             <Button x:Name="MainAdvButton" Click="MainAdvButton_Click" Grid.Column="1" Grid.Row="1" Margin="20,35,70,35"  Width="130" HorizontalAlignment="Left">
@@ -66,7 +67,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock HorizontalAlignment="Left" Text="Co-Advisor" VerticalAlignment="Center" Width="150"  FontSize="16" FontWeight="SemiBold" Margin="0,0,0,3"/>
-                <ComboBox Grid.Column="1" x:Name="Co_AdvisorComboBox" HorizontalAlignment="Left" Margin="10 0" VerticalAlignment="Center" Width="140"/>
+                <ComboBox Grid.Column="1" x:Name="Co_AdvisorComboBox" DropDownClosed="Co_AdvisorComboBox_DropDownClosed" HorizontalAlignment="Left" Margin="10 0" VerticalAlignment="Center" Width="140"/>
             </Grid>
             <Button x:Name="Co_AdvButton" Click="Co_AdvButton_Click" Grid.Column="1" Grid.Row="2" Margin="20,35,70,35"  Width="130" HorizontalAlignment="Left">
                 <StackPanel Orientation="Horizontal">
@@ -84,13 +85,22 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock HorizontalAlignment="Left" Grid.Column="0" Text="Industry Advisor" VerticalAlignment="Center" Width="150"  FontSize="16" FontWeight="SemiBold">
                 </TextBlock>
-                <ComboBox Grid.Column="1" Name="IAComboBox" HorizontalAlignment="Left" Margin="10 0" VerticalAlignment="Center" Width="140"/>
+                <ComboBox Grid.Column="1" Name="IAComboBox" DropDownClosed="IAComboBox_DropDownClosed" HorizontalAlignment="Left" Margin="10 0" VerticalAlignment="Center" Width="140"/>
             </Grid>
 
             <Button x:Name="IAButton" Click="IAButton_Click" Grid.Column="1" Grid.Row="3" Margin="20,35,70,35"  Width="130" HorizontalAlignment="Left">
                 <StackPanel Orientation="Horizontal">
                     <Icon:PackIconMaterial Kind="Projector" Margin="0 2 10 2" />
                     <TextBlock x:Name="IAButtonTxt" Text="Assign" HorizontalAlignment="Center">
+
+                    </TextBlock>
+                </StackPanel>
+            </Button>
+
+            <Button x:Name="CancelButton" Click="CancelButton_Click" Grid.Column="0" Grid.Row="4" Width="120" VerticalAlignment="Bottom" Margin="56,0,176,0">
+                <StackPanel Orientation="Horizontal">
+                    <Icon:PackIconMaterial Kind="Cancel" Margin="0 2 10 2" />
+                    <TextBlock Text="Cancel" HorizontalAlignment="Center">
 
                     </TextBlock>
                 </StackPanel>

@@ -138,10 +138,7 @@ namespace FYPManagementSystem.UserControlls.GroupUserControlls
             ProjectToComboBox();
             ProjectComboBox.Text = string.Empty;
         }
-        private void StatusComboBox_DropDownClosed(object sender, EventArgs e)
-        {
 
-        }
         private void ProjectToComboBox()
         {
             try
@@ -166,7 +163,7 @@ namespace FYPManagementSystem.UserControlls.GroupUserControlls
             try
             {
                 var con = Configuration.getInstance().getConnection();
-                SqlCommand cmd = new SqlCommand("SELECT RegistrationNo FROM Student AS S LEFT JOIN GroupStudent AS GS ON S.Id = GS.StudentId WHERE GS.StudentId IS NULL OR GS.Status = 4", con);
+                SqlCommand cmd = new SqlCommand("SELECT S.RegistrationNo FROM Student S LEFT JOIN (SELECT * FROM GroupStudent GS WHERE GS.AssignmentDate = ( SELECT MAX(GS1.AssignmentDate) FROM GroupStudent GS1 WHERE GS1.StudentId = GS.StudentId)) AS recentStudent ON S.Id = recentStudent.StudentID WHERE recentStudent.Status = 4 OR recentStudent.GroupID IS NULL", con);
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
                 DataSet dataSet = new DataSet();
                 dataAdapter.Fill(dataSet);
