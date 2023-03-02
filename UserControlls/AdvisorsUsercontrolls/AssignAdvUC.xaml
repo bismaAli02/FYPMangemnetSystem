@@ -83,7 +83,7 @@
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
-                <ScrollViewer x:Name="AssignAdvScroll" Grid.Row="1" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
+                <ScrollViewer x:Name="AssignAdvScroll" Grid.Row="1" Visibility="Collapsed" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
                     <UserControl  x:Name="addProjectUC" Visibility="Collapsed"/>
 
                 </ScrollViewer>

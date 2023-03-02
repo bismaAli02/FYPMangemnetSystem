@@ -33,7 +33,7 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
         public void DisplayAdvisors()
         {
             var con = Configuration.getInstance().getConnection();
-            SqlCommand cmd = new SqlCommand("SELECT MAX(P.Title) AS  Title, MAX(CASE WHEN PA.AdvisorRole = 11 THEN CONCAT(Person.FirstName,' ',Person.LastName) END) AS MainAdvisor, MAX(CASE WHEN PA.AdvisorRole = 12 THEN CONCAT(Person.FirstName,' ',Person.LastName) END) AS CoAdvisor, MAX(CASE WHEN PA.AdvisorRole = 14 THEN CONCAT(Person.FirstName,' ',Person.LastName) END) AS IndustryAdvisor FROM  ProjectAdvisor PA INNER JOIN Advisor A ON PA.AdvisorId = A.Id JOIN Project P ON P.Id=PA.ProjectId JOIN Person ON Person.Id=A.Id GROUP BY PA.ProjectId", con);
+            SqlCommand cmd = new SqlCommand("SELECT PA.ProjectId, MAX(P.Title) AS  Title, MAX(CASE WHEN PA.AdvisorRole = 11 THEN CONCAT(Person.FirstName,' ',Person.LastName) END) AS MainAdvisor, MAX(CASE WHEN PA.AdvisorRole = 12 THEN CONCAT(Person.FirstName,' ',Person.LastName) END) AS CoAdvisor, MAX(CASE WHEN PA.AdvisorRole = 14 THEN CONCAT(Person.FirstName,' ',Person.LastName) END) AS IndustryAdvisor FROM  ProjectAdvisor PA INNER JOIN Advisor A ON PA.AdvisorId = A.Id JOIN Project P ON P.Id=PA.ProjectId JOIN Person ON Person.Id=A.Id GROUP BY PA.ProjectId", con);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             da.Fill(dt);
@@ -48,13 +48,13 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
             {
                 addProjectUC.Content = new AddProjectAdvUC();
                 addProjectUC.Visibility = Visibility.Visible;
-                AddStuScroll.Visibility = Visibility.Visible;
+                AssignAdvScroll.Visibility = Visibility.Visible;
                 AssignProjectButton.Content = "Go Back";
             }
             else
             {
                 addProjectUC.Visibility = Visibility.Collapsed;
-                AddStuScroll.Visibility = Visibility.Collapsed;
+                AssignAdvScroll.Visibility = Visibility.Collapsed;
                 AssignProjectButton.Content = "Assign Advisor To Project";
 
             }
@@ -63,32 +63,48 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
+            string title, mainAdv, coAdv, indusAdv;
+            DataRowView selectedRow = AssignAdvDataGrid.SelectedItem as DataRowView;
+            if (selectedRow != null)
+            {
+                int id = Int32.Parse(selectedRow["ProjectId"].ToString());
+                title = selectedRow["Title"].ToString();
+                mainAdv = selectedRow["MainAdvisor"].ToString();
+                coAdv = selectedRow["CoAdvisor"].ToString();
+                indusAdv = selectedRow["IndustryAdvisor"].ToString();
 
+                // this constructer is call because if I clicked edit button of selected row so I can see previous data in Usercontrol
+
+                addProjectUC.Content = new AddProjectAdvUC(id, title, mainAdv, coAdv, indusAdv);
+                addProjectUC.Visibility = Visibility.Visible;
+                AssignAdvScroll.Visibility = Visibility.Visible;
+                AssignProjectButton.Content = "Go Back";
+            }
         }
-        /*
-                private void deleteTuple(int id)
-                {
-                    try
-                    {
-                        var con = Configuration.getInstance().getConnection();
-                        SqlCommand cmd = new SqlCommand("DELETE FROM Student WHERE Id =@Id; DELETE FROM Person WHERE Id =@Id", con);
-                        cmd.Parameters.AddWithValue("@Id", id);
-                        cmd.ExecuteNonQuery();
-                        MessageBox.Show("Successfully Deleted!!!");
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                }*/
+
+        private void deleteTuple(int id)
+        {
+            try
+            {
+                var con = Configuration.getInstance().getConnection();
+                SqlCommand cmd = new SqlCommand("DELETE FROM ProjectAdvisor WHERE ProjectId =@Id", con);
+                cmd.Parameters.AddWithValue("@Id", id);
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Successfully Deleted!!!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
             DataRowView selectedRow = AssignAdvDataGrid.SelectedItem as DataRowView;
             if (selectedRow != null)
             {
-                int id = int.Parse(selectedRow["Id"].ToString());
-                // deleteTuple(id);
+                int id = int.Parse(selectedRow["ProjectId"].ToString());
+                deleteTuple(id);
                 AssignAdvScroll.Visibility = Visibility.Collapsed;
                 DisplayAdvisors();
                 AssignProjectButton.Content = "Assign Advisor To Project";

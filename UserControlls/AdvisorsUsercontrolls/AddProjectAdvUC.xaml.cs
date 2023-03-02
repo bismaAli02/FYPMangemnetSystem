@@ -30,9 +30,74 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
         {
             InitializeComponent();
             ProjectToComboBox();
-            MainAdvToComboBox();
-            CoAdvToComboBox();
-            IndustryAdvToComboBox();
+            MainAdvToComboBox("", "");
+            CoAdvToComboBox("", "");
+            IndustryAdvToComboBox("", "");
+        }
+
+        public AddProjectAdvUC(int projId, string title, string mainAdv, string coAdv, string industryAdv)
+        {
+            InitializeComponent();
+            AllProjectToComboBox();
+            ProjTitleComboBox.Text = title;
+            MainAdvToComboBox(coAdv, industryAdv);
+            CoAdvToComboBox(mainAdv, industryAdv);
+            IndustryAdvToComboBox(coAdv, mainAdv);
+            IAComboBox.Text = industryAdv;
+            Co_AdvisorComboBox.Text = coAdv;
+            MainAdvComboBox.Text = mainAdv;
+            ProjTitleComboBox.IsEnabled = false;
+            CancelButton.Visibility = Visibility.Collapsed;
+        }
+
+
+        private void findParent()
+        {
+            var parent = VisualTreeHelper.GetParent(this);
+            while (parent != null && !(parent is ScrollViewer))
+            {
+                parent = VisualTreeHelper.GetParent(parent);
+            }
+            if (parent is ScrollViewer)
+            {
+                ScrollViewer par = parent as ScrollViewer;
+                par.Visibility = Visibility.Collapsed;
+                findParentUserControl();
+
+            }
+        }
+
+        private void findParentUserControl()
+        {
+            var parent = VisualTreeHelper.GetParent(this);
+            while (parent != null && !(parent is AssignAdvUC))
+            {
+                parent = VisualTreeHelper.GetParent(parent);
+            }
+            if (parent is AssignAdvUC)
+            {
+                AssignAdvUC par = parent as AssignAdvUC;
+                par.DisplayAdvisors();
+                Button btn = (Button)par.FindName("AssignProjectButton");
+                btn.Content = "Assign Advisor To Project";
+            }
+        }
+        private void AllProjectToComboBox()
+        {
+            try
+            {
+                var con = Configuration.getInstance().getConnection();
+                SqlCommand cmd = new SqlCommand("SELECT Title FROM Project", con);
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
+                DataSet dataSet = new DataSet();
+                dataAdapter.Fill(dataSet);
+                ProjTitleComboBox.ItemsSource = dataSet.Tables[0].DefaultView;
+                ProjTitleComboBox.DisplayMemberPath = "Title";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void ProjectToComboBox()
@@ -52,14 +117,14 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
                 MessageBox.Show(ex.Message);
             }
         }
-        private void MainAdvToComboBox()
+        private void MainAdvToComboBox(string coAdv, string industryAdv)
         {
             try
             {
                 var con = Configuration.getInstance().getConnection();
                 SqlCommand cmd = new SqlCommand("SELECT CONCAT(P.FirstName,' ',P.LastName) AS Name FROM Advisor AS A JOIN Person AS P ON A.Id = P.Id WHERE CONCAT(P.FirstName,' ',P.LastName) <> @CoAdvisor AND CONCAT(P.FirstName,' ',P.LastName) <> @IndustryAdvisor", con);
-                cmd.Parameters.AddWithValue("@CoAdvisor", Co_AdvisorComboBox.Text);
-                cmd.Parameters.AddWithValue("@IndustryAdvisor", IAComboBox.Text);
+                cmd.Parameters.AddWithValue("@CoAdvisor", coAdv);
+                cmd.Parameters.AddWithValue("@IndustryAdvisor", industryAdv);
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
                 DataSet dataSet = new DataSet();
                 dataAdapter.Fill(dataSet);
@@ -101,15 +166,23 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
             reader.Close();
             return advId;
         }
+        private void RemoveAdvisor(int projId)
+        {
+            var con = Configuration.getInstance().getConnection();
+            SqlCommand cmd = new SqlCommand("DELETE FROM ProjectAdvisor WHERE ProjectId=@projId", con);
+            cmd.Parameters.AddWithValue("@projId", projId);
+            cmd.ExecuteNonQuery();
 
-        private void CoAdvToComboBox()
+        }
+
+        private void CoAdvToComboBox(string mainAdv, string industryAdv)
         {
             try
             {
                 var con = Configuration.getInstance().getConnection();
                 SqlCommand cmd = new SqlCommand("SELECT CONCAT(P.FirstName,' ',P.LastName) AS Name FROM Advisor AS A JOIN Person AS P ON A.Id = P.Id WHERE CONCAT(P.FirstName,' ',P.LastName) <> @MainAdvisor AND CONCAT(P.FirstName,' ',P.LastName) <> @IndustryAdvisor", con);
-                cmd.Parameters.AddWithValue("@MainAdvisor", MainAdvComboBox.Text);
-                cmd.Parameters.AddWithValue("@IndustryAdvisor", IAComboBox.Text);
+                cmd.Parameters.AddWithValue("@MainAdvisor", mainAdv);
+                cmd.Parameters.AddWithValue("@IndustryAdvisor", industryAdv);
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
                 DataSet dataSet = new DataSet();
                 dataAdapter.Fill(dataSet);
@@ -127,25 +200,23 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
             if (ProjTitleComboBox.IsEnabled == true)
             {
                 ProjectToComboBox();
+                MainAdvToComboBox("", "");
+                CoAdvToComboBox("", "");
+                IndustryAdvToComboBox("", "");
+                AssignAdvButtonTxt.Text = "Assign";
             }
-            MainAdvToComboBox();
-            CoAdvToComboBox();
-            IndustryAdvToComboBox();
-            Co_AdvButtonTxt.Text = "Assign";
-            MainAdvButtonTxt.Text = "Assign";
-            IAButtonTxt.Text = "Assign";
 
 
         }
 
-        private void IndustryAdvToComboBox()
+        private void IndustryAdvToComboBox(string coAdv, string mainAdv)
         {
             try
             {
                 var con = Configuration.getInstance().getConnection();
                 SqlCommand cmd = new SqlCommand("SELECT CONCAT(P.FirstName,' ',P.LastName) AS Name FROM Advisor AS A JOIN Person AS P ON A.Id = P.Id WHERE CONCAT(P.FirstName,' ',P.LastName) <> @CoAdvisor AND CONCAT(P.FirstName,' ',P.LastName) <> @MainAdvisor", con);
-                cmd.Parameters.AddWithValue("@MainAdvisor", MainAdvComboBox.Text);
-                cmd.Parameters.AddWithValue("@CoAdvisor", Co_AdvisorComboBox.Text);
+                cmd.Parameters.AddWithValue("@CoAdvisor", coAdv);
+                cmd.Parameters.AddWithValue("@MainAdvisor", mainAdv);
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
                 DataSet dataSet = new DataSet();
                 dataAdapter.Fill(dataSet);
@@ -157,36 +228,8 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
                 MessageBox.Show(ex.Message);
             }
         }
-        private void MainAdvButton_Click(object sender, RoutedEventArgs e)
-        {
-            int projId = ProjectIdFromDataBase();
-            int advId = AdvisorIdFromDataBase(MainAdvComboBox.Text);
-            if (MainAdvButtonTxt.Text == "Assign")
-            {
-                AssignProject("Main Advisor", projId, advId, MainAdvButtonTxt);
-            }
-            else if (MainAdvButtonTxt.Text == "Re-Assign")
-            {
-                ReAssignProject("Main Advisor", projId, advId);
-            }
-        }
 
-        private void Co_AdvButton_Click(object sender, RoutedEventArgs e)
-        {
-            int projId = ProjectIdFromDataBase();
-            int advId = AdvisorIdFromDataBase(Co_AdvisorComboBox.Text);
-            if (Co_AdvButtonTxt.Text == "Assign")
-            {
-                AssignProject("Co-Advisor", projId, advId, Co_AdvButtonTxt);
-            }
-            else if (Co_AdvButtonTxt.Text == "Re-Assign")
-            {
-                ReAssignProject("Co-Advisor", projId, advId);
-            }
-
-        }
-
-        private void AssignProject(string role, int projId, int advId, TextBlock btnTxt)
+        private void AssignProject(string role, int projId, int advId)
         {
             try
             {
@@ -197,60 +240,21 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
                 cmd.Parameters.AddWithValue("@AssignmentDate", DateTime.Now);
 
                 cmd.ExecuteNonQuery();
-                btnTxt.Text = "Re-Assign";
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
-
-        private void ReAssignProject(string role, int projId, int advId)
-        {
-            try
-            {
-                var con = Configuration.getInstance().getConnection();
-                SqlCommand cmd = new SqlCommand("UPDATE ProjectAdvisor SET AssignmentDate=@Date, AdvisorId=@AdvisorId WHERE ProjectId=@ProjectId AND AdvisorRole =(SELECT Id FROM Lookup  WHERE Category='ADVISOR_ROLE' AND Value=" + role + "Industry Advisor') ", con);
-                cmd.Parameters.AddWithValue("@ProjectId", projId);
-                cmd.Parameters.AddWithValue("@AdvisorId", advId);
-                cmd.Parameters.AddWithValue("@AssignmentDate", DateTime.Now);
-                cmd.ExecuteNonQuery();
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-        }
-        private void IAButton_Click(object sender, RoutedEventArgs e)
-        {
-            int projId = ProjectIdFromDataBase();
-            int advId = AdvisorIdFromDataBase(IAComboBox.Text);
-            if (IAButtonTxt.Text == "Assign")
-            {
-                AssignProject("Industry Advisor", projId, advId, IAButtonTxt);
-            }
-            else if (IAButtonTxt.Text == "Re-Assign")
-            {
-                ReAssignProject("Industry Advisor", projId, advId);
-            }
-        }
-
-        private void ProjTitleComboBox_DropDownClosed(object sender, EventArgs e)
-        {
-
-        }
-
         private void MainAdvComboBox_DropDownClosed(object sender, EventArgs e)
         {
             string coAdv, indusAdv;
             coAdv = Co_AdvisorComboBox.Text;
             indusAdv = IAComboBox.Text;
-            CoAdvToComboBox();
+            CoAdvToComboBox(MainAdvComboBox.Text, indusAdv);
             Co_AdvisorComboBox.Text = coAdv;
             IAComboBox.Text = indusAdv;
-            IndustryAdvToComboBox();
+            IndustryAdvToComboBox(coAdv, MainAdvComboBox.Text);
             Co_AdvisorComboBox.Text = coAdv;
             IAComboBox.Text = indusAdv;
         }
@@ -260,10 +264,10 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
             string mainAdv, indusAdv;
             mainAdv = MainAdvComboBox.Text;
             indusAdv = IAComboBox.Text;
-            MainAdvToComboBox();
+            MainAdvToComboBox(Co_AdvisorComboBox.Text, indusAdv);
             MainAdvComboBox.Text = mainAdv;
             IAComboBox.Text = indusAdv;
-            IndustryAdvToComboBox();
+            IndustryAdvToComboBox(Co_AdvisorComboBox.Text, mainAdv);
             MainAdvComboBox.Text = mainAdv;
             IAComboBox.Text = indusAdv;
         }
@@ -273,10 +277,10 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
             string mainAdv, coAdv;
             mainAdv = MainAdvComboBox.Text;
             coAdv = Co_AdvisorComboBox.Text;
-            MainAdvToComboBox();
+            MainAdvToComboBox(coAdv, IAComboBox.Text);
             MainAdvComboBox.Text = mainAdv;
             Co_AdvisorComboBox.Text = coAdv;
-            CoAdvToComboBox();
+            CoAdvToComboBox(mainAdv, IAComboBox.Text);
             MainAdvComboBox.Text = mainAdv;
             Co_AdvisorComboBox.Text = coAdv;
         }
@@ -284,6 +288,21 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             EmptyForm();
+        }
+
+        private void AssignAdvButton_Click(object sender, RoutedEventArgs e)
+        {
+            int projId = ProjectIdFromDataBase();
+            int mainAdvId = AdvisorIdFromDataBase(MainAdvComboBox.Text);
+            int coAdvId = AdvisorIdFromDataBase(Co_AdvisorComboBox.Text);
+            int industryAdvId = AdvisorIdFromDataBase(IAComboBox.Text);
+            RemoveAdvisor(projId);
+            AssignProject("Main Advisor", projId, mainAdvId);
+            AssignProject("Co-Advisor", projId, coAdvId);
+            AssignProject("Industry Advisor", projId, industryAdvId);
+            MessageBox.Show("Assigned Successfullly");
+            findParent();
+
         }
     }
 }

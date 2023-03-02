@@ -27,19 +27,30 @@ namespace FYPManagementSystem.UserControlls.GroupUserControlls
         {
             InitializeComponent();
             DisplayGroups();
+
         }
 
         private void CreateGroupButton_Click(object sender, RoutedEventArgs e)
         {
             if (CreateGroupButton.Content.ToString() == "Create Group")
             {
+                int id = 0;
                 try
                 {
                     var con = Configuration.getInstance().getConnection();
-                    SqlCommand cmd = new SqlCommand("INSERT INTO [Group](Created_On) VALUES(@Created_On)", con);
+                    SqlCommand cmd = new SqlCommand("INSERT INTO [Group](Created_On) VALUES(@Created_On);SELECT TOP 1 Id FROM [Group] ORDER BY Id DESC", con);
                     cmd.Parameters.AddWithValue("@Created_On", DateTime.Today);
-                    cmd.ExecuteNonQuery();
-                    MessageBox.Show("Successfully Created");
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        id = int.Parse(reader["ID"].ToString());
+                    }
+                    reader.Close();
+                    GroupScroll.Visibility = Visibility.Visible;
+                    GroupUC.Content = new EditGroupUC(id);
+                    GroupUC.Visibility = Visibility.Visible;
+                    CreateGroupButton.Content = "Go Back";
+                    ExportPdfButton.Visibility = Visibility.Collapsed;
 
                 }
                 catch (Exception ex)
@@ -51,6 +62,7 @@ namespace FYPManagementSystem.UserControlls.GroupUserControlls
             {
                 GroupScroll.Visibility = Visibility.Collapsed;
                 CreateGroupButton.Content = "Create Group";
+                ExportPdfButton.Visibility = Visibility.Visible;
             }
             DisplayGroups();
         }
@@ -60,7 +72,7 @@ namespace FYPManagementSystem.UserControlls.GroupUserControlls
             try
             {
                 var con = Configuration.getInstance().getConnection();
-                SqlCommand cmd = new SqlCommand("SELECT CONCAT('Group',G.Id) AS GroupId,P.Title,S.RegistrationNo AS RegNo,(SELECT FORMAT(G.Created_On, 'dd/MM/yyyy')) AS Created_On FROM [Group] AS G LEFT JOIN GroupProject AS GP ON G.Id=GP.GroupId LEFT JOIN GroupStudent AS GS ON GS.GroupId=G.Id LEFT JOIN Project AS P ON GP.ProjectId=P.Id LEFT JOIN Student AS S ON S.Id = GS.StudentId ", con);
+                SqlCommand cmd = new SqlCommand("SELECT CONCAT('Group',G.Id) AS GroupId,P.Title,S.RegistrationNo AS RegNo,(SELECT FORMAT(G.Created_On, 'dd/MM/yyyy')) AS Created_On FROM [Group] AS G LEFT JOIN GroupProject AS GP ON G.Id=GP.GroupId LEFT JOIN GroupStudent AS GS ON GS.GroupId=G.Id LEFT JOIN Project AS P ON GP.ProjectId=P.Id LEFT JOIN Student AS S ON S.Id = GS.StudentId WHERE GS.Status=3", con);
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
@@ -144,6 +156,7 @@ namespace FYPManagementSystem.UserControlls.GroupUserControlls
                 GroupUC.Content = new EditGroupUC(id2);
                 GroupUC.Visibility = Visibility.Visible;
                 CreateGroupButton.Content = "Go Back";
+                ExportPdfButton.Visibility = Visibility.Collapsed;
 
             }
             else

@@ -44,6 +44,7 @@ namespace FYPManagementSystem.UserControlls.GroupUserControlls
                 AssignButtonTxt.Text = "Re-Assign";
             }
 
+
         }
 
         private void CurrentProjectFromDataBase()
@@ -242,22 +243,6 @@ namespace FYPManagementSystem.UserControlls.GroupUserControlls
             }
             LoadStudentsIntoGrids();
         }
-
-        /* private int ReturnGender()
-         {
-             int gender = 0;
-             var con = Configuration.getInstance().getConnection();
-             SqlCommand cmd = new SqlCommand("SELECT Id FROM Lookup WHERE Category='GENDER' AND Value=@Gender", con);
-             cmd.Parameters.AddWithValue("@Gender", genderComboBox.Text);
-             SqlDataReader reader = cmd.ExecuteReader();
-             if (reader.Read())
-             {
-                 gender = int.Parse(reader["Id"].ToString());
-             }
-             reader.Close();
-             return gender;
-
-         }*/
 
     }
 }
