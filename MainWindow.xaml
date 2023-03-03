@@ -65,25 +65,33 @@
     <Border Background="White" CornerRadius="40" MouseDown="Border_MouseDown">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="270"/>
+                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
             <!-- Menu -->
-            <Border Background="White" CornerRadius="40 0 0 40" Grid.Column="0">
+            <Border Visibility="Visible" Background="White" CornerRadius="40 0 0 40" Grid.Column="0">
                 <StackPanel Margin="0 30 0 0">
                     <ContentControl x:Name="CC" Grid.Column="1"/>
 
                     <!-- Ellips -->
+                    <!--
 
                     <StackPanel Orientation="Horizontal"
-                                HorizontalAlignment="Left" Margin="63 10 0 10">
-                        <Ellipse Fill="#FF6258" Width="10" Height="10"/>
-                        <Ellipse Fill="#FFBF2F" Width="10" Height="10" Margin="7 0"/>
-                        <Ellipse Fill="#2acb42" Width="10" Height="10"/>
-                    </StackPanel>
+                    HorizontalAlignment="Left" Margin="63 10 0 10">
+                    <Ellipse Fill="#FF6258" Width="10" Height="10"/>
+                    <Ellipse Fill="#FFBF2F" Width="10" Height="10" Margin="7 0"/>
+                    <Ellipse Fill="#2acb42" Width="10" Height="10"/>
+                    </StackPanel>-->
 
                     <TextBlock Text="Main Menu" Style="{StaticResource menuTitle}"/>
+
+                    <Button x:Name="HomeScreenButton" Style="{StaticResource menuButton}" Click="HomeScreenButton_Click">
+                        <Grid>
+                            <TextBlock Text="Home" Margin="0 0 0 2"/>
+                            <Icon:PackIconMaterial  Style="{StaticResource menuButtonIcon}" Kind="HomeAccount"/>
+                        </Grid>
+                    </Button>
                     <!-- Button 1 student grid-->
                     <Button x:Name="StudentButton" Style="{StaticResource menuButton}" Click="StudentButton_Click">
                         <Grid>
@@ -109,9 +117,9 @@
                     </Button>
 
                     <!-- Button 4 Assign projects To students-->
-                    <Button  x:Name="AssignAdvButton"  Style="{StaticResource menuButton}" Click="AssignAdvButton_Click">
+                    <Button Width="250" x:Name="AssignAdvButton"  Style="{StaticResource menuButton}" Click="AssignAdvButton_Click">
                         <Grid>
-                            <TextBlock Text="Assign Advisors" Margin="0 0 0 2"/>
+                            <TextBlock Text="Advisors Allocation" Margin="0 0 0 2"/>
                             <Icon:PackIconMaterial Style="{StaticResource menuButtonIcon}"/>
                         </Grid>
                     </Button>
@@ -205,7 +213,7 @@
 
             <Grid Grid.Column="1" x:Name="AssignAdvUCGrid">
                 <Grid x:Name="AssignAdvUC">
-                    <AdvisorUserControlls:AssignAdvUC Margin="-10,-37,10,37"/>
+                    <AdvisorUserControlls:AssignAdvUC />
                 </Grid>
             </Grid>
         </Grid>

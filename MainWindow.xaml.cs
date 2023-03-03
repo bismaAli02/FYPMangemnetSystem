@@ -116,6 +116,11 @@ namespace FYPManagementSystem
         {
             Application.Current.Shutdown();
         }
+
+        private void HomeScreenButton_Click(object sender, RoutedEventArgs e)
+        {
+            CollapseAllGrids();
+        }
     }
 }
 

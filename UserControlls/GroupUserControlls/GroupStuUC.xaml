@@ -31,6 +31,15 @@
                 <Button Grid.Row="0" Content="Create Group" HorizontalAlignment="Right" Width="130" Name="CreateGroupButton" Click="CreateGroupButton_Click" Margin="472,0,0,0"/>
 
                 <DataGrid Grid.Row="1" Name="GroupDataGrid" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserSortColumns="False" CanUserResizeColumns="False" IsReadOnly="True" AutoGenerateColumns="False">
+                    <DataGrid.GroupStyle>
+                        <GroupStyle>
+                            <GroupStyle.HeaderTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}" FontWeight="Bold"/>
+                                </DataTemplate>
+                            </GroupStyle.HeaderTemplate>
+                        </GroupStyle>
+                    </DataGrid.GroupStyle>
                     <DataGrid.Columns>
 
                         <!-- Make columns and bind them with tabel attributes-->
@@ -51,10 +60,19 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="Registration No." Width="auto">
+                        <DataGridTemplateColumn Header="Total Students" Width="auto">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding RegNo }"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+
+                        <DataGridTemplateColumn Header="Remaining Students" Width="auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding RemainingStudents}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>

@@ -180,29 +180,36 @@ namespace FYPManagementSystem.UserControlls.GroupUserControlls
 
         private void AddStuButton_Click(object sender, RoutedEventArgs e)
         {
-            int stuId;
-            if (AddStuComboBox.Text != string.Empty)
+            if (GroupStudentDataGrid.Items.Count < 5)
             {
-                stuId = StudentIdFromDataBase();
-                try
+                int stuId;
+                if (AddStuComboBox.Text != string.Empty)
                 {
-                    var con = Configuration.getInstance().getConnection();
-                    SqlCommand cmd = new SqlCommand("INSERT INTO GroupStudent VALUES (@GroupId, @StudentId,@Status,@Date)", con);
-                    cmd.Parameters.AddWithValue("@StudentId", stuId);
-                    cmd.Parameters.AddWithValue("@GroupId", groupId);
-                    cmd.Parameters.AddWithValue("@Date", DateTime.Now);
-                    cmd.Parameters.AddWithValue("@Status", 3);
-                    cmd.ExecuteNonQuery();
-                    AddStuComboBox.Text = string.Empty;
+                    stuId = StudentIdFromDataBase();
+                    try
+                    {
+                        var con = Configuration.getInstance().getConnection();
+                        SqlCommand cmd = new SqlCommand("INSERT INTO GroupStudent VALUES (@GroupId, @StudentId,@Status,@Date)", con);
+                        cmd.Parameters.AddWithValue("@StudentId", stuId);
+                        cmd.Parameters.AddWithValue("@GroupId", groupId);
+                        cmd.Parameters.AddWithValue("@Date", DateTime.Now);
+                        cmd.Parameters.AddWithValue("@Status", 3);
+                        cmd.ExecuteNonQuery();
+                        AddStuComboBox.Text = string.Empty;
 
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
+                StudentToComboBox();
+                LoadStudentsIntoGrids();
             }
-            StudentToComboBox();
-            LoadStudentsIntoGrids();
+            else
+            {
+                MessageBox.Show("Group reach its maximum Limit!!!");
+            }
         }
 
         private void LoadStudentsIntoGrids()

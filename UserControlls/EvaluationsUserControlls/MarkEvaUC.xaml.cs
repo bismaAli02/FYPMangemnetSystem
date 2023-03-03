@@ -71,7 +71,7 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
             try
             {
                 var con = Configuration.getInstance().getConnection();
-                SqlCommand cmd = new SqlCommand("SELECT Id FROM [Group]", con);
+                SqlCommand cmd = new SqlCommand("SELECT DISTINCT G.Id FROM [Group] AS G LEFT JOIN GroupProject AS GP ON G.Id=GP.GroupId LEFT JOIN GroupStudent AS GS ON GS.GroupId=G.Id WHERE GS.Status=3", con);
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
                 DataSet dataSet = new DataSet();
                 dataAdapter.Fill(dataSet);
@@ -86,19 +86,23 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
 
         private void EvaNameToComboBox()
         {
-            try
+            if (GIdComboBox.Text != string.Empty)
             {
-                var con = Configuration.getInstance().getConnection();
-                SqlCommand cmd = new SqlCommand("SELECT Name FROM Evaluation", con);
-                SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
-                DataSet dataSet = new DataSet();
-                dataAdapter.Fill(dataSet);
-                EvaComboBox.ItemsSource = dataSet.Tables[0].DefaultView;
-                EvaComboBox.DisplayMemberPath = "Name";
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
+                try
+                {
+                    var con = Configuration.getInstance().getConnection();
+                    SqlCommand cmd = new SqlCommand("SELECT Name FROM Evaluation E EXCEPT SELECT E.Name FROM Evaluation E JOIN GroupEvaluation GE ON GE.EvaluationId = E.Id JOIN [Group] G ON G.Id = GE.GroupId WHERE G.Id = @ID", con);
+                    cmd.Parameters.AddWithValue("@ID", int.Parse(GIdComboBox.Text));
+                    SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
+                    DataSet dataSet = new DataSet();
+                    dataAdapter.Fill(dataSet);
+                    EvaComboBox.ItemsSource = dataSet.Tables[0].DefaultView;
+                    EvaComboBox.DisplayMemberPath = "Name";
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
 
@@ -221,6 +225,11 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
         private void EvaComboBox_DropDownClosed(object sender, EventArgs e)
         {
             GiveEvaluationId();
+        }
+
+        private void GIdComboBox_DropDownClosed(object sender, EventArgs e)
+        {
+            EvaNameToComboBox();
         }
     }
 }

@@ -30,6 +30,8 @@ namespace FYPManagementSystem.UserControlls.GroupUserControlls
 
         }
 
+        int totalMembers = 5;
+
         private void CreateGroupButton_Click(object sender, RoutedEventArgs e)
         {
             if (CreateGroupButton.Content.ToString() == "Create Group")
@@ -72,11 +74,15 @@ namespace FYPManagementSystem.UserControlls.GroupUserControlls
             try
             {
                 var con = Configuration.getInstance().getConnection();
-                SqlCommand cmd = new SqlCommand("SELECT CONCAT('Group',G.Id) AS GroupId,P.Title,S.RegistrationNo AS RegNo,(SELECT FORMAT(G.Created_On, 'dd/MM/yyyy')) AS Created_On FROM [Group] AS G LEFT JOIN GroupProject AS GP ON G.Id=GP.GroupId LEFT JOIN GroupStudent AS GS ON GS.GroupId=G.Id LEFT JOIN Project AS P ON GP.ProjectId=P.Id LEFT JOIN Student AS S ON S.Id = GS.StudentId WHERE GS.Status=3", con);
+                SqlCommand cmd = new SqlCommand("SELECT CONCAT('Group',G.Id) AS GroupId,P.Title,COUNT(S.RegistrationNo) AS RegNo,('" + totalMembers + "' - COUNT(S.RegistrationNo)) AS RemainingStudents,(SELECT FORMAT(G.Created_On, 'dd/MM/yyyy')) AS Created_On FROM [Group] AS G LEFT JOIN GroupProject AS GP ON G.Id=GP.GroupId LEFT JOIN GroupStudent AS GS ON GS.GroupId=G.Id LEFT JOIN Project AS P ON GP.ProjectId=P.Id LEFT JOIN Student AS S ON S.Id = GS.StudentId WHERE GS.Status=3 GROUP BY G.Id,P.Id, P.Title, G.Created_On", con);
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
                 GroupDataGrid.ItemsSource = dt.DefaultView;
+
+
+
+
             }
             catch (Exception ex)
             {

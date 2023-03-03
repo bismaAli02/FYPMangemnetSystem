@@ -42,7 +42,7 @@
                 <TextBlock HorizontalAlignment="Left" Grid.Column="0" Text="Group ID" VerticalAlignment="Center" Width="100"  FontSize="16" FontWeight="SemiBold">
 
                 </TextBlock>
-                <ComboBox Grid.Column="1" Name="GIdComboBox" HorizontalAlignment="Left" Margin="10 0" VerticalAlignment="Center" Width="140"/>
+                <ComboBox Grid.Column="1" DropDownClosed="GIdComboBox_DropDownClosed" Name="GIdComboBox" HorizontalAlignment="Left" Margin="10 0" VerticalAlignment="Center" Width="140"/>
             </Grid>
 
             <Grid Grid.Row="2" Grid.Column="0" Margin="0 20">

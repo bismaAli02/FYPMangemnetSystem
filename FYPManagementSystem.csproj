@@ -110,6 +110,9 @@
     <Compile Include="UserControlls\GroupUserControlls\EditGroupUC.xaml.cs">
       <DependentUpon>EditGroupUC.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControlls\GroupUserControlls\GroupDetailUC.xaml.cs">
+      <DependentUpon>GroupDetailUC.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControlls\PdfUserControlls\PdfUC.xaml.cs">
       <DependentUpon>PdfUC.xaml</DependentUpon>
     </Compile>
@@ -180,6 +183,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControlls\GroupUserControlls\EditGroupUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControlls\GroupUserControlls\GroupDetailUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -259,6 +266,11 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Images\group.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\DashBoard3.png" />
+    <Content Include="Assets\Images\DashBoardImage1.jfif" />
+    <Content Include="Assets\Images\DashBoardImage2.jfif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\MaterialDesignThemes.4.7.0\build\MaterialDesignThemes.targets" Condition="Exists('packages\MaterialDesignThemes.4.7.0\build\MaterialDesignThemes.targets')" />
