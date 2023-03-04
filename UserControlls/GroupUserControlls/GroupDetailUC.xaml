@@ -19,7 +19,7 @@
 
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
+                <RowDefinition Height="150"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
@@ -28,31 +28,16 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0">
+                <Grid Grid.Column="0" VerticalAlignment="Top">
                     <TextBlock  Text="Group Id" FontSize="18" FontWeight="SemiBold" Margin="15 15 0 0" x:Name="GroupIdHeader"/>
                 </Grid>
 
-                <Grid Grid.Column="1">
+                <Grid Grid.Column="1" VerticalAlignment="Center">
                     <TextBlock  Text="Project Title" FontSize="18" FontWeight="SemiBold" Margin="15 15 0 0" x:Name="ProjectTitleHeader"/>
                 </Grid>
                 <Grid/>
 
-
-
-                <Wpf:PieChart Grid.Column="2" x:Name="studentCountPieChart">
-                    <Wpf:PieChart.Series>
-                        <Wpf:PieSeries Title="1" Values="{Binding value1}" DataLabels="True" LabelPoint="{Binding PointLabel}">
-
-                        </Wpf:PieSeries>
-                        <Wpf:PieSeries Title="2" Values="{Binding value2}" DataLabels="True" LabelPoint="{Binding PointLabel}">
-
-                        </Wpf:PieSeries>
-                        <Wpf:PieSeries Title="3" Values="{Binding value3}" DataLabels="True" LabelPoint="{Binding PointLabel}">
-
-                        </Wpf:PieSeries>
-                    </Wpf:PieChart.Series>
-                </Wpf:PieChart>
-
+                <Wpf:PieChart Grid.Column="2" x:Name="myPieChart"  Hoverable="True"/>
 
 
             </Grid>
@@ -60,7 +45,9 @@
             <DataGrid Grid.Row="1" x:Name="GroupDataGrid" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserSortColumns="False" CanUserResizeColumns="False" IsReadOnly="True" AutoGenerateColumns="False">
                 <DataGrid.Columns>
 
-                    <!-- Make columns and bind them with tabel attributes-->
+
+                    <!--Make columns and bind them with tabel attributes-->
+
                     <DataGridTemplateColumn Header="Registration Number" Width="auto">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>

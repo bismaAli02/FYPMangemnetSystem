@@ -32,36 +32,57 @@ namespace FYPManagementSystem.UserControlls.GroupUserControlls
             InitializeComponent();
             this.groupId = groupId;
             this.projectTitle = projectTitle;
+            DisplayPieChart();
+            GroupIdHeader.Text = "Group Id: " + groupId;
+            ProjectTitleHeader.Text = "Project: " + projectTitle;
         }
 
         private void DisplayPieChart()
         {
             List<int> studentCount = new List<int>();
             var con = Configuration.getInstance().getConnection();
-            SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM GroupStudent WHERE GroupId=@GroupId AND Status=3 ; SELECT COUNT(*) FROM GroupStudent WHERE GroupId=@GroupId AND Status=4", con);
+            SqlCommand cmd = new SqlCommand("SELECT COUNT(*) AS Id FROM GroupStudent WHERE GroupId=@GroupId AND Status=3", con);
             cmd.Parameters.AddWithValue("@GroupId", groupId);
             SqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())
+
+            if (reader.Read())
             {
                 studentCount.Add(int.Parse(reader["Id"].ToString()));
             }
-            studentCount.Add(studentCount[0]);
             reader.Close();
-            // Create a new chart series
-            var series = new PieSeries();
-            // Set the data source for the series
-            var data = new List<KeyValuePair<string, int>>();
-            data.Add(new KeyValuePair<string, int>("Slice 1", 10));
-            data.Add(new KeyValuePair<string, int>("Slice 2", 20));
-            data.Add(new KeyValuePair<string, int>("Slice 3", 30));
-            series.DataContext = data;
+            SqlCommand cmd1 = new SqlCommand("SELECT COUNT(*) AS Id FROM GroupStudent WHERE GroupId=@GroupId AND Status=4", con);
+            cmd1.Parameters.AddWithValue("@GroupId", groupId);
+            SqlDataReader reader1 = cmd1.ExecuteReader();
+            if (reader1.Read())
+            {
+                studentCount.Add(int.Parse(reader1["Id"].ToString()));
+            }
+            studentCount.Add(5 - studentCount[0]);
+            reader1.Close();
 
-            // Set the value and category bindings for the series
-            series.ValueBinding = new PropertyNameDataPointBinding("Value");
-            series.CategoryBinding = new PropertyNameDataPointBinding("Label");
+            LiveCharts.SeriesCollection psc = new LiveCharts.SeriesCollection
+            {
+                new LiveCharts.Wpf.PieSeries
+                {
+                    Values = new LiveCharts.ChartValues<decimal> {studentCount[0]},
+                    Title="Active Students"
+                },
+                new LiveCharts.Wpf.PieSeries
+                {
+                    Values = new LiveCharts.ChartValues<decimal> {studentCount[1]},
+                    Title= "In-Active Students"
+                },
+                new LiveCharts.Wpf.PieSeries
+                {
+                    Values = new LiveCharts.ChartValues<decimal> {studentCount[2]},
+                    Title="Remaining Slots"
+                }
+            };
 
-            // Add the series to the pie chart
-            pieChart.Series.Add(series);
+            foreach (LiveCharts.Wpf.PieSeries ps in psc)
+            {
+                myPieChart.Series.Add(ps);
+            }
         }
     }
 }
