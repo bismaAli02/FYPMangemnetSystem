@@ -1,12 +1,112 @@
-﻿<UserControl x:Class="FYPManagementSystem.UserControlls.GroupUserControlls.GroupDetailUC"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:FYPManagementSystem.UserControlls.GroupUserControlls"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:FYPManagementSystem.UserControlls.StudentsUserControlls"
+    xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:Wpf="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf" x:Class="FYPManagementSystem.UserControlls.GroupUserControlls.GroupDetailUC"
+    mc:Ignorable="d"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    TextElement.FontWeight="Regular"
+    TextElement.FontSize="13"
+    TextOptions.TextFormattingMode="Ideal"
+    TextOptions.TextRenderingMode="Auto"
+    Background="Transparent"
+    FontFamily="{DynamicResource MaterialDesignFont}">
+    <materialDesign:Card Padding="32" Margin="-16 0">
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <TextBlock  Text="Group Id" FontSize="18" FontWeight="SemiBold" Margin="15 15 0 0" x:Name="GroupIdHeader"/>
+                </Grid>
+
+                <Grid Grid.Column="1">
+                    <TextBlock  Text="Project Title" FontSize="18" FontWeight="SemiBold" Margin="15 15 0 0" x:Name="ProjectTitleHeader"/>
+                </Grid>
+                <Grid/>
+
+
+
+                <Wpf:PieChart Grid.Column="2" x:Name="studentCountPieChart">
+                    <Wpf:PieChart.Series>
+                        <Wpf:PieSeries Title="1" Values="{Binding value1}" DataLabels="True" LabelPoint="{Binding PointLabel}">
+
+                        </Wpf:PieSeries>
+                        <Wpf:PieSeries Title="2" Values="{Binding value2}" DataLabels="True" LabelPoint="{Binding PointLabel}">
+
+                        </Wpf:PieSeries>
+                        <Wpf:PieSeries Title="3" Values="{Binding value3}" DataLabels="True" LabelPoint="{Binding PointLabel}">
+
+                        </Wpf:PieSeries>
+                    </Wpf:PieChart.Series>
+                </Wpf:PieChart>
+
+
+
+            </Grid>
+
+            <DataGrid Grid.Row="1" x:Name="GroupDataGrid" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserSortColumns="False" CanUserResizeColumns="False" IsReadOnly="True" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+
+                    <!-- Make columns and bind them with tabel attributes-->
+                    <DataGridTemplateColumn Header="Registration Number" Width="auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding RegNo}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+
+                    <DataGridTemplateColumn Header="Name" Width="auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="Status" Width="auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Status}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+
+                    <DataGridTemplateColumn Header="Activation Date" Width="auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding ActiveDate}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="In Active Date" Width="auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding InActiveDate}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </materialDesign:Card>
 </UserControl>
+
+
