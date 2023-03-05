@@ -93,6 +93,27 @@ namespace FYPManagementSystem.UserControlls.GroupUserControlls
 
         private void GDButton_Click(object sender, RoutedEventArgs e)
         {
+            DataRowView selectedRow = GroupDataGrid.SelectedItem as DataRowView; // as is used for typecasting through as we convert selected item in dataRowView 
+            int id2;
+            string id1 = "";
+            string projectTitle;
+            if (selectedRow != null)
+            {
+                string id = selectedRow["GroupId"].ToString();
+                projectTitle = selectedRow["Title"].ToString();
+
+                for (int i = 5; i < id.Length; i++)
+                {
+                    id1 += id[i];
+                }
+                id2 = int.Parse(id1);
+                GroupScroll.Visibility = Visibility.Visible;
+                GroupUC.Content = new GroupDetailUC(id2, projectTitle);
+                GroupUC.Visibility = Visibility.Visible;
+                CreateGroupButton.Content = "Go Back";
+                ExportPdfButton.Visibility = Visibility.Collapsed;
+
+            }
 
         }
 

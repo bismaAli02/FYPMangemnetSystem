@@ -80,7 +80,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button HorizontalAlignment="Right" x:Name="GDButton" Background="Transparent" BorderBrush="Transparent" Click="GDButton_Click">
-                                        <Icon:PackIconMaterial Kind="Record" Foreground="BlueViolet" />
+                                        <Icon:PackIconMaterial Kind="Menu" Foreground="BlueViolet" />
                                     </Button>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
