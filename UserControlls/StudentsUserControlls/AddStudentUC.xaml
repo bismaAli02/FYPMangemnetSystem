@@ -32,7 +32,7 @@
 
 
 
-            <Image Source="C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\Assets\Images\AddUser.png" Grid.Column="1" Grid.Row="0" Height="70"/>
+            <Image Source="\Assets\Images\AddUser.png" Grid.Column="1" Grid.Row="0" Height="70"/>
 
             <Grid Grid.Row="2" Grid.Column="0" Margin="0 20">
                 <Grid.ColumnDefinitions>

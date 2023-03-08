@@ -3,10 +3,168 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:FYPManagementSystem.UserControlls.PdfUserControlls"
+             xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:local="clr-namespace:FYPManagementSystem"
              mc:Ignorable="d"
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="Aquamarine">
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal"
+             TextOptions.TextRenderingMode="Auto"
+             Background="Transparent"
+             FontFamily="{DynamicResource MaterialDesignFont}">
+    <materialDesign:Card Padding="32" Margin="16">
 
-    </Grid>
+        <Grid >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+
+            <Border Grid.Column="0"
+                    Grid.Row="0" CornerRadius="25"
+                    Padding="20"
+                    Width="200"
+                    Height="200"
+                    Background="#efefee"
+                    HorizontalAlignment="Stretch">
+                <Border.Effect>
+                    <DropShadowEffect ShadowDepth="1"
+                                      BlurRadius="20"
+                                      Opacity="0.5" />
+                </Border.Effect>
+                <Grid>
+                    <TextBlock FontWeight="SemiBold"
+                               VerticalAlignment="Top"
+                               HorizontalAlignment="Left"
+                               Margin="0 5 0 0"
+                               Text="STUDENT PDF" />
+
+                    <Button HorizontalAlignment="Center"
+                            VerticalAlignment="Bottom"
+                            x:Name="StudentreportBtn"
+                            Click="StudentreportBtn_Click"
+                            Content="Generate Report" />
+
+                    <Image VerticalAlignment="Center"
+                           Width="40"
+                           Height="40"
+                           HorizontalAlignment="Left"
+                           Source="\Assets\Images\Pdf.png" />
+
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="1"
+                    Grid.Row="0" CornerRadius="25"
+                    Padding="20"
+                    Width="200"
+                    Height="200"
+                    Background="#efefee"
+                    HorizontalAlignment="Stretch">
+                <Border.Effect>
+                    <DropShadowEffect ShadowDepth="1"
+                                      BlurRadius="20"
+                                      Opacity="0.5" />
+                </Border.Effect>
+                <Grid>
+                    <TextBlock FontWeight="SemiBold"
+                               VerticalAlignment="Top"
+                               HorizontalAlignment="Left"
+                               Margin="0 5 0 0"
+                               Text="ADVISOR PDF" />
+
+                    <Button HorizontalAlignment="Center"
+                            VerticalAlignment="Bottom"
+                            x:Name="AdvisorReportBtn"
+                            Click="AdvisorReportBtn_Click"
+                            Content="Generate Report" />
+
+                    <Image VerticalAlignment="Center"
+                           Width="40"
+                           Height="40"
+                           HorizontalAlignment="Left"
+                           Source="\Assets\Images\Pdf.png"/>
+
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="0"
+                    Grid.Row="1" CornerRadius="25"
+                    Padding="20"
+                    Width="200"
+                    Height="200"
+                    Background="#efefee"
+                    HorizontalAlignment="Stretch">
+                <Border.Effect>
+                    <DropShadowEffect ShadowDepth="1"
+                                      BlurRadius="20"
+                                      Opacity="0.5" />
+                </Border.Effect>
+                <Grid>
+                    <TextBlock FontWeight="SemiBold"
+                               VerticalAlignment="Top"
+                               HorizontalAlignment="Left"
+                               Margin="0 5 0 0"
+                               Text="Advisory Board PDF"/>
+
+                    <Button HorizontalAlignment="Center"
+                            VerticalAlignment="Bottom"
+                            x:Name="AdvBoardReportBtn"
+                            Click="AdvBoardReportBtn_Click"
+                            Content="Generate Report" />
+
+                    <Image VerticalAlignment="Center"
+                           Width="40"
+                           Height="40"
+                           HorizontalAlignment="Left"
+                           Source="\Assets\Images\Pdf.png" />
+
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="1"
+                    Grid.Row="1" CornerRadius="25"
+                    Padding="20"
+                    Width="200"
+                    Height="200"
+                    Background="#efefee"
+                    HorizontalAlignment="Stretch">
+                <Border.Effect>
+                    <DropShadowEffect ShadowDepth="1"
+                                      BlurRadius="20"
+                                      Opacity="0.5" />
+                </Border.Effect>
+                <Grid>
+                    <TextBlock FontWeight="SemiBold"
+                               VerticalAlignment="Bottom"
+                               HorizontalAlignment="Left"
+                               Margin="0,0,0,139"
+                               Text="All Evaluation PDF" />
+
+                    <Button HorizontalAlignment="Center"
+                            VerticalAlignment="Bottom"
+                            x:Name="EvaluationReportBtn"
+                            Click="EvaluationReportBtn_Click"
+                            Content="Generate Report" />
+
+                    <Image VerticalAlignment="Center"
+                           Width="40"
+                           Height="40"
+                           HorizontalAlignment="Left"
+                           Source="\Assets\Images\Pdf.png" />
+
+                </Grid>
+            </Border>
+
+
+        </Grid>
+
+    </materialDesign:Card>
 </UserControl>

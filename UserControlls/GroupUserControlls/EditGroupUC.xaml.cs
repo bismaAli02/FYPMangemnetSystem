@@ -236,9 +236,10 @@ namespace FYPManagementSystem.UserControlls.GroupUserControlls
                 try
                 {
                     var con = Configuration.getInstance().getConnection();
-                    SqlCommand cmd = new SqlCommand("UPDATE GroupStudent SET Status=@Status WHERE GroupId=@GroupId AND StudentId = @StudentId", con);
+                    SqlCommand cmd = new SqlCommand("UPDATE GroupStudent SET AssignmentDate = @Date, Status=@Status WHERE GroupId=@GroupId AND StudentId = @StudentId", con);
                     cmd.Parameters.AddWithValue("@StudentId", int.Parse(selectedRow["Id"].ToString()));
                     cmd.Parameters.AddWithValue("@GroupId", groupId);
+                    cmd.Parameters.AddWithValue("@Date", DateTime.Now);
                     cmd.Parameters.AddWithValue("@Status", 4);
                     cmd.ExecuteNonQuery();
 

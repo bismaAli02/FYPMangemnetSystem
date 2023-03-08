@@ -186,6 +186,10 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
             {
                 MessageBox.Show("Please Enter Obtained Marks", " Error ", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            else if (int.Parse(OMTextBox.Text) > int.Parse(TMTextBox.Text))
+            {
+                MessageBox.Show("Obtained Markes cannot be more than Total Marks", " Error ", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
             else
             {
                 if (SaveButtonTxt.Text == "Save")
@@ -201,6 +205,7 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
 
             }
         }
+
 
         private void findParentUserControl()
         {

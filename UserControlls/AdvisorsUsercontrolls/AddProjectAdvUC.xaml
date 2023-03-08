@@ -31,7 +31,7 @@
 
 
 
-            <Image Source="C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\Assets\Images\group.png" Grid.Column="1" Grid.Row="0" Height="50"/>
+            <Image Source="\Assets\Images\group.png" Grid.Column="1" Grid.Row="0" Height="50"/>
 
             <Grid Grid.Row="0" Grid.Column="0" Margin="0 20">
                 <Grid.ColumnDefinitions>

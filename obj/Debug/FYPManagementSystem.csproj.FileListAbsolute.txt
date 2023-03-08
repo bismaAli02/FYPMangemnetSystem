@@ -91,7 +91,6 @@ C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\obj\Debug\UserCont
 C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\obj\Debug\UserControlls\EvaluationsUserControlls\MarkEvaUC.g.cs
 C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\obj\Debug\UserControlls\PdfUserControlls\PdfUC.g.cs
 C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\obj\Debug\UserControlls\ProjectsUserControlls\AddProjUC.g.cs
-C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\obj\Debug\UserControlls\ProjectsUserControlls\AssignProjUC.g.cs
 C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\obj\Debug\UserControlls\ProjectsUserControlls\ProjUC.g.cs
 C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\obj\Debug\UserControlls\StudentsUserControlls\AddStudentUC.g.cs
 C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\obj\Debug\UserControlls\StudentsUserControlls\StudentUC.g.cs
@@ -104,7 +103,6 @@ C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\obj\Debug\UserCont
 C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\obj\Debug\UserControlls\EvaluationsUserControlls\MarkEvaUC.baml
 C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\obj\Debug\UserControlls\PdfUserControlls\PdfUC.baml
 C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\obj\Debug\UserControlls\ProjectsUserControlls\AddProjUC.baml
-C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\obj\Debug\UserControlls\ProjectsUserControlls\AssignProjUC.baml
 C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\obj\Debug\UserControlls\ProjectsUserControlls\ProjUC.baml
 C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\obj\Debug\UserControlls\StudentsUserControlls\AddStudentUC.baml
 C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\obj\Debug\UserControlls\StudentsUserControlls\StudentUC.baml
@@ -147,3 +145,8 @@ C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\bin\Debug\ro\Xceed
 C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\bin\Debug\ru\Xceed.Wpf.AvalonDock.resources.dll
 C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\bin\Debug\sv\Xceed.Wpf.AvalonDock.resources.dll
 C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\bin\Debug\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\bin\Debug\itextsharp.dll
+C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\bin\Debug\itextsharp.xml
+C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\bin\Debug\Assets\Images\DashBoardImage1.jfif
+C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\bin\Debug\Assets\Images\DashBoardImage2.jfif

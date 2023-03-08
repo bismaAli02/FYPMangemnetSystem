@@ -7,9 +7,10 @@
     xmlns:ProjectsUserControlls="clr-namespace:FYPManagementSystem.UserControlls.ProjectsUserControlls"
     xmlns:EvaluationsUserControlls="clr-namespace:FYPManagementSystem.UserControlls.EvaluationsUserControlls"
     xmlns:GroupUserControlls="clr-namespace:FYPManagementSystem.UserControlls.GroupUserControlls"
+    xmlns:PDFUserControl="clr-namespace:FYPManagementSystem.UserControlls.PdfUserControlls"
     x:Class="FYPManagementSystem.MainWindow"
     Height="700" Width="1050"
-    WindowStartupLocation="CenterScreen" Background="Transparent" AllowsTransparency="True" WindowStyle="None">
+    WindowStartupLocation="CenterScreen" Background="Transparent" >
     <Window.Resources>
 
         <Style x:Key="menuTitle" TargetType="{x:Type TextBlock}">
@@ -64,6 +65,12 @@
     </Window.Resources>
     <Border Background="White" CornerRadius="40" MouseDown="Border_MouseDown">
         <Grid>
+            <Grid.Resources>
+                <Style TargetType="Image" x:Key="sameSizeImage">
+                    <Setter Property="Width" Value="{Binding ActualWidth, ElementName=image2}"   />
+                    <Setter Property="Height" Value="{Binding ActualHeight, ElementName=image2}"   />
+                </Style>
+            </Grid.Resources>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
@@ -149,6 +156,14 @@
                     </Button>
 
                     <!-- Button 8-->
+                    <Button x:Name="GeneratePdfButton" Style="{StaticResource menuButton}" Click="GeneratePdfButton_Click">
+                        <Grid>
+                            <TextBlock Text="Generate PDF" Margin="0 0 0 2"/>
+                            <Icon:PackIconMaterial Style="{StaticResource menuButtonIcon}"/>
+                        </Grid>
+                    </Button>
+
+                    <!-- Button 9-->
                     <Button x:Name="ExitButton" Style="{StaticResource menuButton}" Click="ExitButton_Click">
                         <Grid>
                             <TextBlock Text="Exit" Margin="0 0 0 2"/>
@@ -158,6 +173,23 @@
 
                 </StackPanel>
             </Border>
+
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" x:Name="HomeDashBoard" Margin="16">
+                <Border>
+                    <Image Style="{StaticResource sameSizeImage}" Visibility="Collapsed" Name="image1" Source="\Assets\Images\DashBoard3.png" Stretch="UniformToFill"/>
+                </Border>
+
+
+                <Border CornerRadius="10">
+                    <Image Visibility="Collapsed" Name="image2" Source="\Assets\Images\DashBoardImage1.jfif" Stretch="UniformToFill"/>
+                </Border>
+                <Border CornerRadius="10">
+                    <Image Style="{StaticResource sameSizeImage}" Visibility="Collapsed" Name="image3" Source="\Assets\Images\DashBoardImage2.jfif" Stretch="UniformToFill"/>
+                </Border>
+            </StackPanel>
+
+            <Slider Name="slider" Minimum="0" Maximum="3" ValueChanged="slider_ValueChanged"/>
+
 
 
             <!-- Place Student User Control On MainWindow so that All Students Records Can Display-->
@@ -214,6 +246,12 @@
             <Grid Grid.Column="1" x:Name="AssignAdvUCGrid">
                 <Grid x:Name="AssignAdvUC">
                     <AdvisorUserControlls:AssignAdvUC />
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Column="1" x:Name="reportUCGrid">
+                <Grid x:Name="reportUC">
+                    <PDFUserControl:PdfUC/>
                 </Grid>
             </Grid>
         </Grid>

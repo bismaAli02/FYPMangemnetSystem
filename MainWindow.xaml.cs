@@ -5,16 +5,31 @@ using FYPManagementSystem.UserControlls.EvaluationsUserControlls;
 using FYPManagementSystem.UserControlls.GroupUserControlls;
 using FYPManagementSystem.UserControlls.ProjectsUserControlls;
 using FYPManagementSystem.UserControlls.AdvisorsUsercontrolls;
+using System.Timers;
+using System.Windows.Threading;
+using System;
 
 namespace FYPManagementSystem
 {
     public partial class MainWindow : Window
     {
-
+        private DispatcherTimer timer;
         public MainWindow()
         {
             InitializeComponent();
             CollapseAllGrids(); // initially when constructor call All grids hide
+                                // Create a new DispatcherTimer
+            timer = new DispatcherTimer();
+
+            // Set the interval to 2 seconds
+            timer.Interval = TimeSpan.FromSeconds(2);
+
+            // Handle the Tick event
+            timer.Tick += Timer_Tick;
+
+            // Start the timer
+            timer.Start();
+            slider.Visibility = Visibility.Collapsed;
         }
 
         // this function is used for all grids or user controls to hide except one grid whose button is clicked
@@ -27,6 +42,7 @@ namespace FYPManagementSystem
             AssignAdvUCGrid.Visibility = Visibility.Collapsed;
             GroupUCGrid.Visibility = Visibility.Collapsed;
             MarkEvaluationGrid.Visibility = Visibility.Collapsed;
+            reportUCGrid.Visibility = Visibility.Collapsed;
             stUC.Visibility = Visibility.Collapsed;
             advUC.Visibility = Visibility.Collapsed;
             ProjUC.Visibility = Visibility.Collapsed;
@@ -34,10 +50,10 @@ namespace FYPManagementSystem
             MarkEvaUC.Visibility = Visibility.Collapsed;
             GroupStuUC.Visibility = Visibility.Collapsed;
             AssignAdvUC.Visibility = Visibility.Collapsed;
-
+            reportUC.Visibility = Visibility.Collapsed;
         }
 
-        //this function is used for design Purpose when mouse drag to any button that button will highlight 
+        //this function is used for design Purpose when mouse drag to any button that button will highlight
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
@@ -117,9 +133,49 @@ namespace FYPManagementSystem
             Application.Current.Shutdown();
         }
 
+        private void slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (slider.Value == 0)
+            {
+                image1.Visibility = Visibility.Visible;
+                image2.Visibility = Visibility.Collapsed;
+                image3.Visibility = Visibility.Collapsed;
+            }
+            else if (slider.Value == 1)
+            {
+                image1.Visibility = Visibility.Collapsed;
+                image2.Visibility = Visibility.Visible;
+                image3.Visibility = Visibility.Collapsed;
+            }
+            else if (slider.Value == 2)
+            {
+                image1.Visibility = Visibility.Collapsed;
+                image2.Visibility = Visibility.Collapsed;
+                image3.Visibility = Visibility.Visible;
+            }
+        }
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            // Increment the Slider value by 1
+            slider.Value += 1;
+            if (slider.Value == 3)
+            {
+                slider.Value = 0;
+            }
+
+        }
+
+
         private void HomeScreenButton_Click(object sender, RoutedEventArgs e)
         {
             CollapseAllGrids();
+        }
+
+        private void GeneratePdfButton_Click(object sender, RoutedEventArgs e)
+        {
+            CollapseAllGrids();
+            reportUCGrid.Visibility = Visibility.Visible;
+            reportUC.Visibility = Visibility.Visible;
         }
     }
 }
