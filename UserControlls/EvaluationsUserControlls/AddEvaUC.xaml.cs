@@ -40,6 +40,24 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
             this.id = id;
         }
 
+        private bool WeightageSumCalculate(int weightage)
+        {
+            int totalWeightage = 0;
+            var con = Configuration.getInstance().getConnection();
+            SqlCommand cmd = new SqlCommand("SELECT SUM(TotalWeightage) AS total FROM Evaluation", con);
+            SqlDataReader reader = cmd.ExecuteReader();
+            if (reader.Read())
+            {
+                totalWeightage = int.Parse(reader["total"].ToString());
+            }
+            reader.Close();
+            if (totalWeightage + weightage > 100)
+            {
+                return false;
+            }
+            return true;
+        }
+
         private void EmptyForm()
         {
             NameTextBox.Text = string.Empty;
@@ -116,6 +134,10 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
             else if (TWTextBox.Text == string.Empty)
             {
                 MessageBox.Show("Please Enter Total Weightage for the Project", " Error ", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else if (!WeightageSumCalculate(int.Parse(TWTextBox.Text.ToString())))
+            {
+                MessageBox.Show("Invalid Total Weightage as exceeded 100 for all evaluation", " Error ", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else
             {

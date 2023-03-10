@@ -16,6 +16,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FYPManagementSystem.UserControlls.ProjectsUserControlls;
+using System.Windows.Forms;
+using MessageBox = System.Windows.MessageBox;
+using UserControl = System.Windows.Controls.UserControl;
 
 namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
 {
@@ -30,6 +33,19 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
             DisplayEvaluation();
         }
 
+        private bool WeightageSumCalculate()
+        {
+            int totalWeightage = 0;
+            foreach (System.Data.DataRowView dataRow in EvaDataGrid.ItemsSource)
+            {
+                totalWeightage += int.Parse(dataRow[3].ToString());
+            }
+            if (totalWeightage >= 100)
+            {
+                return false;
+            }
+            return true;
+        }
         public void DisplayEvaluation()
         {
             var con = Configuration.getInstance().getConnection();
@@ -69,17 +85,23 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
         {
             if (AddEvaButton.Content.ToString() == "Add Evaluation")
             {
-                AddEvaUC.Content = new AddEvaUC();
-                AddEvaUC.Visibility = Visibility.Visible;
-                AddEvaButton.Content = "Go Back";
+                if (EvaDataGrid.Items.Count != 4 && WeightageSumCalculate())
+                {
+                    AddEvaUC.Content = new AddEvaUC();
+                    AddEvaUC.Visibility = Visibility.Visible;
+                    AddEvaButton.Content = "Go Back";
+                }
+                else
+                {
+                    MessageBox.Show("You can't add more evaluation You can add only 4 evaluations");
+                }
             }
             else
             {
                 AddEvaUC.Visibility = Visibility.Collapsed;
+                DisplayEvaluation();
                 AddEvaButton.Content = "Add Evaluation";
-
             }
-            DisplayEvaluation();
 
         }
 

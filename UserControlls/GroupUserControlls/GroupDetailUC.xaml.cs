@@ -95,9 +95,9 @@ namespace FYPManagementSystem.UserControlls.GroupUserControlls
 
             //SELECT FORMAT(DateOfBirth, 'dd/MM/yyyy') this format is used to only retrieve date no time
 
-            SqlCommand cmd = new SqlCommand("SELECT CONCAT(P.FirstName ,' ',P.LastName) AS Name,S.Id ,S.RegistrationNo AS RegNo ,L.Value AS Status,(CASE WHEN GS.Status =@Status THEN (SELECT FORMAT(AssignmentDate, 'dd/MM/yyyy')) END) AS ActiveDate,(CASE WHEN GS.Status<>@Status THEN (SELECT FORMAT(AssignmentDate, 'dd/MM/yyyy')) END) AS InActiveDate FROM GroupStudent AS GS JOIN Lookup AS L ON GS.Status = L.Id JOIN Student AS S ON S.Id = GS.StudentId JOIN Person AS P ON P.Id = S.Id WHERE GS.GroupId = @GroupId ORDER BY L.Value", con);
+            SqlCommand cmd = new SqlCommand("SELECT CONCAT(P.FirstName ,' ',P.LastName) AS Name,S.Id ,S.RegistrationNo AS RegNo ,L.Value AS Status,(CASE WHEN L.Value =@Status THEN (SELECT FORMAT(AssignmentDate, 'dd/MM/yyyy')) END) AS ActiveDate,(CASE WHEN L.Value<>@Status THEN (SELECT FORMAT(AssignmentDate, 'dd/MM/yyyy')) END) AS InActiveDate FROM GroupStudent AS GS JOIN Lookup AS L ON GS.Status = L.Id JOIN Student AS S ON S.Id = GS.StudentId JOIN Person AS P ON P.Id = S.Id WHERE GS.GroupId = @GroupId ORDER BY L.Value", con);
             cmd.Parameters.AddWithValue("@GroupId", groupId);
-            cmd.Parameters.AddWithValue("@Status", 3);
+            cmd.Parameters.AddWithValue("@Status", "Active");
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             da.Fill(dt);

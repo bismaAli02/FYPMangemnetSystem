@@ -10,14 +10,16 @@
     xmlns:PDFUserControl="clr-namespace:FYPManagementSystem.UserControlls.PdfUserControlls"
     x:Class="FYPManagementSystem.MainWindow"
     Height="700" Width="1050"
-    WindowStartupLocation="CenterScreen" Background="Transparent" >
+    WindowStartupLocation="CenterScreen" Background="Transparent" AllowsTransparency="True" WindowStyle="None">
     <Window.Resources>
 
         <Style x:Key="menuTitle" TargetType="{x:Type TextBlock}">
             <Setter Property="Foreground" Value="BlueViolet"/>
-            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="FontSize" Value="38"/>
             <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Margin" Value="63 30 0 15"/>
+            <Setter Property="Margin" Value="0 40"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
 
         </Style>
 
@@ -63,7 +65,7 @@
 
 
     </Window.Resources>
-    <Border Background="White" CornerRadius="40" MouseDown="Border_MouseDown">
+    <Border Background="White" CornerRadius="40" MouseDown="Border_MouseDown" MouseLeftButtonDown="Border_MouseLeftButtonDown">
         <Grid>
             <Grid.Resources>
                 <Style TargetType="Image" x:Key="sameSizeImage">
@@ -91,8 +93,22 @@
                     <Ellipse Fill="#2acb42" Width="10" Height="10"/>
                     </StackPanel>-->
 
-                    <TextBlock Text="Main Menu" Style="{StaticResource menuTitle}"/>
+                    <!--<Border Width="150"
+                    Height="150"
+                    Background="White"
+                    CornerRadius="100"
+                    DockPanel.Dock="Top"
+                    HorizontalAlignment="Left"
+                    Margin="30 30 0 0">
+                    <Ellipse>
+                    <Ellipse.Fill>
+                    <ImageBrush  ImageSource="\Assets\Images\splashImage.png" />
+                    </Ellipse.Fill>
+                    </Ellipse>
+                    </Border>-->
+                    <Image Source="/Assets/Images/splashImage.png" Height="100" Margin="-70 0 0 0" Width="100">
 
+                    </Image>
                     <Button x:Name="HomeScreenButton" Style="{StaticResource menuButton}" Click="HomeScreenButton_Click">
                         <Grid>
                             <TextBlock Text="Home" Margin="0 0 0 2"/>
@@ -174,19 +190,28 @@
                 </StackPanel>
             </Border>
 
-            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" x:Name="HomeDashBoard" Margin="16">
-                <Border>
-                    <Image Style="{StaticResource sameSizeImage}" Visibility="Collapsed" Name="image1" Source="\Assets\Images\DashBoard3.png" Stretch="UniformToFill"/>
-                </Border>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Style="{StaticResource menuTitle}" Text="Final Year project Management System" TextWrapping="Wrap" FontFamily="PalentineLinoType"/>
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" x:Name="HomeDashBoard" Margin="16">
+                    <Border>
+                        <Image Style="{StaticResource sameSizeImage}" Visibility="Collapsed" Name="image1" Source="\Assets\Images\DashBoard3.png" Stretch="UniformToFill"/>
+                    </Border>
 
 
-                <Border CornerRadius="10">
-                    <Image Visibility="Collapsed" Name="image2" Source="\Assets\Images\DashBoardImage1.jfif" Stretch="UniformToFill"/>
-                </Border>
-                <Border CornerRadius="10">
-                    <Image Style="{StaticResource sameSizeImage}" Visibility="Collapsed" Name="image3" Source="\Assets\Images\DashBoardImage2.jfif" Stretch="UniformToFill"/>
-                </Border>
-            </StackPanel>
+                    <Border CornerRadius="10">
+                        <Image Visibility="Collapsed" Name="image2" Source="\Assets\Images\DashBoardImage1.jfif" Stretch="UniformToFill"/>
+                    </Border>
+                    <Border CornerRadius="10">
+                        <Image Style="{StaticResource sameSizeImage}" Visibility="Collapsed" Name="image3" Source="\Assets\Images\DashBoardImage2.jfif" Stretch="UniformToFill"/>
+                    </Border>
+                </StackPanel>
+            </Grid>
+
+
 
             <Slider Name="slider" Minimum="0" Maximum="3" ValueChanged="slider_ValueChanged"/>
 
@@ -194,7 +219,7 @@
 
             <!-- Place Student User Control On MainWindow so that All Students Records Can Display-->
 
-            <Grid Grid.Column="1" x:Name="StudentGrid">
+            <Grid Grid.Column="1" Visibility="Collapsed" x:Name="StudentGrid">
                 <Grid x:Name="stUC">
                     <local:StudentUC/>
                 </Grid>
@@ -202,7 +227,7 @@
 
             <!-- Place Advisor User Control On MainWindow so that All Advisor Records Can Display-->
 
-            <Grid Grid.Column="1" x:Name="AdvisorGrid">
+            <Grid Grid.Column="1" Visibility="Collapsed" x:Name="AdvisorGrid">
                 <Grid x:Name="advUC">
                     <AdvisorUserControlls:AdvUC/>
                 </Grid>
@@ -210,7 +235,7 @@
 
             <!-- Place Project User Control On MainWindow so that All Project Records Can Display-->
 
-            <Grid Grid.Column="1" x:Name="ProjectGrid">
+            <Grid Grid.Column="1" Visibility="Collapsed" x:Name="ProjectGrid">
                 <Grid x:Name="ProjUC">
                     <ProjectsUserControlls:ProjUC/>
                 </Grid>
@@ -219,7 +244,7 @@
 
             <!-- Place Evaluation User Control On MainWindow so that All Evaluation Records Can Display-->
 
-            <Grid Grid.Column="1" x:Name="EvaluationGrid">
+            <Grid Grid.Column="1" Visibility="Collapsed" x:Name="EvaluationGrid">
                 <Grid x:Name="EvaUC">
                     <EvaluationsUserControlls:EvaUC/>
                 </Grid>
@@ -227,7 +252,7 @@
 
             <!-- Place Marks Evaluation User Control On MainWindow so that All Marked Evaluation Record Can Display-->
 
-            <Grid Grid.Column="1" x:Name="MarkEvaluationGrid">
+            <Grid Grid.Column="1"  Visibility="Collapsed" x:Name="MarkEvaluationGrid">
                 <Grid x:Name="MarkEvaUC">
                     <EvaluationsUserControlls:EvaProjectUC/>
                 </Grid>
@@ -235,7 +260,7 @@
 
             <!-- Place Group User Control On MainWindow so that All Group Record Can Display-->
 
-            <Grid Grid.Column="1" x:Name="GroupUCGrid">
+            <Grid Grid.Column="1" Visibility="Collapsed" x:Name="GroupUCGrid">
                 <Grid x:Name="GroupStuUC">
                     <GroupUserControlls:GroupStuUC/>
                 </Grid>
@@ -243,13 +268,13 @@
 
             <!-- Place Assign advisor User Control On MainWindow so that All Advisor Projects Record Can Display-->
 
-            <Grid Grid.Column="1" x:Name="AssignAdvUCGrid">
+            <Grid Grid.Column="1" x:Name="AssignAdvUCGrid" Visibility="Collapsed">
                 <Grid x:Name="AssignAdvUC">
                     <AdvisorUserControlls:AssignAdvUC />
                 </Grid>
             </Grid>
 
-            <Grid Grid.Column="1" x:Name="reportUCGrid">
+            <Grid Grid.Column="1" Visibility="Collapsed" x:Name="reportUCGrid">
                 <Grid x:Name="reportUC">
                     <PDFUserControl:PdfUC/>
                 </Grid>
