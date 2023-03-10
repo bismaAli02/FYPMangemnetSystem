@@ -2,6 +2,7 @@
 using FYPManagementSystem.UserControlls.ProjectsUserControlls;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -40,11 +42,69 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
             this.id = id;
         }
 
+        private bool ValidationInDatabase(string query)
+        {
+            var con = Configuration.getInstance().getConnection();
+            SqlCommand cmd = new SqlCommand(query, con);
+            SqlDataReader reader = cmd.ExecuteReader();
+            if (reader.HasRows)
+            {
+                reader.Close();
+                return true;
+            }
+            else
+            {
+                reader.Close();
+                return false;
+            }
+        }
+        private bool titleNameValidations()
+        {
+            string name = NameTextBox.Text;
+            bool isValid = true;
+
+            if (name == "")
+            {
+                MessageBox.Show("Evaluation Name cannot be empty", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                isValid = false;
+                return isValid;
+            }
+            else if (name == " ")
+            {
+                MessageBox.Show("Evaluation Name cannot be empty", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                isValid = false;
+            }
+            isValid = false;
+            for (int i = 0; i < name.Length; i++)
+            {
+                if (((name[i] > 64 && name[i] < 91) || (name[i] > 96 && name[i] < 123)))
+                {
+                    isValid = true;
+                    break;
+                }
+            }
+
+            if (isValid)
+            {
+                isValid = !ValidationInDatabase("SELECT Name FROM Evaluation WHERE Name='" + name + "' AND Id<>" + id);
+                if (!ValidationInDatabase("SELECT Name FROM Evaluation WHERE Name='" + name + "' AND Id<>" + id))
+                {
+                    MessageBox.Show("There already exists one Evaluation With the same name", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Evaluation Title must contain at least one Alphabet", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            return isValid;
+        }
+
+
         private bool WeightageSumCalculate(int weightage)
         {
             int totalWeightage = 0;
             var con = Configuration.getInstance().getConnection();
-            SqlCommand cmd = new SqlCommand("SELECT SUM(TotalWeightage) AS total FROM Evaluation", con);
+            SqlCommand cmd = new SqlCommand("SELECT SUM(TotalWeightage) AS total FROM Evaluation WHERE Id<>'" + id + "'", con);
             SqlDataReader reader = cmd.ExecuteReader();
             if (reader.Read())
             {

@@ -25,7 +25,7 @@
 
         <Style x:Key="menuButton" TargetType="{x:Type Button}">
             <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="#cfcfcf"/>
+            <Setter Property="Foreground" Value="Black"/>
             <Setter Property="Height" Value="50"/>
             <Setter Property="Margin" Value="30 3 0 3"/>
             <Setter Property="FontSize" Value="18"/>

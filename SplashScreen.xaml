@@ -11,7 +11,7 @@
         AllowsTransparency="True"
         WindowStyle="None"
         Background="{x:Null}" ContentRendered="Window_ContentRendered">
-    <materialDesign:Card UniformCornerRadius="15" Background="{DynamicResource MaterialDesignPaper}"  materialDesign:ShadowAssist.ShadowDepth="Depth4" Margin="25">
+    <materialDesign:Card UniformCornerRadius="15" Background="{DynamicResource MaterialDesignPaper}" materialDesign:ShadowAssist.ShadowDepth="Depth4" Margin="25">
 
 
         <!--Grid is a Panel which contain rows and columns-->

@@ -80,7 +80,9 @@
                 <TextBlock HorizontalAlignment="Left" Grid.Column="0" Text="Date Of Birth" VerticalAlignment="Center" Width="100"  FontSize="16" FontWeight="SemiBold">
 
                 </TextBlock>
-                <DatePicker Name="Date" HorizontalAlignment="Left" Grid.Column="1" Width="200" Margin="6,0,0,0"></DatePicker>
+                <DatePicker Name="Date" HorizontalAlignment="Left" Grid.Column="1" Width="200" Margin="6,0,0,0" DisplayDate="01/01/1995"
+                            DisplayDateEnd="12/31/2005"
+                            DisplayDateStart="01/01/1990"></DatePicker>
             </Grid>
 
             <Grid Grid.Row="4" Grid.Column="0" Margin="0 40">

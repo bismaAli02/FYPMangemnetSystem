@@ -19,6 +19,7 @@ using FYPManagementSystem.UserControlls.ProjectsUserControlls;
 using System.Windows.Forms;
 using MessageBox = System.Windows.MessageBox;
 using UserControl = System.Windows.Controls.UserControl;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
 {
@@ -81,6 +82,8 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
         }
 
 
+
+
         private void AddEvaButton_Click(object sender, RoutedEventArgs e)
         {
             if (AddEvaButton.Content.ToString() == "Add Evaluation")
@@ -93,7 +96,7 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
                 }
                 else
                 {
-                    MessageBox.Show("You can't add more evaluation You can add only 4 evaluations");
+                    MessageBox.Show("You can't add more evaluation");
                 }
             }
             else
