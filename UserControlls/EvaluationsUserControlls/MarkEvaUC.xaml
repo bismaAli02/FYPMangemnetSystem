@@ -51,7 +51,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock HorizontalAlignment="Center" Text="Evaluation Name" VerticalAlignment="Bottom" Width="150"  FontSize="16" FontWeight="SemiBold" Margin="0,0,0,3"/>
-                <ComboBox Grid.Column="1" Name="EvaComboBox" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="140" DropDownClosed="EvaComboBox_DropDownClosed"/>
+                <ComboBox Grid.Column="1" Margin="10 0" Name="EvaComboBox" HorizontalAlignment="Left" VerticalAlignment="Center" Width="140" DropDownClosed="EvaComboBox_DropDownClosed"/>
             </Grid>
 
 

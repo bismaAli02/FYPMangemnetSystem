@@ -176,6 +176,7 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
                 cmd.ExecuteNonQuery();
                 MessageBox.Show("Successfully saved");
                 EmptyForm();
+                findParent();// this function is used here for display student method purpose and scrollViewer visibility purpose
             }
             catch (Exception ex)
             {
@@ -199,10 +200,11 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
                     cmd.Parameters.AddWithValue("@DateOfBirth", Date.Text);
                     cmd.Parameters.AddWithValue("@Gender", gender);
                     cmd.Parameters.AddWithValue("@Designation", designation);
-                    cmd.Parameters.AddWithValue("@Salary", SalaryTextBox.Text);
+                    cmd.Parameters.AddWithValue("@Salary", int.Parse(SalaryTextBox.Text));
                     cmd.Parameters.AddWithValue("@Id", id);
                     cmd.ExecuteNonQuery();
                     MessageBox.Show("Record Updated");
+                    findParent();// this function is used here for display student method purpose and scrollViewer visibility purpose
                 }
                 catch (Exception ex)
                 {
@@ -254,36 +256,161 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
             int gender = ReturnGender();
             int designation = ReturnDesignation();
 
-            if (FNTextBox.Text == string.Empty)
+            if (FirstNameValidations() && LastNameValidations() && ContactNumberValidation() && EmailValidation() && SalaryValidation())
             {
-                MessageBox.Show("Please Enter  First Name ", " Error ", MessageBoxButton.OK, MessageBoxImage.Error);
+                if (gender > 0 && designation > 0)
+                {
+                    if (SaveButtonTxt.Text == "Save")
+                    {
+                        SaveRecord(gender, designation);
+                    }
+                    else
+                    {
+                        UpdateRecord(gender, designation);
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("First fill all fields", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+
             }
-            else if (DesComboBox.Text == string.Empty)
+
+        }
+
+
+
+        // All validation Code
+
+        private bool FirstNameValidations()
+        {
+            string name = FNTextBox.Text;
+            bool isValid = true;
+
+            if (name == "")
             {
-                MessageBox.Show("Please Select Designation", " Error ", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("First Name cannot be empty", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                isValid = false;
             }
-            else if (EmailTextBox.Text == string.Empty)
+            else if (name == " ")
             {
-                MessageBox.Show("Please Enter Email", " Error ", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("First Name cannot be empty", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                isValid = false;
             }
-            else if (SalaryTextBox.Text == string.Empty)
+            else if (name.Length >= 3)
             {
-                MessageBox.Show("Please Enter Salary", " Error ", MessageBoxButton.OK, MessageBoxImage.Error);
+                for (int i = 0; i < name.Length; i++)
+                {
+                    if (!((name[i] > 64 && name[i] < 91) || (name[i] > 96 && name[i] < 123)))
+                    {
+                        MessageBox.Show("Name cannot contain Characters other than A-Z or a-z", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        isValid = false;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Name cannot be less than 3 Characters", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                isValid = false;
+            }
+            return isValid;
+        }
+
+        private bool LastNameValidations()
+        {
+            string name = LNTextBox.Text;
+            bool isValid = true;
+
+            if (name.Length >= 3)
+            {
+                for (int i = 0; i < name.Length; i++)
+                {
+                    if (!((name[i] > 64 && name[i] < 91) || (name[i] > 96 && name[i] < 123)))
+                    {
+                        MessageBox.Show("Name cannot contain Characters other than A-Z or a-z", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        isValid = false;
+                        break;
+                    }
+                }
+            }
+            else if (name != "")
+            {
+                MessageBox.Show("Name cannot be less than 3 Characters", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                isValid = false;
+            }
+            return isValid;
+        }
+
+        private bool ContactNumberValidation()
+        {
+            string numbers = "0123456789";
+            bool isValid = true;
+            if (ContactTextBox.Text == "")
+            {
+
+            }
+            else if (ContactTextBox.Text.Length == 11)
+            {
+                foreach (char n in ContactTextBox.Text)
+                {
+                    if (!numbers.Contains(n.ToString()))
+                    {
+                        isValid = false;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("InValid Contact Number", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            return isValid;
+        }
+
+
+        private bool SalaryValidation()
+        {
+            string numbers = "0123456789";
+            bool isValid = true;
+            if (SalaryTextBox.Text == "")
+            {
+                isValid = false;
+                MessageBox.Show("Enter salary", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else if (SalaryTextBox.Text.Length <= 7)
+            {
+                foreach (char n in SalaryTextBox.Text)
+                {
+                    if (!numbers.Contains(n.ToString()))
+                    {
+                        isValid = false;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Salary is out of range", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            return isValid;
+        }
+
+        private bool EmailValidation()
+        {
+            string email = EmailTextBox.Text;
+            bool isValid = true;
+            if (email.Contains("@") && email.Contains("."))
+            {
 
             }
             else
             {
-                if (SaveButtonTxt.Text == "Save")
-                {
-                    SaveRecord(gender, designation);
-                }
-                else
-                {
-                    UpdateRecord(gender, designation);
-                }
-                findParent();
-
+                MessageBox.Show("InValid Email Address", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                isValid = false;
             }
+            return isValid;
         }
 
 

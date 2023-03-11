@@ -74,6 +74,7 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
             {
                 MessageBox.Show("Evaluation Name cannot be empty", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 isValid = false;
+                return isValid;
             }
             isValid = false;
             for (int i = 0; i < name.Length; i++)
@@ -87,15 +88,16 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
 
             if (isValid)
             {
-                isValid = !ValidationInDatabase("SELECT Name FROM Evaluation WHERE Name='" + name + "' AND Id<>" + id);
-                if (!ValidationInDatabase("SELECT Name FROM Evaluation WHERE Name='" + name + "' AND Id<>" + id))
+                if (ValidationInDatabase("SELECT Name FROM Evaluation WHERE Name='" + name + "' AND Id<>" + id))
                 {
                     MessageBox.Show("There already exists one Evaluation With the same name", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    isValid = false;
                 }
             }
             else
             {
                 MessageBox.Show("Evaluation Title must contain at least one Alphabet", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
             }
             return isValid;
         }
@@ -195,7 +197,7 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
             {
                 MessageBox.Show("Invalid Total Weightage as exceeded 100 for all evaluation", " Error ", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            else
+            else if (titleNameValidations())
             {
                 if (SaveButtonTxt.Text == "Save")
                 {

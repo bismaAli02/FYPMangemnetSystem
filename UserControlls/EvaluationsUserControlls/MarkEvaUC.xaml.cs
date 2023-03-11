@@ -36,16 +36,16 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
         public MarkEvaUC(string groupID, string evaName, int obtainMarks, int evaID)
         {
             InitializeComponent();
+            this.evaID = evaID;
             GroupIdToComboBox();
+            GIdComboBox.Text = groupID;
             EvaNameToComboBox();
             SaveButtonTxt.Text = "Update";
-            GIdComboBox.Text = groupID;
             EvaComboBox.Text = evaName.ToString();
             OMTextBox.Text = obtainMarks.ToString();
             GIdComboBox.IsReadOnly = true;
             EvaComboBox.IsReadOnly = true;
             TMTextBox.IsReadOnly = true;
-            this.evaID = evaID;
             GIdComboBox.IsEnabled = false;
             EvaComboBox.IsEnabled = false;
             GiveEvaluationId();
@@ -55,9 +55,12 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
         //this code clears  all the controls
         private void EmptyForm()
         {
-            GIdComboBox.Text = string.Empty;
-            EvaComboBox.Text = string.Empty;
-            TMTextBox.Text = string.Empty;
+            if (GIdComboBox.IsEnabled == true)
+            {
+                GIdComboBox.Text = string.Empty;
+                EvaComboBox.Text = string.Empty;
+                TMTextBox.Text = string.Empty;
+            }
             OMTextBox.Text = string.Empty;
         }
 
@@ -92,7 +95,7 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
                 try
                 {
                     var con = Configuration.getInstance().getConnection();
-                    SqlCommand cmd = new SqlCommand("SELECT Name FROM Evaluation E EXCEPT SELECT E.Name FROM Evaluation E JOIN GroupEvaluation GE ON GE.EvaluationId = E.Id JOIN [Group] G ON G.Id = GE.GroupId WHERE G.Id = @ID", con);
+                    SqlCommand cmd = new SqlCommand("SELECT Name FROM Evaluation E EXCEPT SELECT E.Name FROM Evaluation E JOIN GroupEvaluation GE ON GE.EvaluationId = E.Id JOIN [Group] G ON G.Id = GE.GroupId WHERE G.Id = @ID AND GE.EvaluationId <>" + evaID, con);
                     cmd.Parameters.AddWithValue("@ID", int.Parse(GIdComboBox.Text));
                     //creates a new instance of the SqlDataAdapter class and assigns it to the variable dataAdapter
                     SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);

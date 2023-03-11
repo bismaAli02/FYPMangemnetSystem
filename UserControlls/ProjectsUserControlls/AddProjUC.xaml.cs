@@ -17,9 +17,6 @@ using System.Windows.Shapes;
 
 namespace FYPManagementSystem.UserControlls.ProjectsUserControlls
 {
-    /// <summary>
-    /// Interaction logic for AddProjUC.xaml
-    /// </summary>
     public partial class AddProjUC : UserControl
     {
         int id; // this attribute is used for Project id
@@ -128,7 +125,7 @@ namespace FYPManagementSystem.UserControlls.ProjectsUserControlls
             {
                 MessageBox.Show("Please Select Description for the Project", " Error ", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            else
+            else if (ValidationForProjectTitle())
             {
                 if (SaveButtonTxt.Text == "Save")
                 {
@@ -142,8 +139,54 @@ namespace FYPManagementSystem.UserControlls.ProjectsUserControlls
                 // this function is used here for displayProjects method purpose 
                 findParentUserControl();
             }
+        }
 
+        //this function validate a query in a database  and checking whether it returns any rows. If the query returns rows, the function returns true otherwise, it returns false. 
+        private bool ValidationInDatabase(string query)
+        {
+            var con = Configuration.getInstance().getConnection();
+            SqlCommand cmd = new SqlCommand(query, con);
+            SqlDataReader reader = cmd.ExecuteReader();// execute query and read the resulting rows one at a time.
+            if (reader.HasRows)
+            {
+                reader.Close();
+                return true;
+            }
+            else
+            {
+                reader.Close();
+                return false;
+            }
+        }
 
+        // validation
+        private bool ValidationForProjectTitle()
+        {
+            string title = TitleTextBox.Text;
+            bool isValid = false;
+            for (int i = 0; i < title.Length; i++)
+            {
+                if ((title[i] > 64 && title[i] < 91) || (title[i] > 96 && title[i] < 123))
+                {
+
+                    isValid = true;
+                    break;
+                }
+            }
+            if (isValid)
+            {
+                if (ValidationInDatabase("SELECT Title FROM Project WHERE Title='" + title + "' AND Id<>" + id))
+                {
+
+                    MessageBox.Show("You canot add Projects with same name", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    isValid = false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Project Title cannot be only integer", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            return isValid;
         }
     }
 }

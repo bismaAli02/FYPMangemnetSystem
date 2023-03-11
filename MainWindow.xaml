@@ -172,8 +172,8 @@
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Style="{StaticResource menuTitle}" Text="Final Year project Management System" TextWrapping="Wrap" FontFamily="PalentineLinoType"/>
-                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" x:Name="HomeDashBoard" Margin="16">
+                <TextBlock Style="{StaticResource menuTitle}" Text="Final Year project Management System" TextWrapping="Wrap" FontFamily="PalentineLinoType" Margin="0 70"/>
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" x:Name="HomeDashBoard" Margin="16 -100 16 16">
                     <Border>
                         <Image Style="{StaticResource sameSizeImage}" Visibility="Collapsed" Name="image1" Source="\Assets\Images\DashBoard3.png" Stretch="UniformToFill"/>
                     </Border>

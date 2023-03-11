@@ -47,6 +47,7 @@ namespace FYPManagementSystem.UserControlls.StudentsUserControlls
             genderComboBox.Text = gender;
             Date.Text = dob;
             RNTextBox.Text = regNo;
+            RNTextBox.IsEnabled = false;
             this.id = id;
         }
 
@@ -90,13 +91,17 @@ namespace FYPManagementSystem.UserControlls.StudentsUserControlls
         //this code clears  all the controls
         private void EmptyForm()
         {
+            if (RNTextBox.IsEnabled == true)
+            {
+                RNTextBox.Text = string.Empty;
+            }
             FNTextBox.Text = string.Empty;
             LNTextBox.Text = string.Empty;
             genderComboBox.Text = string.Empty;
             Date.Text = string.Empty;
-            RNTextBox.Text = string.Empty;
             EmailTextBox.Text = string.Empty;
             ContactTextBox.Text = string.Empty;
+
         }
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
@@ -221,15 +226,23 @@ namespace FYPManagementSystem.UserControlls.StudentsUserControlls
             // in if condition checking all validation
             if (RegisterNoValidations() && FirstNameValidations() && LastNameValidations() && ContactNumberValidation() && EmailValidation())
             {
-                if (savebuttontxt.Text == "Save")
+                if (gender > 0)
                 {
-                    SaveRecord(gender);
+                    if (savebuttontxt.Text == "Save")
+                    {
+                        SaveRecord(gender);
+                    }
+                    else
+                    {
+                        UpdateRecord(gender);
+                    }
+                    findParent(); // this function is used here for display student method purpose and scrollViewer visibility purpose
                 }
                 else
                 {
-                    UpdateRecord(gender);
+                    MessageBox.Show("Enter gender First", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-                findParent(); // this function is used here for display student method purpose and scrollViewer visibility purpose
+
             }
 
         }

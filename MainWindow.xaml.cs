@@ -33,6 +33,8 @@ namespace FYPManagementSystem
             // Start the timer
             timer.Start();
             slider.Visibility = Visibility.Collapsed;
+            HomeScreenButton.Background = Brushes.BlueViolet;
+            HomeScreenButton.Foreground = Brushes.White;
 
         }
 

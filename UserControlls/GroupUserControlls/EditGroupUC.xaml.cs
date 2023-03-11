@@ -211,7 +211,7 @@ namespace FYPManagementSystem.UserControlls.GroupUserControlls
                     try
                     {
                         var con = Configuration.getInstance().getConnection();
-                        SqlCommand cmd = new SqlCommand("INSERT INTO GroupStudent VALUES (@GroupId, @StudentId,@Status,@Date)", con);
+                        SqlCommand cmd = new SqlCommand("DELETE FROM GroupStudent WHERE StudentId=@StudentId AND GroupId=@GroupId; INSERT INTO GroupStudent VALUES (@GroupId, @StudentId,@Status,@Date)", con);
                         cmd.Parameters.AddWithValue("@StudentId", stuId);
                         cmd.Parameters.AddWithValue("@GroupId", groupId);
                         cmd.Parameters.AddWithValue("@Date", DateTime.Now);
