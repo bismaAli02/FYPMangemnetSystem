@@ -65,24 +65,6 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
             }
         }
 
-        private void deleteTuple(int id)
-        {
-            try
-            {
-                var con = Configuration.getInstance().getConnection();
-                SqlCommand cmd = new SqlCommand("DELETE FROM Evaluation WHERE Id =@Id", con);
-                cmd.Parameters.AddWithValue("@Id", id);
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("Successfully Deleted!!!");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-
-
         // Add evaluation
         private void AddEvaButton_Click(object sender, RoutedEventArgs e)
         {
@@ -122,24 +104,6 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
                 AddEvaUC.Content = new AddEvaUC(name, totalMarks, totalWeightage, id);
                 AddEvaUC.Visibility = Visibility.Visible;
                 AddEvaButton.Content = "Go Back";
-            }
-
-        }
-
-        private void DeleteButton_Click(object sender, RoutedEventArgs e)
-        {
-            DataRowView selectedRow = EvaDataGrid.SelectedItem as DataRowView;
-            if (selectedRow != null)
-            {
-                int id = int.Parse(selectedRow["Id"].ToString());
-                deleteTuple(id);
-                AddEvaUC.Visibility = Visibility.Collapsed;
-                DisplayEvaluation();
-
-            }
-            else
-            {
-                MessageBox.Show("Please Select a specific row to Delete!!!");
             }
 
         }

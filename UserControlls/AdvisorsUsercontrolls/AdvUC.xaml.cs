@@ -54,39 +54,6 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
 
             }
         }
-        private void deleteTuple(int id)
-        {
-            try
-            {
-                var con = Configuration.getInstance().getConnection();
-                SqlCommand cmd = new SqlCommand("DELETE FROM Advisor WHERE Id =@Id; DELETE FROM Person WHERE Id =@Id", con);
-                cmd.Parameters.AddWithValue("@Id", id);
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("Successfully Deleted!!!");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void DeleteButton_Click(object sender, RoutedEventArgs e)
-        {
-            DataRowView selectedRow = advDataGrid.SelectedItem as DataRowView;
-            if (selectedRow != null)
-            {
-                int id = int.Parse(selectedRow["Id"].ToString());
-                deleteTuple(id);
-                AddAdvScroll.Visibility = Visibility.Collapsed;
-                DisplayAdvisors();
-
-            }
-            else
-            {
-                MessageBox.Show("Please Select a specific row to Delete!!!");
-            }
-        }
-
         // update record in database
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {

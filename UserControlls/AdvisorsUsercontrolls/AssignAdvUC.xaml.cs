@@ -82,38 +82,5 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
                 AssignProjectButton.Content = "Go Back";
             }
         }
-
-        private void deleteTuple(int id)
-        {
-            try
-            {
-                var con = Configuration.getInstance().getConnection();
-                SqlCommand cmd = new SqlCommand("DELETE FROM ProjectAdvisor WHERE ProjectId =@Id", con);
-                cmd.Parameters.AddWithValue("@Id", id);
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("Successfully Deleted!!!");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void DeleteButton_Click(object sender, RoutedEventArgs e)
-        {
-            DataRowView selectedRow = AssignAdvDataGrid.SelectedItem as DataRowView;
-            if (selectedRow != null)
-            {
-                int id = int.Parse(selectedRow["ProjectId"].ToString());
-                deleteTuple(id);
-                AssignAdvScroll.Visibility = Visibility.Collapsed;
-                DisplayAdvisors();
-                AssignProjectButton.Content = "Assign Advisor To Project";
-            }
-            else
-            {
-                MessageBox.Show("Please Select a specific row to Delete!!!");
-            }
-        }
     }
 }

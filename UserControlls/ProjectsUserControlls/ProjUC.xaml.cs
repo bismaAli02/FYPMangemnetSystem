@@ -54,22 +54,6 @@ namespace FYPManagementSystem.UserControlls.ProjectsUserControlls
             }
         }
 
-        private void deleteTuple(int id)
-        {
-            try
-            {
-                var con = Configuration.getInstance().getConnection();
-                SqlCommand cmd = new SqlCommand("DELETE FROM Project WHERE Id =@Id", con);
-                cmd.Parameters.AddWithValue("@Id", id);
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("Successfully Deleted!!!");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
         private void AddProjButton_Click(object sender, RoutedEventArgs e)
         {
             // use a single button for two purpose if Add ProjUC visibility is visible that means we can open Add Project UserControl or if not it means Usercontrol is already opened now we use this button for go back purpose
@@ -103,23 +87,6 @@ namespace FYPManagementSystem.UserControlls.ProjectsUserControlls
                 AddProjUC.Visibility = Visibility.Visible;
                 AddProjButton.Content = "Go Back";
             }
-        }
-
-        private void DeleteButton_Click(object sender, RoutedEventArgs e)
-        {
-            DataRowView selectedRow = ProjDataGrid.SelectedItem as DataRowView;
-            if (selectedRow != null)
-            {
-                int id = int.Parse(selectedRow["Id"].ToString());
-                deleteTuple(id);
-                AddProjUC.Visibility = Visibility.Collapsed;
-                DisplayProjects();
-            }
-            else
-            {
-                MessageBox.Show("Please Select a specific row to Delete!!!");
-            }
-
         }
     }
 }

@@ -34,6 +34,14 @@
                     <Image Source="Assets\Images\splashImage.png" HorizontalAlignment="Center" Height="150" Width="150" >
                     </Image>
                     <TextBlock Name="fyp" Text="Final Year Project Management System" FontSize="28" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"    Margin="15 0 0 0" Width="400" TextWrapping="Wrap">
+                        <TextBlock.Effect>
+                            <DropShadowEffect
+                                ShadowDepth="4"
+                                Direction="330"
+                                Color="Black"
+                                Opacity="0.5"
+                                BlurRadius="4"/>
+                        </TextBlock.Effect>
 
                     </TextBlock>
                 </WrapPanel>

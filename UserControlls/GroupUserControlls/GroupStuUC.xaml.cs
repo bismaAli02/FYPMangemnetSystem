@@ -111,49 +111,6 @@ namespace FYPManagementSystem.UserControlls.GroupUserControlls
             }
 
         }
-        private void deleteTuple(int id)
-        {
-            try
-            {
-                var con = Configuration.getInstance().getConnection();
-                // delete a Group from Group tabel
-                SqlCommand cmd = new SqlCommand("DELETE FROM GroupEvaluation WHERE GroupId =@Id;DELETE FROM GroupProject WHERE GroupId =@Id;DELETE FROM GroupStudent WHERE GroupId =@Id ;DELETE FROM [Group] WHERE Id =@Id", con);
-                cmd.Parameters.AddWithValue("@Id", id);
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("Successfully Deleted!!!");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void DeleteButton_Click(object sender, RoutedEventArgs e)
-        {
-            DataRowView selectedRow = GroupDataGrid.SelectedItem as DataRowView; // as is used for typecasting through as we convert selected item in dataRowView 
-            int id2;
-            string id1 = "";
-            if (selectedRow != null)
-            {
-                string id = selectedRow["GroupId"].ToString();
-
-                for (int i = 5; i < id.Length; i++)
-                {
-                    id1 += id[i];
-                }
-                id2 = int.Parse(id1);
-                deleteTuple(id2);
-                GroupScroll.Visibility = Visibility.Collapsed;
-                DisplayGroups();
-                CreateGroupButton.Content = "Create Group";
-
-            }
-            else
-            {
-                MessageBox.Show("Please Select a specific row to Delete!!!");
-            }
-        }
-
 
         //It gets the selected row as a DataRowView object, extracts the ID of the group to be edited from the "GroupId" column, passes it to a new instance of the EditGroupUC user control. 
         private void EditButton_Click(object sender, RoutedEventArgs e)

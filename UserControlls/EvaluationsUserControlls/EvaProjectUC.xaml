@@ -71,16 +71,6 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-
-                        <DataGridTemplateColumn Header="Delete" IsReadOnly="True" Width="auto">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Button x:Name="DeleteButton" Click="DeleteButton_Click" Background="Transparent" BorderBrush="Transparent">
-                                        <Icon:PackIconMaterial Kind="Delete" Foreground="Red"/>
-                                    </Button>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
                 <UserControl Grid.Row="1" x:Name="MarkEvaUC" Visibility="Collapsed"/>
