@@ -24,18 +24,23 @@ using Paragraph = iTextSharp.text.Paragraph;
 using Microsoft.Win32;
 using SaveFileDialog = System.Windows.Forms.SaveFileDialog;
 using UserControl = System.Windows.Controls.UserControl;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Xml.Linq;
 
 namespace FYPManagementSystem.UserControlls.PdfUserControlls
 {
-    /// <summary>
-    /// Interaction logic for PdfUC.xaml
-    /// </summary>
+
     public partial class PdfUC : UserControl
     {
         public PdfUC()
         {
             InitializeComponent();
         }
+
+
+
+        //This function is used to generate a title page for a PDF document using iTextSharp library. it adds various elements to it such as the document title, an image, author and submission details, and department and university information. The function sets different fonts and alignments for each element using iTextSharp's.
 
         private void TitlePage(ref Document document)
         {
@@ -101,6 +106,7 @@ namespace FYPManagementSystem.UserControlls.PdfUserControlls
 
         }
 
+        //it creates a report section in a PDF document using the iTextSharp library. This function take parameter document, page title and query. It then sets up fonts and formatting for the document, executes the SQL query, creates a table with the query results, and adds it to the document.
         private void CreateReportSection(ref Document document, string PageTitle, string query)
         {
             Font boldFont = new Font(Font.FontFamily.TIMES_ROMAN, 16, Font.BOLD);
@@ -140,13 +146,15 @@ namespace FYPManagementSystem.UserControlls.PdfUserControlls
                 }
                 reader.Close();
                 document.Add(table);
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
+
+
+        //This function creates a PDF.This function take parameter document, page title and query.It opens a dialog box to save the report file, and if the file name is not empty, it creates a new PDF document using iTextSharp library.It then calls two other functions to generate a title page and a report section, respectively.
         private void CreateReport(string fileName, string pageTitle, string query)
         {
             SaveFileDialog sfd = new SaveFileDialog();
@@ -160,8 +168,6 @@ namespace FYPManagementSystem.UserControlls.PdfUserControlls
                     try
                     {
                         File.Delete(sfd.FileName);
-
-
                     }
                     catch (Exception ex)
                     {
@@ -188,6 +194,7 @@ namespace FYPManagementSystem.UserControlls.PdfUserControlls
             }
         }
 
+        //creates student report 
         private void StudentreportBtn_Click(object sender, RoutedEventArgs e)
         {
             string fileName = "Students.pdf";
@@ -197,6 +204,7 @@ namespace FYPManagementSystem.UserControlls.PdfUserControlls
             CreateReport(fileName, title, studentQuery);
         }
 
+        //create advisor report
         private void AdvisorReportBtn_Click(object sender, RoutedEventArgs e)
         {
             string fileName = "Advisors.pdf";
@@ -206,6 +214,8 @@ namespace FYPManagementSystem.UserControlls.PdfUserControlls
             CreateReport(fileName, title, advisorQuery);
         }
 
+
+        //create advisor board report
         private void AdvBoardReportBtn_Click(object sender, RoutedEventArgs e)
         {
             string fileName = "AdvisoryBoard.pdf";
@@ -215,6 +225,7 @@ namespace FYPManagementSystem.UserControlls.PdfUserControlls
             CreateReport(fileName, title, advBoardQuery);
         }
 
+        //create Evaluation report
         private void EvaluationReportBtn_Click(object sender, RoutedEventArgs e)
         {
             string fileName = "Evaluation.pdf";
@@ -224,6 +235,8 @@ namespace FYPManagementSystem.UserControlls.PdfUserControlls
             CreateReport(fileName, title, evaQuery);
         }
 
+
+        //This function is used to creates a report section for a specific group in a PDF document. It takes parameters such as the document , group ID, project title, Main advisor, coAdvisor, industry advisor, and query.
         private void CreateGroupReportSection(ref Document document, int groupId, string ProjectTitle, string mainAdv, string coAdv, string inAdv, string query)
         {
             Font boldFont = new Font(Font.FontFamily.TIMES_ROMAN, 16, Font.BOLD);
@@ -284,6 +297,8 @@ namespace FYPManagementSystem.UserControlls.PdfUserControlls
                 MessageBox.Show(ex.Message);
             }
         }
+
+        //This method takes a file name as a parameter and saves the PDF document to that file.
         private void CreateGroupReport(string fileName)
         {
             Font boldFont = new Font(Font.FontFamily.TIMES_ROMAN, 16, Font.BOLD);
@@ -372,7 +387,7 @@ namespace FYPManagementSystem.UserControlls.PdfUserControlls
             CreateGroupReport(fileName);
         }
 
-
+        //This function creates a table to display the evaluation marks and calculates the total marks obtained by the student. The method then adds all this information to the PDF document and creates a new page for the next student's evaluation marks.
         private void CreateMarkEvaluationSection(ref Document document, int stuId)
         {
             Font boldFont = new Font(Font.FontFamily.TIMES_ROMAN, 16, Font.BOLD);
@@ -474,6 +489,8 @@ namespace FYPManagementSystem.UserControlls.PdfUserControlls
                 MessageBox.Show(ex.Message);
             }
         }
+
+        //this function retrieves a list of distinct student IDs from a database and iterates over each student to create a section for their mark evaluation. The details of this section creation are implemented in the CreateMarkEvaluationSection method.
         private void CreateMarkEvaReport(string fileName)
         {
             Font boldFont = new Font(Font.FontFamily.TIMES_ROMAN, 16, Font.BOLD);
@@ -538,13 +555,15 @@ namespace FYPManagementSystem.UserControlls.PdfUserControlls
             }
         }
 
-
+        //  creates a PDF file containing evaluation data using the "CreateMarkEvaReport" method
         private void markSheetPdf_Click(object sender, RoutedEventArgs e)
         {
             string fileName = "Evaluation.pdf";
             CreateMarkEvaReport(fileName);
         }
 
+
+        // it generates a PDF report based on SQL queries.The report will contain several sections, such as "Students Report", "Advisors Report", "Advisory Board Report", and "Evaluations Report".
         private void CompletePDFReport(string fileName)
         {
             string studentQuery = "Select S.RegistrationNo AS [Registration No], (FirstName + ' ' + LastName) AS Name,L.Value AS Gender,(SELECT FORMAT(DateOfBirth, 'dd-MM-yyyy')) AS [Date Of Birth],Contact,Email from Person P JOIN Student S ON S.Id=P.Id JOIN Lookup L ON L.Id=P.Gender";
@@ -669,6 +688,8 @@ namespace FYPManagementSystem.UserControlls.PdfUserControlls
             }
         }
 
+
+        //creates a PDF file containing All reports data using the "CompletePdfReport" method
         private void completePdf_Click(object sender, RoutedEventArgs e)
         {
             CompletePDFReport("FYP Report");

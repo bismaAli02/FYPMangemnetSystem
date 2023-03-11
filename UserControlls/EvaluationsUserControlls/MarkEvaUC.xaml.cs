@@ -32,6 +32,7 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
             EvaNameToComboBox();
         }
 
+        // this parametrized constructer made for update operation purpose
         public MarkEvaUC(string groupID, string evaName, int obtainMarks, int evaID)
         {
             InitializeComponent();
@@ -50,6 +51,8 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
             GiveEvaluationId();
         }
 
+
+        //this code clears  all the controls
         private void EmptyForm()
         {
             GIdComboBox.Text = string.Empty;
@@ -58,24 +61,22 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
             OMTextBox.Text = string.Empty;
         }
 
-        private void LockForm()
-        {
-            GIdComboBox.IsReadOnly = true;
-            EvaComboBox.IsReadOnly = true;
-            TMTextBox.IsReadOnly = true;
-            OMTextBox.IsReadOnly = true;
-        }
-
         private void GroupIdToComboBox()
         {
             try
             {
                 var con = Configuration.getInstance().getConnection();
                 SqlCommand cmd = new SqlCommand("SELECT DISTINCT G.Id FROM [Group] AS G LEFT JOIN GroupProject AS GP ON G.Id=GP.GroupId LEFT JOIN GroupStudent AS GS ON GS.GroupId=G.Id WHERE GS.Status=3", con);
+                //creates a new instance of the SqlDataAdapter class and assigns it to the variable dataAdapter
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
+                //this line of code creates a new DataSet object, which can be used to work with data in a tabular format.
                 DataSet dataSet = new DataSet();
+                //it retrieves data from a data source and fills a DataSet object with the retrieved data.
                 dataAdapter.Fill(dataSet);
+                // this code help to display data in comboBox
                 GIdComboBox.ItemsSource = dataSet.Tables[0].DefaultView;
+
+                //GIdComboBox control will display the data from the "Id" column of the data source in its dropdown list.
                 GIdComboBox.DisplayMemberPath = "Id";
             }
             catch (Exception ex)
@@ -93,10 +94,15 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
                     var con = Configuration.getInstance().getConnection();
                     SqlCommand cmd = new SqlCommand("SELECT Name FROM Evaluation E EXCEPT SELECT E.Name FROM Evaluation E JOIN GroupEvaluation GE ON GE.EvaluationId = E.Id JOIN [Group] G ON G.Id = GE.GroupId WHERE G.Id = @ID", con);
                     cmd.Parameters.AddWithValue("@ID", int.Parse(GIdComboBox.Text));
+                    //creates a new instance of the SqlDataAdapter class and assigns it to the variable dataAdapter
                     SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
+                    //this line of code creates a new DataSet object, which can be used to work with data in a tabular format.
                     DataSet dataSet = new DataSet();
+                    //it retrieves data from a data source and fills a DataSet object with the retrieved data.
                     dataAdapter.Fill(dataSet);
+                    // this code help to display data in comboBox
                     EvaComboBox.ItemsSource = dataSet.Tables[0].DefaultView;
+                    //EvaComboBox control will display the data from the "Name" column of the data source in its dropdown list.
                     EvaComboBox.DisplayMemberPath = "Name";
                 }
                 catch (Exception ex)
@@ -106,6 +112,7 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
             }
         }
 
+        // give evaluatio id from database
         private void GiveEvaluationId()
         {
             var con = Configuration.getInstance().getConnection();
@@ -121,7 +128,7 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
             reader.Close();
         }
 
-
+        // save the record in dataBase
         private void SaveRecord()
         {
             try
@@ -143,6 +150,7 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
             }
         }
 
+        // update the record in database
         private void UpdateRecord()
         {
             if (GIdComboBox.Text != string.Empty && OMTextBox.Text != string.Empty)
@@ -162,8 +170,6 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
                 {
                     MessageBox.Show(ex.Message);
                 }
-                EmptyForm();
-                LockForm();
             }
             else
             {
@@ -173,9 +179,10 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
 
 
 
-
+        // save and update function used in this method
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
+            // validations
             if (GIdComboBox.Text == string.Empty)
             {
                 MessageBox.Show("Please Select a Group", " Error ", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -209,6 +216,7 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
         }
 
 
+        //this code find the parent EvaProjUC control. It sets the text of a Button to "Evaluate Group".function is used to call a method of EvaProjUC (displayEvaluateGroup)
         private void findParentUserControl()
         {
             var parent = VisualTreeHelper.GetParent(this);
@@ -229,11 +237,13 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
         {
             EmptyForm();
         }
+
         private void EvaComboBox_DropDownClosed(object sender, EventArgs e)
         {
             GiveEvaluationId();
         }
 
+        //Updates the Combobox that shows the evaluation names according to the selected group only those evaluations are shown which that particular group has not been evaluated
         private void GIdComboBox_DropDownClosed(object sender, EventArgs e)
         {
             EvaNameToComboBox();

@@ -19,9 +19,7 @@ using FYPManagementSystem.UserControlls.StudentsUserControlls;
 
 namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
 {
-    /// <summary>
-    /// Interaction logic for AssignAdvUC.xaml
-    /// </summary>
+
     public partial class AssignAdvUC : UserControl
     {
         public AssignAdvUC()
@@ -30,6 +28,7 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
             DisplayAdvisors();
         }
 
+        // display all advisors
         public void DisplayAdvisors()
         {
             var con = Configuration.getInstance().getConnection();
@@ -42,6 +41,7 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
 
         }
 
+        // use a single button for two purpose if Add ProjectUC visibility is visible that means we can open add ProjUC UserControl or if not it means Usercontrol is already opened now we use this button for go back purpose
         private void AssignProjectButton_Click(object sender, RoutedEventArgs e)
         {
             if (AssignProjectButton.Content.ToString() == "Assign Advisor To Project")
@@ -61,6 +61,7 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
             DisplayAdvisors();
         }
 
+        // update data in database
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
             string title, mainAdv, coAdv, indusAdv;

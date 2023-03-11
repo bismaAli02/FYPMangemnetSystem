@@ -102,7 +102,12 @@
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
+
+                <!--ScrollViewer control provides a convenient way to enable scrolling of content in Windows Presentation Foundation (WPF) applications-->
+
                 <ScrollViewer x:Name="AddStuScroll" Grid.Row="1" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
+
+                    <!--User control is an area where you can place other controls-->
                     <UserControl  x:Name="AddStuUC" Visibility="Collapsed"/>
 
                 </ScrollViewer>

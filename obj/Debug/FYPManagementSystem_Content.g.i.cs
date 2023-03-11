@@ -9,6 +9,5 @@
 //------------------------------------------------------------------------------
 
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("assets/images/dashboardimage1.jfif")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("assets/images/dashboardimage2.jfif")]
 
 

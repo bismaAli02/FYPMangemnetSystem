@@ -149,4 +149,3 @@ C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\bin\Debug\BouncyCa
 C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\bin\Debug\itextsharp.dll
 C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\bin\Debug\itextsharp.xml
 C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\bin\Debug\Assets\Images\DashBoardImage1.jfif
-C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\bin\Debug\Assets\Images\DashBoardImage2.jfif

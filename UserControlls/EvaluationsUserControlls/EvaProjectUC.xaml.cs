@@ -18,9 +18,6 @@ using System.Windows.Shapes;
 
 namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
 {
-    /// <summary>
-    /// Interaction logic for AddMarkUC.xaml
-    /// </summary>
     public partial class EvaProjectUC : UserControl
     {
         public EvaProjectUC()
@@ -28,7 +25,7 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
             InitializeComponent();
             DisplayEvaluateGroup();
         }
-
+        // display all evaluated groups
         public void DisplayEvaluateGroup()
         {
             var con = Configuration.getInstance().getConnection();
@@ -64,6 +61,8 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
             }
         }
 
+
+        // use a single button for two purpose if Add "MarkEvaUC" visibility is visible that means we can open "add evaluation" UserControl or if not it means Usercontrol is already opened now we use this button for go back purpose
         private void MarkEvaButton_Click(object sender, RoutedEventArgs e)
         {
             if (MarkEvaButton.Content.ToString() == "Evaluate Group")
@@ -82,6 +81,7 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
 
         }
 
+        // edit evaluated group
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
 

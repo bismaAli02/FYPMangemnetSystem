@@ -28,16 +28,22 @@ namespace FYPManagementSystem.UserControlls.ProjectsUserControlls
         public ProjUC()
         {
             InitializeComponent();
-            DisplayProjects();
+            DisplayProjects(); // whenever constructor call all Projects record display
         }
         public void DisplayProjects()
         {
             var con = Configuration.getInstance().getConnection();
             SqlCommand cmd = new SqlCommand("SELECT Id, Description, Title FROM Project", con);
+            //creates a new instance of the SqlDataAdapter class and assigns it to the variable dataAdapter
+            // sql data adpter is use to retrieve data from tabel
             SqlDataAdapter da = new SqlDataAdapter(cmd);
+
+            //this line of code creates a new Datatable object, which can be used to work with data in a tabular format.
             DataTable dt = new DataTable();
             da.Fill(dt);
             ProjDataGrid.ItemsSource = dt.DefaultView;
+
+            // use a single button for two purpose if Add ProjUC visibility is visible that means we can open Add Project UserControl or if not it means Usercontrol is already opened now we use this button for go back purpose
             if (AddProjUC.Visibility == Visibility.Collapsed)
             {
                 AddProjButton.Content = "Add Project";
@@ -66,6 +72,8 @@ namespace FYPManagementSystem.UserControlls.ProjectsUserControlls
 
         private void AddProjButton_Click(object sender, RoutedEventArgs e)
         {
+            // use a single button for two purpose if Add ProjUC visibility is visible that means we can open Add Project UserControl or if not it means Usercontrol is already opened now we use this button for go back purpose
+
             if (AddProjButton.Content.ToString() == "Add Project")
             {
                 AddProjUC.Content = new AddProjUC();
@@ -90,6 +98,7 @@ namespace FYPManagementSystem.UserControlls.ProjectsUserControlls
                 int id = Int32.Parse(selectedRow["Id"].ToString());
                 description = selectedRow["Description"].ToString();
                 title = selectedRow["Title"].ToString();
+                // this constructer is call because if I clicked edit button of selected row so I can see previous data in Usercontrol
                 AddProjUC.Content = new AddProjUC(description, title, id);
                 AddProjUC.Visibility = Visibility.Visible;
                 AddProjButton.Content = "Go Back";

@@ -33,6 +33,7 @@ namespace FYPManagementSystem
             // Start the timer
             timer.Start();
             slider.Visibility = Visibility.Collapsed;
+
         }
 
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -103,9 +104,6 @@ namespace FYPManagementSystem
 
             GeneratePdfButton.Background = Brushes.Transparent;
             GeneratePdfButton.Foreground = Brushes.Black;
-
-            ExitButton.Background = Brushes.Transparent;
-            ExitButton.Foreground = Brushes.Black;
         }
 
         //this function is used for design Purpose when mouse drag to any button that button will highlight
@@ -192,10 +190,6 @@ namespace FYPManagementSystem
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
-            HighlightButton(sender);
-            Button btn = sender as Button;
-            btn.Background = Brushes.BlueViolet;
-            btn.Foreground = Brushes.White;
             Application.Current.Shutdown();
         }
 
@@ -235,18 +229,11 @@ namespace FYPManagementSystem
         private void HomeScreenButton_Click(object sender, RoutedEventArgs e)
         {
             HighlightButton(sender);
-            Button btn = sender as Button;
-            btn.Background = Brushes.BlueViolet;
-            btn.Foreground = Brushes.White;
             CollapseAllGrids();
         }
 
         private void GeneratePdfButton_Click(object sender, RoutedEventArgs e)
         {
-            /* NormalizeAllButtons();
-            Button btn = sender as Button;
-            btn.Background = Brushes.BlueViolet;
-            btn.Foreground = Brushes.White;*/
             HighlightButton(sender);
             CollapseAllGrids();
             reportUCGrid.Visibility = Visibility.Visible;

@@ -20,18 +20,16 @@ using System.Windows.Shapes;
 
 namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
 {
-    /// <summary>
-    /// Interaction logic for AddEvaUC.xaml
-    /// </summary>
     public partial class AddEvaUC : UserControl
     {
-        int id;
+        int id; // this attribute is used for Evaluation id 
         public AddEvaUC()
         {
             InitializeComponent();
             SaveButtonTxt.Text = "Save";
         }
 
+        // this parametrized constructer made for update operation purpose
         public AddEvaUC(string name, int totalMarks, int totalWeightage, int id)
         {
             InitializeComponent();
@@ -42,12 +40,14 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
             this.id = id;
         }
 
+
+        //this function validate a query in a database  and checking whether it returns any rows. If the query returns rows, the function returns true otherwise, it returns false. 
         private bool ValidationInDatabase(string query)
         {
             var con = Configuration.getInstance().getConnection();
             SqlCommand cmd = new SqlCommand(query, con);
             SqlDataReader reader = cmd.ExecuteReader();
-            if (reader.HasRows)
+            if (reader.HasRows)// execute query and read the resulting rows one at a time.
             {
                 reader.Close();
                 return true;
@@ -58,6 +58,7 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
                 return false;
             }
         }
+        // validation title name cannot be repeated or it cannot be only integer
         private bool titleNameValidations()
         {
             string name = NameTextBox.Text;
@@ -100,6 +101,7 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
         }
 
 
+        //calculate obtained marks on the basis of weightage 
         private bool WeightageSumCalculate(int weightage)
         {
             int totalWeightage = 0;
@@ -118,6 +120,7 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
             return true;
         }
 
+        //this code clears  all the controls
         private void EmptyForm()
         {
             NameTextBox.Text = string.Empty;
@@ -125,14 +128,9 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
             TWTextBox.Text = string.Empty;
         }
 
-        private void LockForm()
-        {
-            NameTextBox.IsReadOnly = true;
-            TMTextBox.IsReadOnly = true;
-            TWTextBox.IsReadOnly = true;
-        }
 
 
+        // save the record into database
         private void SaveRecord()
         {
             try
@@ -152,7 +150,7 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
                 MessageBox.Show(ex.Message);
             }
         }
-
+        // update the record into database
         private void UpdateRecord()
         {
             if (NameTextBox.Text != string.Empty && TMTextBox.Text != string.Empty)
@@ -172,8 +170,6 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
                 {
                     MessageBox.Show(ex.Message);
                 }
-                EmptyForm();
-                LockForm();
             }
             else
             {
@@ -216,6 +212,7 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
 
 
         }
+        //this code find the parent "EvaUC" control. It sets the text of a Button to "Add Evaluation".function is used to call a method of EvaUC (displayEvaluation)
         private void findParentUserControl()
         {
             var parent = VisualTreeHelper.GetParent(this);

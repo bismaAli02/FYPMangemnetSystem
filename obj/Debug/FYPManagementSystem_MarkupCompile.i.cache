@@ -11,10 +11,10 @@ false
 DEBUG;TRACE
 C:\Users\Dell\Desktop\DataBase\MidProject\FYPManagementSystem\App.xaml
 181339552808
-2845346583
+1422673868
 24-1366893184
 37799326550
 MainWindow.xaml;SplashScreen.xaml;UserControlls\AdvisorsUsercontrolls\AddAdvUC.xaml;UserControlls\AdvisorsUsercontrolls\AddProjectAdvUC.xaml;UserControlls\AdvisorsUsercontrolls\AdvUC.xaml;UserControlls\AdvisorsUsercontrolls\AssignAdvUC.xaml;UserControlls\EvaluationsUserControlls\AddEvaUC.xaml;UserControlls\EvaluationsUserControlls\EvaProjectUC.xaml;UserControlls\EvaluationsUserControlls\EvaUC.xaml;UserControlls\EvaluationsUserControlls\MarkEvaUC.xaml;UserControlls\GroupUserControlls\EditGroupUC.xaml;UserControlls\GroupUserControlls\GroupDetailUC.xaml;UserControlls\PdfUserControlls\PdfUC.xaml;UserControlls\ProjectsUserControlls\AddProjUC.xaml;UserControlls\ProjectsUserControlls\ProjUC.xaml;UserControlls\StudentsUserControlls\AddStudentUC.xaml;UserControlls\GroupUserControlls\GroupStuUC.xaml;UserControlls\StudentsUserControlls\StudentUC.xaml;
 
-True
+False
 

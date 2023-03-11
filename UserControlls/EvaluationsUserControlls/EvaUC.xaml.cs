@@ -23,9 +23,6 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
 {
-    /// <summary>
-    /// Interaction logic for EvaUC.xaml
-    /// </summary>
     public partial class EvaUC : UserControl
     {
         public EvaUC()
@@ -34,6 +31,7 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
             DisplayEvaluation();
         }
 
+        //Calculte the total weightage of evaluations 
         private bool WeightageSumCalculate()
         {
             int totalWeightage = 0;
@@ -47,6 +45,8 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
             }
             return true;
         }
+
+        // display evaluations
         public void DisplayEvaluation()
         {
             var con = Configuration.getInstance().getConnection();
@@ -83,12 +83,12 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
 
 
 
-
+        // Add evaluation
         private void AddEvaButton_Click(object sender, RoutedEventArgs e)
         {
             if (AddEvaButton.Content.ToString() == "Add Evaluation")
             {
-                if (EvaDataGrid.Items.Count != 4 && WeightageSumCalculate())
+                if (EvaDataGrid.Items.Count != 4 && WeightageSumCalculate()) //check validation you cannot add more than 4 eva
                 {
                     AddEvaUC.Content = new AddEvaUC();
                     AddEvaUC.Visibility = Visibility.Visible;
@@ -96,7 +96,7 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
                 }
                 else
                 {
-                    MessageBox.Show("You can't add more evaluation");
+                    MessageBox.Show("You can't add more evaluation", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             else
@@ -107,7 +107,7 @@ namespace FYPManagementSystem.UserControlls.EvaluationsUserControlls
             }
 
         }
-
+        //update record
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
             string name;

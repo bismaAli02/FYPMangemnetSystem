@@ -326,10 +326,8 @@
     <Resource Include="Assets\Images\DashBoard3.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Assets\Images\dashboard2.jpg" />
     <Content Include="Assets\Images\DashBoardImage1.jfif">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Assets\Images\DashBoardImage2.jfif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

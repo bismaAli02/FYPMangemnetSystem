@@ -22,12 +22,13 @@ namespace FYPManagementSystem.UserControlls.ProjectsUserControlls
     /// </summary>
     public partial class AddProjUC : UserControl
     {
-        int id;
+        int id; // this attribute is used for Project id
         public AddProjUC()
         {
             InitializeComponent();
             SaveButtonTxt.Text = "Save";
         }
+        // this parametrized constructer made for update operation purpose
         public AddProjUC(string description, string title, int id)
         {
             InitializeComponent();
@@ -37,25 +38,27 @@ namespace FYPManagementSystem.UserControlls.ProjectsUserControlls
             this.id = id;
         }
 
+        //this code clears  all the controls
         private void EmptyForm()
         {
             DescriptionTextBox.Text = string.Empty;
             TitleTextBox.Text = string.Empty;
         }
 
-        private void LockForm()
-        {
-            DescriptionTextBox.IsReadOnly = true;
-            TitleTextBox.IsReadOnly = true;
-        }
 
+        // this code clears the controls 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             EmptyForm();
         }
+
+        //this code find the parent ProjUC control. It sets the text of a Button to "Add Project".function is used to call a method of Proj UC (display Projects)
         private void findParentUserControl()
         {
+            //this code is used to find immediate parent of the current control
             var parent = VisualTreeHelper.GetParent(this);
+
+            // this loop traverse on tree(user Controls)
             while (parent != null && !(parent is ProjUC))
             {
                 parent = VisualTreeHelper.GetParent(parent);
@@ -69,7 +72,7 @@ namespace FYPManagementSystem.UserControlls.ProjectsUserControlls
 
             }
         }
-
+        // this function simply save data into data base
         private void SaveRecord()
         {
             try
@@ -89,6 +92,7 @@ namespace FYPManagementSystem.UserControlls.ProjectsUserControlls
             }
         }
 
+        // this function simply Update data from data base
         private void UpdateRecord()
         {
             if (DescriptionTextBox.Text != string.Empty && TitleTextBox.Text != string.Empty)
@@ -107,8 +111,6 @@ namespace FYPManagementSystem.UserControlls.ProjectsUserControlls
                 {
                     MessageBox.Show(ex.Message);
                 }
-                EmptyForm();
-                LockForm();
             }
             else
             {
@@ -118,7 +120,7 @@ namespace FYPManagementSystem.UserControlls.ProjectsUserControlls
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            if (TitleTextBox.Text == string.Empty)
+            if (TitleTextBox.Text == string.Empty)// validation for title
             {
                 MessageBox.Show("Please Select Title of the Project", " Error ", MessageBoxButton.OK, MessageBoxImage.Error);
             }
@@ -137,6 +139,7 @@ namespace FYPManagementSystem.UserControlls.ProjectsUserControlls
                     UpdateRecord();
                 }
                 this.Visibility = Visibility.Collapsed;
+                // this function is used here for displayProjects method purpose 
                 findParentUserControl();
             }
 

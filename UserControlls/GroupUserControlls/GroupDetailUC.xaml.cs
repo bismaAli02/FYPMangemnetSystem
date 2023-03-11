@@ -21,13 +21,10 @@ using System.Windows.Shapes;
 
 namespace FYPManagementSystem.UserControlls.GroupUserControlls
 {
-    /// <summary>
-    /// Interaction logic for GroupDetailUC.xaml
-    /// </summary>
     public partial class GroupDetailUC : UserControl
     {
-        int groupId;
-        string projectTitle;
+        int groupId; // it is used to get groupID for a specific group
+        string projectTitle; // it is used to get Project Title for a specific group
         public GroupDetailUC(int groupId, string projectTitle)
         {
             InitializeComponent();
@@ -36,9 +33,10 @@ namespace FYPManagementSystem.UserControlls.GroupUserControlls
             DisplayPieChart();
             GroupIdHeader.Text = "Group Id: " + groupId;
             ProjectTitleHeader.Text = "Project: " + projectTitle;
-            DisplayStudent();
+            DisplayStudent(); // whenever constructor call all students record display
         }
 
+        // this code retrieves data from a database and populates a pie chart using the LiveCharts library to display the count of active and inactive students and remaining slots in a student group.
         private void DisplayPieChart()
         {
             List<int> studentCount = new List<int>();
@@ -87,6 +85,7 @@ namespace FYPManagementSystem.UserControlls.GroupUserControlls
             }
         }
 
+        // display all student record 
         public void DisplayStudent()
         {
             var con = Configuration.getInstance().getConnection();

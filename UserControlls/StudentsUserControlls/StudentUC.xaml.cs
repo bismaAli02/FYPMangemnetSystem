@@ -20,9 +20,6 @@ using FYPManagementSystem.UserControlls.ProjectsUserControlls;
 
 namespace FYPManagementSystem
 {
-    /// <summary>
-    /// Interaction logic for StudentUC.xaml
-    /// </summary>
     public partial class StudentUC : UserControl
     {
         public StudentUC()

@@ -1,10 +1,13 @@
 ﻿using CRUD_Operations;
+using iTextSharp.text.pdf.parser;
+using iTextSharp.text.pdf.qrcode;
 using Org.BouncyCastle.Ocsp;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +16,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -20,18 +24,17 @@ using System.Windows.Shapes;
 
 namespace FYPManagementSystem.UserControlls.StudentsUserControlls
 {
-    /// <summary>
-    /// Interaction logic for AddStudentUC.xaml
-    /// </summary>
     public partial class AddStudentUC : UserControl
     {
-        int id;
+        int id; // this attribute is used for student id 
         public AddStudentUC()
         {
             InitializeComponent();
             savebuttontxt.Text = "Save";
             GenderToComboBox();
         }
+
+        // this parametrized constructer made for update operation purpose
         public AddStudentUC(string firstName, string lastName, string contact, string email, string gender, string regNo, string dob, int id)
         {
             InitializeComponent();
@@ -47,6 +50,7 @@ namespace FYPManagementSystem.UserControlls.StudentsUserControlls
             this.id = id;
         }
 
+        // this function gives value from Lookup table to gender combo box
         private void GenderToComboBox()
         {
             try
@@ -54,24 +58,36 @@ namespace FYPManagementSystem.UserControlls.StudentsUserControlls
                 var con = Configuration.getInstance().getConnection();
                 SqlCommand cmd = new SqlCommand("SELECT Value FROM Lookup WHERE Category=@Category", con);
                 cmd.Parameters.AddWithValue("@Category", "GENDER");
+
+                //creates a new instance of the SqlDataAdapter class and assigns it to the variable dataAdapter
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
+
+                //this line of code creates a new DataSet object, which can be used to work with data in a tabular format.
                 DataSet dataSet = new DataSet();
+
+                //it retrieves data from a data source and fills a DataSet object with the retrieved data.
                 dataAdapter.Fill(dataSet);
+                // this code help to display data in comboBox
                 genderComboBox.ItemsSource = dataSet.Tables[0].DefaultView;
+
+                //GenderComboBox control will display the data from the "Value" column of the data source in its dropdown list.
                 genderComboBox.DisplayMemberPath = "Value";
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
             }
         }
 
+        // this code clears the controls and hides the current user control and  allow to return to the previous screen.
         private void BackButton_Click_1(object sender, RoutedEventArgs e)
         {
             EmptyForm();
             this.Visibility = Visibility.Collapsed;
         }
 
+        //this code clears  all the controls
         private void EmptyForm()
         {
             FNTextBox.Text = string.Empty;
@@ -82,24 +98,18 @@ namespace FYPManagementSystem.UserControlls.StudentsUserControlls
             EmailTextBox.Text = string.Empty;
             ContactTextBox.Text = string.Empty;
         }
-        private void LockForm()
-        {
-            FNTextBox.IsReadOnly = true;
-            LNTextBox.IsReadOnly = true;
-            genderComboBox.IsReadOnly = true;
-            RNTextBox.IsReadOnly = true;
-            EmailTextBox.IsReadOnly = true;
-            ContactTextBox.IsReadOnly = true;
-        }
-
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             EmptyForm();
         }
 
+        //this method is used to find the parent ScrollViewer control of the current user control
         private void findParent()
         {
+            //this code is used to find immediate parent of the current control
             var parent = VisualTreeHelper.GetParent(this);
+
+            // this loop traverse on tree(user Controls)
             while (parent != null && !(parent is ScrollViewer))
             {
                 parent = VisualTreeHelper.GetParent(parent);
@@ -108,11 +118,12 @@ namespace FYPManagementSystem.UserControlls.StudentsUserControlls
             {
                 ScrollViewer par = parent as ScrollViewer;
                 par.Visibility = Visibility.Collapsed;
-                findParentUserControl();
+                findParentUserControl(); //use to find Parent of Add student UC (student UC) so i can use Student UC functions or controlls
 
             }
         }
 
+        //this code find the parent StudentUC control. It sets the text of a Button to "Add Student".function is used to call a method of student UC (display students)
         private void findParentUserControl()
         {
             var parent = VisualTreeHelper.GetParent(this);
@@ -129,6 +140,7 @@ namespace FYPManagementSystem.UserControlls.StudentsUserControlls
             }
         }
 
+        // give gender of current student whose data will enter in form
         private int ReturnGender()
         {
             int gender = 0;
@@ -144,6 +156,8 @@ namespace FYPManagementSystem.UserControlls.StudentsUserControlls
             return gender;
 
         }
+
+        // this function simply save data into data base
 
         private void SaveRecord(int gender)
         {
@@ -169,9 +183,10 @@ namespace FYPManagementSystem.UserControlls.StudentsUserControlls
             }
         }
 
+        // this function is used to update record in database
         private void UpdateRecord(int gender)
         {
-            if (FNTextBox.Text != string.Empty && RNTextBox.Text != string.Empty)
+            if (FNTextBox.Text != string.Empty)
             {
                 try
                 {
@@ -192,8 +207,6 @@ namespace FYPManagementSystem.UserControlls.StudentsUserControlls
                 {
                     MessageBox.Show(ex.Message);
                 }
-                EmptyForm();
-                LockForm();
             }
             else
             {
@@ -203,7 +216,9 @@ namespace FYPManagementSystem.UserControlls.StudentsUserControlls
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            int gender = ReturnGender();
+            int gender = ReturnGender();// give gender of current student whose data will enter in form
+
+            // in if condition checking all validation
             if (RegisterNoValidations() && FirstNameValidations() && LastNameValidations() && ContactNumberValidation() && EmailValidation())
             {
                 if (savebuttontxt.Text == "Save")
@@ -214,18 +229,18 @@ namespace FYPManagementSystem.UserControlls.StudentsUserControlls
                 {
                     UpdateRecord(gender);
                 }
-                findParent();
+                findParent(); // this function is used here for display student method purpose and scrollViewer visibility purpose
             }
 
         }
 
 
-
+        //this function validate a query in a database  and checking whether it returns any rows. If the query returns rows, the function returns true otherwise, it returns false. 
         private bool ValidationInDatabase(string query)
         {
             var con = Configuration.getInstance().getConnection();
             SqlCommand cmd = new SqlCommand(query, con);
-            SqlDataReader reader = cmd.ExecuteReader();
+            SqlDataReader reader = cmd.ExecuteReader();// execute query and read the resulting rows one at a time.
             if (reader.HasRows)
             {
                 reader.Close();
@@ -237,6 +252,8 @@ namespace FYPManagementSystem.UserControlls.StudentsUserControlls
                 return false;
             }
         }
+
+        // All validation Code
 
         private bool FirstNameValidations()
         {

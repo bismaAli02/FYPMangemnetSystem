@@ -20,22 +20,25 @@ using System.Security.AccessControl;
 
 namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
 {
-    /// <summary>
-    /// Interaction logic for AdvUC.xaml
-    /// </summary>
+
     public partial class AdvUC : UserControl
     {
         public AdvUC()
         {
             InitializeComponent();
             AddAdvScroll.Visibility = Visibility.Collapsed;
-            DisplayAdvisors();
+            DisplayAdvisors();// whenever constructor call all Advisors record display
         }
 
-
+        // display all advisors
         public void DisplayAdvisors()
         {
             var con = Configuration.getInstance().getConnection();
+
+            // sql querey that retrieve data for Advisor by joining lookup , Advisor and person tabel
+
+            //SELECT FORMAT(DateOfBirth, 'dd/MM/yyyy') this format is used to only retrieve date no time
+
             SqlCommand cmd = new SqlCommand("Select P.Id, (FirstName + ' ' + LastName) AS Name,LU1.Value AS Designation,A.Salary,LU.Value AS Gender,(SELECT FORMAT(DateOfBirth, 'dd/MM/yyyy')) AS [DateOfBirth],Contact,Email FROM Person P JOIN Advisor A ON A.Id=P.Id JOIN Lookup LU ON LU.Id=P.Gender JOIN Lookup LU1 ON LU1.Id=A.Designation", con);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
@@ -84,6 +87,7 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
             }
         }
 
+        // update record in database
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
             string fullName, firstName, lastName, contact, email, salary, dob, gender, designation;
@@ -109,6 +113,7 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
             }
         }
 
+        // use a single button for two purpose if Add AddAdvUC visibility is visible that means we can open "Add Advisor" UserControl or if not it means Usercontrol is already opened now we use this button for go back purpose
         private void AddAdvButton_Click(object sender, RoutedEventArgs e)
         {
 

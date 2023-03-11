@@ -21,9 +21,6 @@ using System.Runtime.InteropServices.ComTypes;
 
 namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
 {
-    /// <summary>
-    /// Interaction logic for AddProjectAdvUC.xaml
-    /// </summary>
     public partial class AddProjectAdvUC : UserControl
     {
         public AddProjectAdvUC()
@@ -35,6 +32,7 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
             IndustryAdvToComboBox("", "");
         }
 
+        // this parametrized constructer made for update operation purpose
         public AddProjectAdvUC(int projId, string title, string mainAdv, string coAdv, string industryAdv)
         {
             InitializeComponent();
@@ -51,9 +49,12 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
         }
 
 
+        //this method is used to find the parent ScrollViewer control of the current user control
         private void findParent()
         {
+            //this code is used to find immediate parent of the current control
             var parent = VisualTreeHelper.GetParent(this);
+            // this loop traverse on tree(user Controls)
             while (parent != null && !(parent is ScrollViewer))
             {
                 parent = VisualTreeHelper.GetParent(parent);
@@ -62,11 +63,12 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
             {
                 ScrollViewer par = parent as ScrollViewer;
                 par.Visibility = Visibility.Collapsed;
-                findParentUserControl();
+                findParentUserControl();//use to find Parent of Add ProjAdv UC (AssignAdvUC) so i can use AssignAdvUC functions or controlls
 
             }
         }
 
+        //this code find the parent StudentUC control. It sets the text of a Button to "Add Student".function is used to call a method of student UC (display students)
         private void findParentUserControl()
         {
             var parent = VisualTreeHelper.GetParent(this);
@@ -82,6 +84,8 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
                 btn.Content = "Assign Advisor To Project";
             }
         }
+
+        // display all projects to comboBox
         private void AllProjectToComboBox()
         {
             try
@@ -100,6 +104,7 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
             }
         }
 
+        // display specific projects to comboBox
         private void ProjectToComboBox()
         {
             try
@@ -117,6 +122,8 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
                 MessageBox.Show(ex.Message);
             }
         }
+
+        //It attempts to retrieve a list of  main advisors names from a database and display in the drop down list of comboBox
         private void MainAdvToComboBox(string coAdv, string industryAdv)
         {
             try
@@ -137,6 +144,7 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
             }
         }
 
+        // give the id of current project from database
         private int ProjectIdFromDataBase()
         {
             int projId = 0;
@@ -152,6 +160,7 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
             return projId;
         }
 
+        // give  id of curret advisor from database
         private int AdvisorIdFromDataBase(string name)
         {
             int advId = 0;
@@ -175,6 +184,7 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
 
         }
 
+        //It attempts to retrieve a list of  co advisors names from a database and display in the drop down list of comboBox
         private void CoAdvToComboBox(string mainAdv, string industryAdv)
         {
             try
@@ -195,6 +205,7 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
             }
         }
 
+        //clear all controls
         void EmptyForm()
         {
             if (ProjTitleComboBox.IsEnabled == true)
@@ -209,6 +220,7 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
 
         }
 
+        //It attempts to retrieve a list of  industry advisors names from a database and display in the drop down list of comboBox
         private void IndustryAdvToComboBox(string coAdv, string mainAdv)
         {
             try
@@ -229,6 +241,7 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
             }
         }
 
+        // insert a new record into the ProjectAdvisor table of a database, assigning a project to an advisor with a given role.
         private void AssignProject(string role, int projId, int advId)
         {
             try
@@ -246,6 +259,7 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
                 MessageBox.Show(ex.Message);
             }
         }
+        // It retrieves the currently selected advisor from the MainAdvComboBox control and stores it in a variable. It also retrieves the currently selected co-advisor and industry advisor from their respective ComboBox controls and stores them in separate variables.
         private void MainAdvComboBox_DropDownClosed(object sender, EventArgs e)
         {
             string coAdv, indusAdv;
@@ -259,6 +273,7 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
             IAComboBox.Text = indusAdv;
         }
 
+        //It retrieves the currently selected co-advisor from the Co_AdvisorComboBox control and stores it in a variable. It also retrieves the currently selected main advisor and industry advisor from their respective ComboBox controls and stores them in separate variables.
         private void Co_AdvisorComboBox_DropDownClosed(object sender, EventArgs e)
         {
             string mainAdv, indusAdv;
@@ -272,6 +287,7 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
             IAComboBox.Text = indusAdv;
         }
 
+        //it retrieves the currently selected industry advisor from the IAComboBox control and stores it in a variable. It also retrieves the currently selected main advisor and co-advisor from their respective ComboBox controls and stores them in separate variables.
         private void IAComboBox_DropDownClosed(object sender, EventArgs e)
         {
             string mainAdv, coAdv;
@@ -289,6 +305,8 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
         {
             EmptyForm();
         }
+
+        // it first retrieves the project ID from the database using the ProjectIdFromDataBase method. It then retrieves the advisor ID for the selected main advisor, co-advisor, and industry advisor from the database using this method.
 
         private void AssignAdvButton_Click(object sender, RoutedEventArgs e)
         {

@@ -18,12 +18,9 @@ using System.Windows.Shapes;
 
 namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
 {
-    /// <summary>
-    /// Interaction logic for AddAdvUC.xaml
-    /// </summary>
     public partial class AddAdvUC : UserControl
     {
-        int id;
+        int id;    //this attribute is used for Advisor id
         public AddAdvUC()
         {
             InitializeComponent();
@@ -31,6 +28,7 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
             GenderToComboBox();
             DesignationToComboBox();
         }
+        // this parametrized constructer made for update operation purpose
         public AddAdvUC(string firstName, string lastName, string contact, string email, string gender, string designation, string salary, string dob, int id)
         {
             InitializeComponent();
@@ -47,9 +45,14 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
             this.id = id;
             SalaryTextBox.Text = salary;
         }
+
+        //this method is used to find the parent ScrollViewer control of the current user control
         private void findParent()
         {
+            //this code is used to find immediate parent of the current control
             var parent = VisualTreeHelper.GetParent(this);
+
+            // this loop traverse on tree(user Controls)
             while (parent != null && !(parent is ScrollViewer))
             {
                 parent = VisualTreeHelper.GetParent(parent);
@@ -58,11 +61,12 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
             {
                 ScrollViewer par = parent as ScrollViewer;
                 par.Visibility = Visibility.Collapsed;
-                findParentUserControl();
+                findParentUserControl();//use to find Parent of Add advisor UC (Advisor UC) so i can use SAdvisor UC functions or controlls
 
             }
         }
 
+        //this code find the parent AdvUC control. It sets the text of a Button to "Add Adviso".function is used to call a method of Advisor UC (displayAdvisors)
         private void findParentUserControl()
         {
             var parent = VisualTreeHelper.GetParent(this);
@@ -80,12 +84,14 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
             }
         }
 
+        // this code clears the controls and hides the current user control and  allow to return to the previous screen.
         private void BackButton_Click_1(object sender, RoutedEventArgs e)
         {
             EmptyForm();
             this.Visibility = Visibility.Collapsed;
         }
 
+        //this code clears  all the controls
         private void EmptyForm()
         {
             FNTextBox.Text = string.Empty;
@@ -97,16 +103,6 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
             ContactTextBox.Text = string.Empty;
             SalaryTextBox.Text = string.Empty;
         }
-        private void LockForm()
-        {
-            FNTextBox.IsReadOnly = true;
-            LNTextBox.IsReadOnly = true;
-            genderComboBox.IsReadOnly = true;
-            EmailTextBox.IsReadOnly = true;
-            ContactTextBox.IsReadOnly = true;
-            SalaryTextBox.IsReadOnly = true;
-            DesComboBox.IsReadOnly = true;
-        }
 
         private void GenderToComboBox()
         {
@@ -115,18 +111,29 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
                 var con = Configuration.getInstance().getConnection();
                 SqlCommand cmd = new SqlCommand("SELECT Value FROM Lookup WHERE Category=@Category", con);
                 cmd.Parameters.AddWithValue("@Category", "GENDER");
+
+                //creates a new instance of the SqlDataAdapter class and assigns it to the variable dataAdapter
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
+
+                //this line of code creates a new DataSet object, which can be used to work with data in a tabular format.
                 DataSet dataSet = new DataSet();
+
+                //it retrieves data from a data source and fills a DataSet object with the retrieved data.
                 dataAdapter.Fill(dataSet);
+                // this code help to display data in comboBox
                 genderComboBox.ItemsSource = dataSet.Tables[0].DefaultView;
+
+                //GenderComboBox control will display the data from the "Value" column of the data source in its dropdown list.
                 genderComboBox.DisplayMemberPath = "Value";
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
             }
         }
 
+        // take data from lookup tabel and display into designation ComboBox
         private void DesignationToComboBox()
         {
             try
@@ -151,6 +158,7 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
             EmptyForm();
         }
 
+        // save record into dataBase
         private void SaveRecord(int gender, int designation)
         {
             try
@@ -175,6 +183,7 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
             }
         }
 
+        // update record into database
         private void UpdateRecord(int gender, int designation)
         {
             if (FNTextBox.Text != string.Empty && EmailTextBox.Text != string.Empty)
@@ -199,8 +208,6 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
                 {
                     MessageBox.Show(ex.Message);
                 }
-                EmptyForm();
-                LockForm();
             }
             else
             {
@@ -208,6 +215,7 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
             }
         }
 
+        // give gender of current Advisor whose data will enter in form
         private int ReturnGender()
         {
             int gender = 0;
@@ -224,6 +232,8 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
 
         }
 
+
+        // give Designation of current Advisor whose data will enter in form
         private int ReturnDesignation()
         {
             int designation = 0;

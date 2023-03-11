@@ -19,13 +19,10 @@ using MaterialDesignColors.Recommended;
 
 namespace FYPManagementSystem.UserControlls.GroupUserControlls
 {
-    /// <summary>
-    /// Interaction logic for EditGroupUC.xaml
-    /// </summary>
     public partial class EditGroupUC : UserControl
     {
-        int groupId;
-        int projId;
+        int groupId;// it is used to get groupID for a specific group
+        int projId; // it is used to get Project ID for a specific group
         public EditGroupUC(int id)
         {
             InitializeComponent();
@@ -35,6 +32,8 @@ namespace FYPManagementSystem.UserControlls.GroupUserControlls
             ProjectToComboBox();
             StudentToComboBox();
             ProjectIdFromDataBase();
+
+            // use a single button for two purpose if text is "Assign" it means no project assign yet if it is "Re-Assign" it means already project assigned now you can "Re-Assign" project
             if (APTextBox.Text == string.Empty)
             {
                 AssignButtonTxt.Text = "Assign";
@@ -47,6 +46,7 @@ namespace FYPManagementSystem.UserControlls.GroupUserControlls
 
         }
 
+        //This method retrieves the current project title associated with the current group from the database and displays it in a text box.    
         private void CurrentProjectFromDataBase()
         {
 
@@ -61,6 +61,7 @@ namespace FYPManagementSystem.UserControlls.GroupUserControlls
             reader.Close();
         }
 
+        //This function retrieves the project ID of a selected project title from the database based
         private void ProjectIdFromDataBase()
         {
             string title = "";
@@ -83,6 +84,7 @@ namespace FYPManagementSystem.UserControlls.GroupUserControlls
             reader.Close();
         }
 
+        //This method retrieves the ID of a student from the database based on their registration number.
         private int StudentIdFromDataBase()
         {
             int id = 0;
@@ -97,6 +99,8 @@ namespace FYPManagementSystem.UserControlls.GroupUserControlls
             reader.Close();
             return id;
         }
+
+        //The code checks whether the "Assign" button text is "Assign" or "Re-Assign". If the text is "Assign", it inserts a new record in the GroupProject table with the selected project and group ID. If the text is "Re-Assign", it updates the GroupProject table with the new project 
         private void AssignProjButton_Click(object sender, RoutedEventArgs e)
         {
             ProjectIdFromDataBase();
@@ -147,10 +151,17 @@ namespace FYPManagementSystem.UserControlls.GroupUserControlls
                 var con = Configuration.getInstance().getConnection();
                 SqlCommand cmd = new SqlCommand("SELECT Title FROM Project WHERE Title<>@Title", con);
                 cmd.Parameters.AddWithValue("@Title", APTextBox.Text);
+
+                //creates a new instance of the SqlDataAdapter class and assigns it to the variable dataAdapter
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
+
+                //this line of code creates a new DataSet object, which can be used to work with data in a tabular format.
                 DataSet dataSet = new DataSet();
+                //it retrieves data from a data source and fills a DataSet object with the retrieved data.
                 dataAdapter.Fill(dataSet);
+                // this code help to display data in comboBox
                 ProjectComboBox.ItemsSource = dataSet.Tables[0].DefaultView;
+                // ProjectComboBox control will display the data from the "Title" column of the data source in its dropdown list.
                 ProjectComboBox.DisplayMemberPath = "Title";
             }
             catch (Exception ex)
@@ -165,10 +176,20 @@ namespace FYPManagementSystem.UserControlls.GroupUserControlls
             {
                 var con = Configuration.getInstance().getConnection();
                 SqlCommand cmd = new SqlCommand("SELECT S.RegistrationNo FROM Student S LEFT JOIN (SELECT * FROM GroupStudent GS WHERE GS.AssignmentDate = ( SELECT MAX(GS1.AssignmentDate) FROM GroupStudent GS1 WHERE GS1.StudentId = GS.StudentId)) AS recentStudent ON S.Id = recentStudent.StudentID WHERE recentStudent.Status = 4 OR recentStudent.GroupID IS NULL", con);
+
+                //creates a new instance of the SqlDataAdapter class and assigns it to the variable dataAdapter
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
+
+                //this line of code creates a new DataSet object, which can be used to work with data in a tabular format.
                 DataSet dataSet = new DataSet();
+
+                //it retrieves data from a data source and fills a DataSet object with the retrieved data.
                 dataAdapter.Fill(dataSet);
+
+                // this code help to display data in comboBox
                 AddStuComboBox.ItemsSource = dataSet.Tables[0].DefaultView;
+
+                // AddStuComboBox control will display the data from the "RegistrationNo" column of the data source in its dropdown list.
                 AddStuComboBox.DisplayMemberPath = "RegistrationNo";
             }
             catch (Exception ex)
@@ -178,6 +199,7 @@ namespace FYPManagementSystem.UserControlls.GroupUserControlls
 
         }
 
+        // add student into a specific group
         private void AddStuButton_Click(object sender, RoutedEventArgs e)
         {
             if (GroupStudentDataGrid.Items.Count < 5)
@@ -212,6 +234,7 @@ namespace FYPManagementSystem.UserControlls.GroupUserControlls
             }
         }
 
+        // display students of a specific group
         private void LoadStudentsIntoGrids()
         {
             var con = Configuration.getInstance().getConnection();
@@ -227,6 +250,7 @@ namespace FYPManagementSystem.UserControlls.GroupUserControlls
 
         }
 
+        //It first retrieves the currently selected row in a data grid view, then executes a SQL command to update a record in the database  status of "In Active" for the selected student in the selected group.
         private void ToggleButton_Unchecked(object sender, RoutedEventArgs e)
         {
 

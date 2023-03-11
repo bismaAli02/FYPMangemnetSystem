@@ -18,9 +18,6 @@ using System.Windows.Shapes;
 
 namespace FYPManagementSystem.UserControlls.GroupUserControlls
 {
-    /// <summary>
-    /// Interaction logic for GroupStuUC.xaml
-    /// </summary>
     public partial class GroupStuUC : UserControl
     {
         public GroupStuUC()
@@ -30,8 +27,9 @@ namespace FYPManagementSystem.UserControlls.GroupUserControlls
 
         }
 
-        int totalMembers = 5;
+        int totalMembers = 5; // limit you cannot add more than 5 members in a group
 
+        // when button click it create a new group in database
         private void CreateGroupButton_Click(object sender, RoutedEventArgs e)
         {
             if (CreateGroupButton.Content.ToString() == "Create Group")
@@ -52,8 +50,6 @@ namespace FYPManagementSystem.UserControlls.GroupUserControlls
                     GroupUC.Content = new EditGroupUC(id);
                     GroupUC.Visibility = Visibility.Visible;
                     CreateGroupButton.Content = "Go Back";
-                    ExportPdfButton.Visibility = Visibility.Collapsed;
-
                 }
                 catch (Exception ex)
                 {
@@ -64,11 +60,11 @@ namespace FYPManagementSystem.UserControlls.GroupUserControlls
             {
                 GroupScroll.Visibility = Visibility.Collapsed;
                 CreateGroupButton.Content = "Create Group";
-                ExportPdfButton.Visibility = Visibility.Visible;
             }
             DisplayGroups();
         }
 
+        // simply display all groups
         public void DisplayGroups()
         {
             try
@@ -90,7 +86,7 @@ namespace FYPManagementSystem.UserControlls.GroupUserControlls
             }
         }
 
-
+        //it open the group detail UC also it give the id of selectedgroup
         private void GDButton_Click(object sender, RoutedEventArgs e)
         {
             DataRowView selectedRow = GroupDataGrid.SelectedItem as DataRowView; // as is used for typecasting through as we convert selected item in dataRowView 
@@ -111,14 +107,8 @@ namespace FYPManagementSystem.UserControlls.GroupUserControlls
                 GroupUC.Content = new GroupDetailUC(id2, projectTitle);
                 GroupUC.Visibility = Visibility.Visible;
                 CreateGroupButton.Content = "Go Back";
-                ExportPdfButton.Visibility = Visibility.Collapsed;
 
             }
-
-        }
-
-        private void ExportPdfButton_Click(object sender, RoutedEventArgs e)
-        {
 
         }
         private void deleteTuple(int id)
@@ -165,6 +155,7 @@ namespace FYPManagementSystem.UserControlls.GroupUserControlls
         }
 
 
+        //It gets the selected row as a DataRowView object, extracts the ID of the group to be edited from the "GroupId" column, passes it to a new instance of the EditGroupUC user control. 
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
             DataRowView selectedRow = GroupDataGrid.SelectedItem as DataRowView; // as is used for typecasting through as we convert selected item in dataRowView 
@@ -183,7 +174,7 @@ namespace FYPManagementSystem.UserControlls.GroupUserControlls
                 GroupUC.Content = new EditGroupUC(id2);
                 GroupUC.Visibility = Visibility.Visible;
                 CreateGroupButton.Content = "Go Back";
-                ExportPdfButton.Visibility = Visibility.Collapsed;
+
 
             }
             else
