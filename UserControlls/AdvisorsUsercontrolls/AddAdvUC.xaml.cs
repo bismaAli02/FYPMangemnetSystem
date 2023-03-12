@@ -256,7 +256,7 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
             int gender = ReturnGender();
             int designation = ReturnDesignation();
 
-            if (FirstNameValidations() && LastNameValidations() && ContactNumberValidation() && EmailValidation() && SalaryValidation())
+            if (FirstNameValidations() && LastNameValidations() && DateValidation() && ContactNumberValidation() && EmailValidation() && SalaryValidation())
             {
                 if (gender > 0 && designation > 0)
                 {
@@ -343,6 +343,42 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
             return isValid;
         }
 
+        private bool DateValidation()
+        {
+            string dob = Date.Text.ToString();
+            bool isValid = true;
+            if (DateTime.Parse(dob).Year > 2005)
+            {
+                MessageBox.Show("Date Of Birth's Year cannot be more than " + 2005, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            if (DateTime.Parse(dob).Year < 1980)
+            {
+                MessageBox.Show("Date Of Birth's Year cannot be less than " + 1980, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
+            return isValid;
+
+        }
+
+        //this function validate a query in a database  and checking whether it returns any rows. If the query returns rows, the function returns true otherwise, it returns false. 
+        private bool ValidationInDatabase(string query)
+        {
+            var con = Configuration.getInstance().getConnection();
+            SqlCommand cmd = new SqlCommand(query, con);
+            SqlDataReader reader = cmd.ExecuteReader();// execute query and read the resulting rows one at a time.
+            if (reader.HasRows)
+            {
+                reader.Close();
+                return true;
+            }
+            else
+            {
+                reader.Close();
+                return false;
+            }
+        }
         private bool ContactNumberValidation()
         {
             string numbers = "0123456789";
@@ -361,10 +397,16 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
                         break;
                     }
                 }
+                if (ValidationInDatabase("SELECT Contact FROM Person WHERE Contact = '" + ContactTextBox.Text + "'AND Id<>'" + id + "'"))
+                {
+                    MessageBox.Show("Two persons cannot have same contact number", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    isValid = false;
+                }
             }
             else
             {
                 MessageBox.Show("InValid Contact Number", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                isValid = false;
             }
             return isValid;
         }
@@ -393,6 +435,7 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
             else
             {
                 MessageBox.Show("Salary is out of range", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                isValid = false;
             }
             return isValid;
         }
@@ -403,6 +446,11 @@ namespace FYPManagementSystem.UserControlls.AdvisorsUsercontrolls
             bool isValid = true;
             if (email.Contains("@") && email.Contains("."))
             {
+                if (ValidationInDatabase("SELECT Email FROM Person WHERE Email = '" + email + "'AND Id<>'" + id + "'"))
+                {
+                    MessageBox.Show("Two persons cannot have same email", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    isValid = false;
+                }
 
             }
             else

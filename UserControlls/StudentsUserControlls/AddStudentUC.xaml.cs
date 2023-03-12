@@ -224,7 +224,7 @@ namespace FYPManagementSystem.UserControlls.StudentsUserControlls
             int gender = ReturnGender();// give gender of current student whose data will enter in form
 
             // in if condition checking all validation
-            if (RegisterNoValidations() && FirstNameValidations() && LastNameValidations() && ContactNumberValidation() && EmailValidation())
+            if (RegisterNoValidations() && FirstNameValidations() && LastNameValidations() && DateValidation() && ContactNumberValidation() && EmailValidation())
             {
                 if (gender > 0)
                 {
@@ -346,11 +346,18 @@ namespace FYPManagementSystem.UserControlls.StudentsUserControlls
                         break;
                     }
                 }
+                if (ValidationInDatabase("SELECT Contact FROM Person WHERE Contact = '" + ContactTextBox.Text + "'AND Id<>'" + id + "'"))
+                {
+                    MessageBox.Show("Two persons cannot have same contact number", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    isValid = false;
+                }
             }
             else
             {
                 MessageBox.Show("InValid Contact Number", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                isValid = false;
             }
+
             return isValid;
         }
 
@@ -360,7 +367,11 @@ namespace FYPManagementSystem.UserControlls.StudentsUserControlls
             bool isValid = true;
             if (email.Contains("@") && email.Contains("."))
             {
-
+                if (ValidationInDatabase("SELECT Email FROM Person WHERE Email = '" + email + "'AND Id<>'" + id + "'"))
+                {
+                    MessageBox.Show("Two persons cannot have same email", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    isValid = false;
+                }
             }
             else
             {
@@ -410,6 +421,25 @@ namespace FYPManagementSystem.UserControlls.StudentsUserControlls
             }
 
             return isValid;
+        }
+
+        private bool DateValidation()
+        {
+            string dob = Date.Text.ToString();
+            bool isValid = true;
+            if (DateTime.Parse(dob).Year > 2005)
+            {
+                MessageBox.Show("Date Of Birth's Year cannot be more than " + 2005, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            if (DateTime.Parse(dob).Year < 1990)
+            {
+                MessageBox.Show("Date Of Birth's Year cannot be less than " + 1990, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
+            return isValid;
+
         }
 
 
